@@ -6,17 +6,17 @@ const htmlPluginConfig = {
   title: "SUPER_GAME",
   template: "src/template.html",
   hash: true,
-  path: path.resolve(__dirname, "build"),
+  path: path.resolve(__dirname, "build")
 };
 
 const MODE = {
   DEV: "development",
-  PROD: "production",
+  PROD: "production"
 };
 
 const getOutputConfig = (mode) => ({
   filename: mode === MODE.DEV ? "[name].js" : "[name].[fullhash].js",
-  path: path.resolve(__dirname, "build"),
+  path: path.resolve(__dirname, "build")
 });
 
 module.exports = (_, argv) => {
@@ -29,10 +29,10 @@ module.exports = (_, argv) => {
     devServer: {
       open: false,
       port: 3000,
-      historyApiFallback: true,
+      historyApiFallback: true
     },
     resolve: {
-      extensions: [".ts", ".tsx", ".js"],
+      extensions: [".ts", ".tsx", ".js"]
     },
     module: {
       rules: [
@@ -41,14 +41,18 @@ module.exports = (_, argv) => {
           exclude: "/node_modules/",
           use: ["babel-loader", "ts-loader"],
         },
-      ],
+        {
+          test: /\.s[ac]ss$/i,
+          use: ["style-loader", "css-loader", "sass-loader"]
+        }
+      ]
     },
     plugins: [new HtmlWebpackPlugin(htmlPluginConfig)],
 
     devtool: mode === MODE.DEV ? "source-map" : false,
 
     optimization: {
-      minimize: mode === MODE.PROD,
+      minimize: mode === MODE.PROD
     },
   };
 };
