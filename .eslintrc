@@ -1,31 +1,35 @@
 {
-  "extends": [
-    "airbnb",
-    "airbnb-typescript",
-    "airbnb/hooks",
-    "plugin:@typescript-eslint/recommended",
-    "plugin:@typescript-eslint/recommended-requiring-type-checking"
-  ],
+    "extends": [
+        "airbnb",
+        "airbnb-typescript",
+        "airbnb/hooks",
+        "plugin:@typescript-eslint/recommended",
+        "plugin:@typescript-eslint/recommended-requiring-type-checking"
+    ],
 
-  "parserOptions": {
-      "project": ["./tsconfig.json"]
-  },
+    "parserOptions": {
+        "project": ["./tsconfig.json"]
+    },
 
-  "rules": {
-    "@typescript-eslint/indent": "off",
-    "@typescript-eslint/no-var-requires": 0,
-    "semi": "error",
-    "arrow-body-style": "off",
-    "react/function-component-definition": [
-      2,
-      {
-        "namedComponents": "arrow-function",
-        "unnamedComponents": "arrow-function"
-      }
+    "rules": {
+        "indent": "off",
+        "@typescript-eslint/indent": [
+            "error",
+            4
+        ],
+        "@typescript-eslint/no-var-requires": 0,
+        "semi": "error",
+        "arrow-body-style": "off",
+        "react/function-component-definition": [
+            2,
+            {
+                "namedComponents": "arrow-function",
+                "unnamedComponents": "arrow-function"
+            }
+        ]
+    },
+
+    "plugins": [
+        "editorconfig"
     ]
-  },
-
-  "plugins": [
-    "editorconfig"
-  ]
 }
