@@ -1,11 +1,18 @@
-import React, { PureComponent } from 'react';
+import React from 'react';
 import './App.scss';
-import HomePage from '../components/home-page/HomePage';
+import { Route, Routes } from 'react-router-dom';
+import HomePage from '../pages/home-page/HomePage';
+import SignUp from '../pages/sign-up/SignUp';
+import GameOver from '../pages/game-over/GameOver';
 
-export default class App extends PureComponent {
-    public render() {
-        return (
-            <HomePage />
-        );
-    }
-}
+const App = () => {
+    return (
+        <Routes>
+            <Route path="/" element={<HomePage />} />
+            <Route path="sign-up" element={<SignUp />} />
+            <Route path="game-over" element={<GameOver />} />
+        </Routes>
+    );
+};
+
+export default App;
