@@ -1,5 +1,16 @@
 @import "/src/styles/index";
+@import '~antd/dist/antd.css';
 
-h1 {
-    @include flex-center;
+.ant-btn-primary{
+    background: $dark-text;
+    border-radius: 0 20px 0 0;
+    height: 90px;
+    width: 100%;
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    span{
+        @include font-style($font-size: 60px, $color: $light-text, $font-family: VT323);
+    }
 }

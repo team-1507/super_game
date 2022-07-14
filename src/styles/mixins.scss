@@ -1,5 +1,31 @@
+@import "variables";
+
 @mixin flex-center {
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+@mixin font-style(
+    $font-size: 20px,
+    $color: $dark-text,
+    $font-family: Ubuntu,
+    $font-weight: 400,
+    $line-height: 23px,
+    $letter-spacing: 3px,
+    $hover-color: null
+) {
+    font-family: $font-family;
+    font-size: $font-size;
+    color: $color;
+    letter-spacing: $letter-spacing;
+    line-height: $line-height;
+    font-weight: $font-weight;
+    transition: color 70ms ease;
+
+    @if $hover-color {
+        &:hover {
+            color: $hover-color;
+        }
+    }
 }
