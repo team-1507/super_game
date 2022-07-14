@@ -1,0 +1,7 @@
+@import "/src/styles/index";
+
+.home-page {
+    a {
+        @include flex-center;
+    }
+}
