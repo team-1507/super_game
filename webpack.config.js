@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-unsafe-member-access */
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
@@ -39,7 +41,7 @@ module.exports = (_, argv) => {
                 {
                     test: /\.tsx?$/,
                     exclude: '/node_modules/',
-                    use: ['babel-loader', 'ts-loader'],
+                    use: ['ts-loader'],
                 },
                 {
                     test: /\.s[ac]ss$/i,
