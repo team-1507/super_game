@@ -1,7 +1,7 @@
 import React from 'react';
 import './home-page.scss';
 import { Button } from 'antd';
-import Arrow from '../../components/icons/Arrow';
+import ArrowTopRight from '../../components/icons/ArrowTopRight';
 
 const HomePage = () => {
     return (
@@ -47,13 +47,13 @@ const HomePage = () => {
                     <div className="home-page__buttons-group__two-button__btn">
                         <Button type="primary">
                             LEADERBOARD
-                            <Arrow />
+                            <ArrowTopRight />
                         </Button>
                     </div>
                     <div className="home-page__buttons-group__two-button__btn">
                         <Button type="primary">
                             FORUM
-                            <Arrow />
+                            <ArrowTopRight />
                         </Button>
                     </div>
                 </div>
@@ -61,13 +61,13 @@ const HomePage = () => {
                     <div className="home-page__buttons-group__two-button__btn">
                         <Button type="primary">
                             PROFILE
-                            <Arrow />
+                            <ArrowTopRight />
                         </Button>
                     </div>
                     <div className="home-page__buttons-group__two-button__btn">
                         <Button type="primary">
                             LOG OUT
-                            <Arrow />
+                            <ArrowTopRight />
                         </Button>
                     </div>
                 </div>

@@ -1,55 +1,74 @@
 @import "/src/styles/index";
 
 .home-page {
-    padding: 40px 100px;
     min-height: 100vh;
+    padding: 40px 100px;
+
     background-color: $light-text;
     background-image: url("../../../static/images/background.png");
     background-repeat: no-repeat;
+
     &__info {
         display: grid;
-        column-gap: 50px;
         grid-template-columns: repeat(3, 1fr);
-        &__header h1{
-            @include font-style($font-size: 150px,$letter-spacing: -0.06em,$font-family: UbuntuCondensed);
-            line-height: 114px;
+        column-gap: 50px;
+
+        &__header h1 {
+
+            @include font-style($font-size: 150px, $letter-spacing: -0.06em, $font-family: UbuntuCondensed);
+
+            position: relative;
+
             margin-top: 23px;
             margin-bottom: 0;
-            position: relative;
+
+            line-height: 114px;
         }
-        &__about p{
+
+        &__about p {
+
             @include font-style($color: $red);
+
             text-align: justify;
-            &:nth-child(2){
+
+            &:nth-child(2) {
                 padding-left: 90px;
             }
         }
     }
-    &__subtitle p{
+
+    &__subtitle p {
+
         @include font-style($color: $red, $font-size: 36px, $font-weight: 700, $line-height: 41px);
+
+        width: 260px;
         margin-top: 0;
         margin-bottom: 0;
-        width: 260px;
         margin-left: 370px;
     }
-    &__buttons-group{
+
+    &__buttons-group {
         display: flex;
-        align-items: center;
         flex-direction: column;
+        align-items: center;
+
         margin-top: 105px;
-        & button{
+
+        & button {
             margin-bottom: 20px;
         }
-        &__one-button{
-           width: 880px;
+
+        &__one-button {
+            width: 880px;
         }
-        &__two-button{
+
+        &__two-button {
             display: flex;
             column-gap: 20px;
-            &__btn{
+
+            &__btn {
                 width: 430px;
             }
         }
     }
-
 }
