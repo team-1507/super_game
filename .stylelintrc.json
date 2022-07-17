@@ -1,12 +1,19 @@
 {
+    "plugins": ["stylelint-scss", "stylelint-order"],
+    "customSyntax": "postcss-scss",
     "extends": ["stylelint-config-standard", "stylelint-config-clean-order"],
-
     "rules": {
         "indentation": [
             4
         ],
         "at-rule-no-unknown": null,
-        "selector-class-pattern": "^[a-z][a-zA-Z-_]+$"
+        "selector-class-pattern": "^[a-z][a-zA-Z-_]+$",
+        "function-no-unknown": [
+            true,
+            {
+                "ignoreFunctions": ["adjust-color", "if-important"]
+            }
+        ]
     },
     "ignoreFiles": [
         "build/*"

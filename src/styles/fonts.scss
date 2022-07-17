@@ -1,18 +1,5 @@
-@font-face {
-    font-family: VT323;
-    font-style: normal;
-    font-weight: 400;
-    src: url("/static/fonts/VT323/VT323-Regular.ttf") format("truetype");
-}
-@font-face {
-    font-family: Ubuntu;
-    font-style: normal;
-    font-weight: 400;
-    src: url("/static/fonts/Ubuntu/Ubuntu-Regular.ttf") format("truetype");
-}
-@font-face {
-    font-family: UbuntuCondensed;
-    font-style: normal;
-    font-weight: 400;
-    src: url("/static/fonts/UbuntuCondensed/UbuntuCondensed-Regular.ttf") format("truetype");
-}
+@import "https://fonts.googleapis.com/css2?family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap";
+
+@import "https://fonts.googleapis.com/css2?family=Ubuntu+Condensed&display=swap";
+
+@import "https://fonts.googleapis.com/css2?family=VT323&display=swap";

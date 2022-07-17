@@ -1,5 +1,26 @@
+@function if-important($important) {
+
+    @return #{if($important, "!important", "")};
+}
+
 @mixin flex-center {
     display: flex;
-    justify-content: center;
     align-items: center;
+    justify-content: center;
+}
+
+@mixin VT323($important: false) {
+    font-family: "VT323", serif if-important($important);
+}
+
+@mixin Ubuntu($important: false) {
+    font-family: Ubuntu, sans-serif if-important($important);
+}
+
+@mixin UbuntuCondensed($important: false) {
+    font-family: UbuntuCondensed, sans-serif if-important($important);
+}
+
+@mixin roundedTopRight($radius: 20px) {
+    border-radius: 0 $radius 0 0;
 }

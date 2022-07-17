@@ -1,0 +1,31 @@
+@import "/src/styles";
+
+.signInPage {
+
+    @include flex-center;
+
+    min-width: 100vh;
+    min-height: 100vh;
+
+    color: $light-text;
+
+    background-color: $red;
+
+    & a {
+        color: $dark-text;
+    }
+}
+
+.centeredForm {
+    width: 430px;
+
+    h1 {
+
+        @include VT323;
+
+        margin: 0 0 0.5em;
+
+        font-size: $xxxl;
+        line-height: 1em;
+    }
+}
