@@ -15,11 +15,6 @@ const EnterKey = (props:SVGProps<SVGSVGElement>) => {
             />
         </svg>
     );
-}
-
-EnterKey.defaultProps = {
-    fill: '#FAF6EC',
-}
+};
 
 export default EnterKey;
-

@@ -1,4 +1,6 @@
-import React, { createRef, HTMLProps, PureComponent, RefObject } from 'react';
+import React, {
+    createRef, HTMLProps, PureComponent, RefObject,
+} from 'react';
 import { Link } from 'react-router-dom';
 import FormButton from '../../components/form/FormButton';
 import TextInput from '../../components/form/TextInput';
@@ -15,13 +17,13 @@ class SignIn extends PureComponent {
         this.loginInput = createRef<HTMLInputElement>();
     }
 
-    componentDidMount(){
+    componentDidMount() {
         this.loginInput.current?.focus();
     }
 
     render() {
         return (
-            <main className="signInPage">
+            <main className="sign-in-page">
                 <section className="centeredForm">
                     <h1>Sign in</h1>
                     <form action="/" method="post">
@@ -33,7 +35,9 @@ class SignIn extends PureComponent {
                                 <EnterKey />
                             </FormButton>
                             <span className="form-caption">
-                                Don't have an account? <Link to="/sign-up">Sign up</Link>
+                                Don`t have an account?
+                                {' '}
+                                <Link to="/sign-up">Sign up</Link>
                             </span>
                         </div>
                     </form>
@@ -41,6 +45,6 @@ class SignIn extends PureComponent {
             </main>
         );
     }
-};
+}
 
 export default SignIn;

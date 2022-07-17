@@ -1,3 +1,3 @@
 import EnterKey from './EnterKey';
 
-export default EnterKey
+export default EnterKey;

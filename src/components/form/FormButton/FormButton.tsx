@@ -14,7 +14,7 @@ const FormButton = (props:FormButtonProps) => {
             type={type}
             name={name}
             id={id}
-            className={`form-button ${className}`}
+            className={`form-button ${className || ''}`}
         >
             {children}
         </button>

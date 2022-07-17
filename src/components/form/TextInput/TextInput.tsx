@@ -11,30 +11,29 @@ type TextInputProps = HTMLProps<HTMLInputElement> & {
     },
 };
 
-
 const TextInput = React.forwardRef<HTMLInputElement, TextInputProps>((props, ref) => {
-        const {
-            id, value, label, placeholder, className, type, name, message,
-        } = props;
+    const {
+        id, value, label, placeholder, className, type, name, message,
+    } = props;
 
-        return (
-            <>
-                <input
-                    type={type}
-                    id={id}
-                    name={name}
-                    value={value}
-                    placeholder={placeholder}
-                    className={`text-input ${className || ''}`}
-                    ref={ref}
-                />
-                <label htmlFor={id}>{label}</label>
-                <span className={`text-input-status ${message?.status || ''}`}>
-                    {message?.text}
-                </span>
-            </>
-        );
-    });
+    return (
+        <>
+            <input
+                type={type}
+                id={id}
+                name={name}
+                value={value}
+                placeholder={placeholder}
+                className={`text-input ${className || ''}`}
+                ref={ref}
+            />
+            <label htmlFor={id}>{label}</label>
+            <span className={`text-input-status ${message?.status || ''}`}>
+                {message?.text}
+            </span>
+        </>
+    );
+});
 
 TextInput.defaultProps = {
     label: '',
