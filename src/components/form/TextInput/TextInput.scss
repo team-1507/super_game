@@ -1,9 +1,7 @@
 @import "/src/styles";
 
 .text-input {
-
     @include roundedTopRight;
-
     @include VT323;
 
     display: block;
@@ -26,7 +24,6 @@
 
     &:-webkit-autofill::first-line,
     &:-webkit-autofill {
-
         @include VT323(true);
 
         /* stylelint-disable-next-line property-no-vendor-prefix */

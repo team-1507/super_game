@@ -1,9 +1,7 @@
 @import "/src/styles";
 
 .form-button {
-
     @include roundedTopRight(20px);
-
     @include VT323;
 
     margin: 40px 0 0;

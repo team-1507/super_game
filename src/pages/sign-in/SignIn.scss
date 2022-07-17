@@ -1,7 +1,6 @@
 @import "/src/styles";
 
 .sign-in-page {
-
     @include flex-center;
 
     min-width: 100vh;
@@ -24,7 +23,6 @@
     width: 430px;
 
     h1 {
-
         @include VT323;
 
         margin: 0 0 0.5em;

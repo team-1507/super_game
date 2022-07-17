@@ -13,6 +13,16 @@
             {
                 "ignoreFunctions": ["adjust-color", "if-important"]
             }
+        ],
+        "at-rule-empty-line-before": [
+            "always",
+            {
+                "except": [
+                    "after-same-name",
+                    "blockless-after-same-name-blockless",
+                    "first-nested"
+                ]
+            }
         ]
     },
     "ignoreFiles": [

@@ -2,11 +2,12 @@
 
 .header-back-button {
     button {
+        vertical-align: middle;
+
         background-color: $dark-text;
         border: 0;
         border-radius: 20px;
         outline: 0;
-        vertical-align: middle;
 
         .arrow-back-icon {
             fill: $light-text;
@@ -14,14 +15,14 @@
     }
 
     h1 {
-
         @include VT323;
 
-        font-size: $xxxl;
-
         display: inline;
-        padding: 0;
+
         margin: 0;
+        padding: 0;
+
+        font-size: $xxxl;
         vertical-align: middle;
     }
 }
