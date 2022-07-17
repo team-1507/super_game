@@ -1,0 +1,27 @@
+@import "/src/styles";
+
+.header-back-button {
+    button {
+        background-color: $dark-text;
+        border: 0;
+        border-radius: 20px;
+        outline: 0;
+        vertical-align: middle;
+
+        .arrow-back-icon {
+            fill: $light-text;
+        }
+    }
+
+    h1 {
+
+        @include VT323;
+
+        font-size: $xxxl;
+
+        display: inline;
+        padding: 0;
+        margin: 0;
+        vertical-align: middle;
+    }
+}
