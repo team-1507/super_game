@@ -34,7 +34,7 @@
                 "error", 
                 "static public field"
             ],
-        "react/button-has-type": false
+        "react/button-has-type": "off"
     },
 
     "plugins": [

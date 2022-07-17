@@ -4,7 +4,8 @@ import { Route, Routes } from 'react-router-dom';
 import HomePage from '../pages/home-page/HomePage';
 import SignUp from '../pages/sign-up/SignUp';
 import GameOver from '../pages/game-over/GameOver';
-import SignIn from '../pages/sign-in/SignIn';
+import SignIn from '../pages/sign-in';
+import Settings from '../pages/settings';
 
 const App = () => {
     return (
@@ -13,6 +14,7 @@ const App = () => {
             <Route path="sign-up" element={<SignUp />} />
             <Route path="sign-in" element={<SignIn />} />
             <Route path="game-over" element={<GameOver />} />
+            <Route path="settings" element={<Settings />} />
         </Routes>
     );
 };

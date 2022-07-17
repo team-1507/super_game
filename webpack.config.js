@@ -1,7 +1,8 @@
-/* eslint-disable @typescript-eslint/no-unsafe-member-access */
-/* eslint-disable @typescript-eslint/no-unsafe-assignment */
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const CssMinimizerPlugin = require("css-minimizer-webpack-plugin");
+
 
 const htmlPluginConfig = {
     filename: 'index.html',
@@ -45,16 +46,33 @@ module.exports = (_, argv) => {
                 },
                 {
                     test: /\.s[ac]ss$/i,
-                    use: ['style-loader', 'css-loader', 'sass-loader'],
+                    use: [
+                        MiniCssExtractPlugin.loader,
+                        { loader: "css-loader", options: { sourceMap: mode === MODE.DEV } },
+                        { loader: "sass-loader", options: { sourceMap: mode === MODE.DEV } },
+                    ],
                 },
             ],
         },
-        plugins: [new HtmlWebpackPlugin(htmlPluginConfig)],
+        plugins: [new HtmlWebpackPlugin(htmlPluginConfig), new MiniCssExtractPlugin()],
 
         devtool: mode === MODE.DEV ? 'source-map' : false,
 
         optimization: {
             minimize: mode === MODE.PROD,
+            minimizer: [
+                `...`,
+                new CssMinimizerPlugin({
+                    minimizerOptions: {
+                        preset: [
+                          "default",
+                          {
+                            discardComments: { removeAll: true },
+                          },
+                        ],
+                      },
+                }),
+              ],
         },
     };
 };
