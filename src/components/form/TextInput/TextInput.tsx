@@ -1,28 +1,21 @@
-import React, { InputHTMLAttributes, PureComponent } from 'react';
+import React, { HTMLProps } from 'react';
 import './TextInput.scss';
 
-type TextInputProps = InputHTMLAttributes<HTMLInputElement> & {
+type TextInputProps = HTMLProps<HTMLInputElement> & {
     label?: string,
     id?: string,
     type?: 'text' | 'password',
     message?: {
         text?: string,
         status?: 'error' | 'info',
-    }
+    },
 };
 
-class TextInput extends PureComponent<TextInputProps> {
-    static defaultProps = {
-        label: '',
-        id: `input-${Math.floor(Math.random() * 10000)}`,
-        type: 'text',
-        message: undefined,
-    };
 
-    render() {
+const TextInput = React.forwardRef<HTMLInputElement, TextInputProps>((props, ref) => {
         const {
             id, value, label, placeholder, className, type, name, message,
-        } = this.props;
+        } = props;
 
         return (
             <>
@@ -33,6 +26,7 @@ class TextInput extends PureComponent<TextInputProps> {
                     value={value}
                     placeholder={placeholder}
                     className={`text-input ${className || ''}`}
+                    ref={ref}
                 />
                 <label htmlFor={id}>{label}</label>
                 <span className={`text-input-status ${message?.status || ''}`}>
@@ -40,7 +34,13 @@ class TextInput extends PureComponent<TextInputProps> {
                 </span>
             </>
         );
-    }
-}
+    });
+
+TextInput.defaultProps = {
+    label: '',
+    id: `input-${Math.floor(Math.random() * 10000)}`,
+    type: 'text',
+    message: undefined,
+};
 
 export default TextInput;

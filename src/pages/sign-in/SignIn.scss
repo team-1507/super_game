@@ -11,6 +11,10 @@
 
     background-color: $red;
 
+    & * {
+        color: inherit;
+    }
+
     & a {
         color: $dark-text;
     }
@@ -27,5 +31,33 @@
 
         font-size: $xxxl;
         line-height: 1em;
+        color: $dark-text;
+    }
+
+    .submit-button-wrapper {
+        position: relative;
+
+        &::after {
+            content: "";
+
+            clear: both;
+            display: block;
+        }
+
+        .form-button {
+            float: right;
+        }
+
+        .form-caption {
+            position: absolute;
+            bottom: 0;
+
+            font-size: $mplus;
+            font-weight: 300;
+
+            * {
+                font-size: inherit;
+            }
+        }
     }
 }
