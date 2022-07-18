@@ -10,11 +10,12 @@ import Settings from '../pages/settings';
 const App = () => {
     return (
         <Routes>
+            <Route path="/sign-up" element={<SignUp />} />
+            <Route path="/sign-in" element={<SignIn />} />
+            <Route path="/settings/:activeTab" element={<Settings />} />
+            <Route path="/settings" element={<Settings />} />
+            <Route path="/game-over" element={<GameOver />} />
             <Route path="/" element={<HomePage />} />
-            <Route path="sign-up" element={<SignUp />} />
-            <Route path="sign-in" element={<SignIn />} />
-            <Route path="game-over" element={<GameOver />} />
-            <Route path="settings" element={<Settings />} />
         </Routes>
     );
 };

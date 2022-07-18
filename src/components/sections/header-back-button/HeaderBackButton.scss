@@ -1,13 +1,24 @@
 @import "/src/styles";
 
 .header-back-button {
-    button {
+    margin-bottom: 35px;
+
+    .back-button {
+        display: inline-block;
+
+        width: 7rem;
+        height: 7rem;
+        margin-right: 25px;
+
+        line-height: 7rem;
+        text-align: center;
         vertical-align: middle;
 
         background-color: $dark-text;
         border: 0;
         border-radius: 20px;
         outline: 0;
+        box-shadow: 5px 5px 10px 0 adjust-color($dark-hilighted, $alpha: -0.5);
 
         .arrow-back-icon {
             fill: $light-text;
@@ -23,6 +34,7 @@
         padding: 0;
 
         font-size: $xxxl;
+        color: $red;
         vertical-align: middle;
     }
 }
