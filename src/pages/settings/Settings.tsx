@@ -9,13 +9,21 @@ const Settings = () => {
     return (
         <main className="settings-page">
             <HeaderBackButton />
-            active tab:
-            {activeTab}
-            <TabsWidget activeTab={activeTab || ''}>
+            <TabsWidget activeTab={activeTab || 'profile'}>
                 <Tab header="Profile" url="profile">
                     PROFILE_CONTENT
                 </Tab>
                 <Tab header="Controls" url="controls">
+                    Lorem ipsum dolor sit, amet consectetur adipisicing elit. Optio corrupti aut
+                    , distinctio corporis cumque aliquid sint facere nobis fugiat quisqua
+                    m officia eligendi voluptas architecto officiis dignissimos iure molest
+                    iae a eaque.
+                </Tab>
+                <Tab header="Other" url="other">
+                    Lorem ipsum dolor sit, amet consectetur adipisicing elit. Optio corrupti aut
+                    , distinctio corporis cumque aliquid sint facere nobis fugiat quisqua
+                    m officia eligendi voluptas architecto officiis dignissimos iure molest
+                    iae a eaque.
                     Lorem ipsum dolor sit, amet consectetur adipisicing elit. Optio corrupti aut
                     , distinctio corporis cumque aliquid sint facere nobis fugiat quisqua
                     m officia eligendi voluptas architecto officiis dignissimos iure molest

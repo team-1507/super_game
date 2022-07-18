@@ -1,0 +1,57 @@
+@import "/src/styles";
+
+.tabs-widget {
+    position: relative;
+
+    .tabs-widget-tab-header {
+        @include VT323;
+
+        position: relative;
+
+        display: inline-block;
+
+        margin-left: -3px;
+        padding: 15px 25px;
+
+        font-size: $xxl;
+        color: $red;
+        text-decoration: none;
+
+        background-color: $light-text;
+        border: 1px solid adjust-color($dark-hilighted, $alpha: 0);
+        border-bottom: 5px solid $brown;
+        border-radius: 2px 20px 2px 2px;
+        box-shadow: 3px -5px 5px 0 adjust-color($dark-hilighted, $alpha: -0.5);
+
+        @for $i from 1 through 10 {
+            &:nth-child(#{$i}) {
+                z-index: #{10 - $i};
+            }
+        }
+
+        &[data-active="true"] {
+            z-index: 20;
+
+            background-color: $brown;
+        }
+
+        &:active,
+        &:focus {
+            outline: none;
+        }
+    }
+
+    .tabs-widget-tab-content {
+        float: right;
+        display: block;
+
+        width: 100%;
+        margin-top: 10px;
+
+        border: 1px solid green;
+
+        &[data-active="false"] {
+            display: none;
+        }
+    }
+}

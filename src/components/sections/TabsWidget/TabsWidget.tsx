@@ -1,6 +1,8 @@
 import React, {
     HTMLProps, PureComponent, createContext, useContext,
 } from 'react';
+import { Link } from 'react-router-dom';
+import './TabsWidget.scss';
 
 const ActiveTabWidgetContext = createContext('');
 
@@ -12,11 +14,12 @@ type TabProps = HTMLProps<HTMLElement> & {
 export const Tab = (props: TabProps) => {
     const { header, children, url } = props;
     const active = useContext(ActiveTabWidgetContext) === url;
+    const baseUrl = window.location.pathname.split('/').slice(1, -1).join('/');
     return (
         <>
-            <header className="tabs-widget-tab-header" data-active={active}>
+            <Link to={`/${baseUrl}/${url}`} className="tabs-widget-tab-header" data-active={active}>
                 {header}
-            </header>
+            </Link>
             <section className="tabs-widget-tab-content" data-active={active}>
                 {children}
             </section>
