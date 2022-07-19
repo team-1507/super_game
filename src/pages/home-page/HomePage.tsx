@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import './home-page.scss';
 import { Button } from 'antd';
 import ArrowTopRight from '../../components/icons/ArrowTopRight';
@@ -45,10 +46,12 @@ const HomePage = () => {
                 </div>
                 <div className="home-page__buttons-group__two-button">
                     <div className="home-page__buttons-group__two-button__btn">
-                        <Button type="primary">
-                            LEADERBOARD
-                            <ArrowTopRight />
-                        </Button>
+                        <Link to="/leaderboard">
+                            <Button type="primary">
+                                LEADERBOARD
+                                <ArrowTopRight />
+                            </Button>
+                        </Link>
                     </div>
                     <div className="home-page__buttons-group__two-button__btn">
                         <Button type="primary">
