@@ -7,11 +7,15 @@ import users from './users';
 
 const Leaderboard = () => {
     const generateCols = users
-        .map((item, index) =>
-            <Col span={8} key={index} title={item}>
-                <span className="leaderboard-page__grid__number">{index + 1}.</span>
+        .map((item, index) => (
+            <Col span={8} key={item} title={item}>
+                <span className="leaderboard-page__grid__number">
+                    {index + 1}
+                    .
+                </span>
                 <span className="leaderboard-page__grid__text">{item}</span>
-            </Col>);
+            </Col>
+        ));
 
     return (
         <main className="leaderboard-page">
