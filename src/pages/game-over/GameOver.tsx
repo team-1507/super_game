@@ -16,13 +16,13 @@ const GameOver = () => {
                     {score}
                 </h3>
             </div>
-            <div className="home-page__buttons-group">
-                <div className="home-page__buttons-group__two-button__btn">
+            <div className="game-over__buttons-group">
+                <div className="game-over__buttons-group__two-button__btn">
                     <Button type="primary">
                         START AGAIN
                     </Button>
                 </div>
-                <div className="home-page__buttons-group__two-button__btn">
+                <div className="game-over__buttons-group__two-button__btn">
                     <Link to="/">
                         <Button type="primary">
                             MAIN PAGE
