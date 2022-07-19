@@ -15,7 +15,13 @@
     border-radius: 0 20px 0 0;
 
     span {
-
         @include font-style($font-size: 60px, $color: $light-text, $font-family: VT323);
     }
+}
+.ant-input {
+    background: #362724;
+    border-radius: 0 20px 0 0;
+    margin-bottom: 40px;
+    @include font-style($font-size: 40px, $color: $light-text, $font-family: VT323);
+    padding: 24px 15px;
 }
