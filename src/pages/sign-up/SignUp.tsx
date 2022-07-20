@@ -18,10 +18,10 @@ const GameOver = () => {
             </div>
             <div className="sign-up-page__form-items">
                 <div className="sign-up-page__form-items_input">
-                    <Input value={inputsFormSignUp.login} status="error" placeholder="Login" />
+                    <Input value={inputsFormSignUp.login} placeholder="Login" />
                 </div>
                 <div className="sign-up-page__form-items_input">
-                    <Input value={inputsFormSignUp.email} status="error" placeholder="Email" />
+                    <Input value={inputsFormSignUp.email} placeholder="Email" />
                 </div>
                 <div className="sign-up-page__form-items_input">
                     <Input value={inputsFormSignUp.password} status="error" placeholder="Password" />

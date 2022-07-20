@@ -1,0 +1,18 @@
+
+
+.ant-input {
+    background: $dark-text;
+    border-radius: 0 20px 0 0;
+    margin-bottom: 40px;
+    @include font-style($font-size: 40px, $color: $light-text, $font-family: VT323);
+    padding: 24px 15px;
+    border: 0;
+    cursor: pointer;
+    &:hover{
+        border-bottom: 5px solid $brown-001;
+    }
+    &:active, &:focus {
+        border-bottom: 5px solid $brown-001;
+        background: $brown-002;
+    }
+}
