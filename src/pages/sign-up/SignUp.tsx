@@ -4,7 +4,7 @@ import { Button, Input, Form } from 'antd';
 import './sign-up.scss';
 import Enter from '../../components/icons/Enter';
 
-const GameOver = () => {
+const SignUp = () => {
     const onFinish = (values: any) => {
         console.log('Success:', values);
     };
@@ -102,4 +102,4 @@ const GameOver = () => {
     );
 };
 
-export default GameOver;
+export default SignUp;

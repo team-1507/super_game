@@ -25,11 +25,11 @@
         &__sign-in {
             @include font-style($font-size: 16px, $letter-spacing: 1px, $color: $light-text, $font-family: Ubuntu);
         }
-        &__button .ant-btn-primary{
+        &__button .ant-btn-primary {
             width: 171px;
             height: 46px;
 
-            span{
+            span {
                 @include font-style($font-size: 33px, $color: $light-text, $font-family: VT323);
             }
         }
