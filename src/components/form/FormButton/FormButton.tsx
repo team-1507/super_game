@@ -7,7 +7,7 @@ type FormButtonProps = HTMLProps<HTMLButtonElement> & {
 
 const FormButton = (props:FormButtonProps) => {
     const {
-        type, children, name, id, className,
+        type, children, name, id, className, onClick,
     } = props;
     return (
         <button
@@ -15,6 +15,7 @@ const FormButton = (props:FormButtonProps) => {
             name={name}
             id={id}
             className={`form-button ${className || ''}`}
+            onClick={onClick}
         >
             {children}
         </button>

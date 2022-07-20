@@ -13,14 +13,17 @@ type TabProps = HTMLProps<HTMLElement> & {
 
 export const Tab = (props: TabProps) => {
     const { header, children, url } = props;
-    const active = useContext(ActiveTabWidgetContext) === url;
-    const baseUrl = window.location.pathname.split('/').slice(1, -1).join('/');
+    const activeTab = useContext(ActiveTabWidgetContext);
+    const isActive = activeTab === url;
+    const baseUrl = new RegExp(`${activeTab}[/]?$`).test(window.location.pathname)
+        ? window.location.pathname.replace(/\/$/, '').split('/').slice(1, -1).join('/')
+        : window.location.pathname.replace(/\/$/, '').replace(/^\//, '');
     return (
         <>
-            <Link to={`/${baseUrl}/${url}`} className="tabs-widget-tab-header" data-active={active}>
+            <Link to={`/${baseUrl}/${url}`} className="tabs-widget-tab-header" data-active={isActive}>
                 {header}
             </Link>
-            <section className="tabs-widget-tab-content" data-active={active}>
+            <section className="tabs-widget-tab-content" data-active={isActive}>
                 {children}
             </section>
         </>

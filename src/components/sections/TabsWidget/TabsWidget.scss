@@ -19,9 +19,11 @@
 
         background-color: $light-text;
         border: 1px solid adjust-color($dark-hilighted, $alpha: 0);
-        border-bottom: 5px solid $brown;
+        border-bottom: 10px solid $brown;
         border-radius: 2px 20px 2px 2px;
-        box-shadow: 3px -5px 5px 0 adjust-color($dark-hilighted, $alpha: -0.5);
+        box-shadow: 0 -5px 5px 0 adjust-color($dark-hilighted, $alpha: -0.5);
+
+        transition: background-color 0.3s, transform 0.3s, box-shadow 0.3s;
 
         @for $i from 1 through 10 {
             &:nth-child(#{$i}) {
@@ -39,6 +41,12 @@
         &:focus {
             outline: none;
         }
+
+        &:active {
+            transform: translate(0, -5px);
+
+            box-shadow: 0 -2px 5px 0 adjust-color($dark-hilighted, $alpha: -0.5);
+        }
     }
 
     .tabs-widget-tab-content {
@@ -47,8 +55,6 @@
 
         width: 100%;
         margin-top: 10px;
-
-        border: 1px solid green;
 
         &[data-active="false"] {
             display: none;

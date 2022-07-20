@@ -20,6 +20,18 @@
         outline: 0;
         box-shadow: 5px 5px 10px 0 adjust-color($dark-hilighted, $alpha: -0.5);
 
+        transition: background-color 0.3s, transform 0.3s, box-shadow 0.3s;
+
+        &:hover {
+            background-color: $dark-hilighted;
+        }
+
+        &:active {
+            transform: translate(5px, 5px);
+
+            box-shadow: 0 0 10px 0 adjust-color($dark-hilighted, $alpha: -0.5);
+        }
+
         .arrow-back-icon {
             fill: $light-text;
         }

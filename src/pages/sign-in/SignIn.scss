@@ -33,14 +33,9 @@
     }
 
     .submit-button-wrapper {
+        @include clear-after;
+
         position: relative;
-
-        &::after {
-            content: "";
-
-            clear: both;
-            display: block;
-        }
 
         .form-button {
             float: right;

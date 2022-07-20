@@ -19,3 +19,11 @@
 @mixin roundedTopRight($radius: 20px) {
     border-radius: 0 $radius 0 0;
 }
+@mixin clear-after {
+    &::after {
+        content: "";
+
+        clear: both;
+        display: block;
+    }
+}

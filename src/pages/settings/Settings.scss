@@ -4,6 +4,68 @@
     min-width: 100vh;
     min-height: 100vh;
     padding: 40px 120px;
+    margin-bottom: 40px;
 
     background-color: $brown;
+
+    * {
+        color: $light-text;
+    }
+
+    .form-button,
+    .text-input {
+        &:active,
+        &:focus,
+        &:hover {
+            box-shadow: inset 0 -5px 0 0 $dark-text;
+        }
+    }
+
+    .avatar-upload-wrapper {
+        @include clear-after;
+
+        padding: 20px 0 0;
+
+        .avatar-img-cont {
+            @include roundedTopRight(40px);
+
+            float: left;
+            overflow: hidden;
+
+            width: 220px;
+            height: 220px;
+            margin-right: 40px;
+
+            img {
+                width: 100%;
+                height: 100%;
+
+                object-fit: cover;
+            }
+        }
+
+        .form-button {
+            @include roundedTopRight(10px);
+
+            width: 170px;
+            margin-top: 0;
+            margin-bottom: 20px;
+            padding: 7px 10px;
+
+            font-size: $l;
+            text-align: left;
+            text-transform: uppercase;
+        }
+    }
+
+    .login-password-forms-wrapper {
+        display: flex;
+        justify-content: space-between;
+
+        max-width: 940px;
+
+        & > div {
+            flex-basis: 430px;
+        }
+    }
 }
