@@ -1,17 +1,32 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { Button, Input, Form } from 'antd';
 import './sign-up.scss';
 import Enter from '../../components/icons/Enter';
+import SignUpApi from '../../api/sign-up/sign-up';
+import { SignUpData } from '../../api/sign-up/types';
 
 const SignUp = () => {
-    const onFinish = (values: any) => {
-        console.log('Success:', values);
+    const navigate = useNavigate();
+    const onFinish = (values: SignUpData) => {
+        const signUpData:SignUpData = {
+            first_name: 'Иван',
+            second_name: 'Дачный',
+            login: values.login,
+            email: values.email,
+            password: values.password,
+            phone: '89999999999',
+        };
+        SignUpApi.signUp(signUpData).then((response) => {
+            if (response) {
+                navigate('/');
+            }
+        })
+            .catch((error) => {
+                console.log(error);
+            });
     };
 
-    const onFinishFailed = (errorInfo: any) => {
-        console.log('Failed:', errorInfo);
-    };
     return (
         <div className="sign-up-page">
             <div className="sign-up-page__title">
@@ -21,7 +36,6 @@ const SignUp = () => {
                 name="basic"
                 initialValues={{ remember: true }}
                 onFinish={onFinish}
-                onFinishFailed={onFinishFailed}
                 autoComplete="off"
                 className="sign-up-page__form-items"
             >
@@ -41,10 +55,7 @@ const SignUp = () => {
                 <Form.Item
                     label="E-MAIL"
                     name="email"
-                    rules={[{ required: true, message: 'Please input your email' }, {
-                        pattern: /^\S+@\S+\.\S+$/,
-                        message: 'Format is wrong',
-                    }]}
+                    rules={[{ type: 'email' }]}
                 >
                     <div className="form-item sign-up-page__form-items_input">
                         <Input placeholder="Email" />
