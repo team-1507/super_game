@@ -28,7 +28,13 @@
                 "namedComponents": "arrow-function",
                 "unnamedComponents": "arrow-function"
             }
-        ]
+        ],
+        "react/static-property-placement": 
+            [
+                "error", 
+                "static public field"
+            ],
+        "react/button-has-type": "off"
     },
 
     "plugins": [

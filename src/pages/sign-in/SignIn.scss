@@ -1,0 +1,63 @@
+@import "/src/styles";
+
+.sign-in-page {
+
+    @include flex-center;
+
+    min-width: 100vh;
+    min-height: 100vh;
+
+    color: $light-text;
+
+    background-color: $red;
+
+    & * {
+        color: inherit;
+    }
+
+    & a {
+        color: $dark-text;
+    }
+}
+
+.centeredForm {
+    width: 430px;
+
+    h1 {
+
+        @include VT323;
+
+        margin: 0 0 0.5em;
+
+        font-size: $xxxl;
+        line-height: 1em;
+        color: $dark-text;
+    }
+
+    .submit-button-wrapper {
+        position: relative;
+
+        &::after {
+            content: "";
+
+            clear: both;
+            display: block;
+        }
+
+        .form-button {
+            float: right;
+        }
+
+        .form-caption {
+            position: absolute;
+            bottom: 0;
+
+            font-size: $mplus;
+            font-weight: 300;
+
+            * {
+                font-size: inherit;
+            }
+        }
+    }
+}
