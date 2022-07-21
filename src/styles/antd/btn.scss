@@ -1,0 +1,26 @@
+.ant-btn-primary {
+    height: 90px;
+
+    background: $dark-text;
+    border: none;
+
+    span {
+
+        @include font-style($font-size: 60px, $color: $light-text, $font-family: VT323);
+    }
+
+    &:not(.ant-btn-icon-only) {
+        display: flex;
+        align-items: center;
+        justify-content: space-around;
+
+        width: 100%;
+
+        border-radius: 0 20px 0 0;
+    }
+    &.ant-btn-icon-only {
+        width: 90px;
+
+        border-radius: 20px;
+    }
+}
