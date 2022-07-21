@@ -61,7 +61,6 @@ module.exports = (_, argv) => {
         optimization: {
             minimize: mode === MODE.PROD,
             minimizer: [
-                `...`,
                 new CssMinimizerPlugin({
                     minimizerOptions: {
                         preset: [
