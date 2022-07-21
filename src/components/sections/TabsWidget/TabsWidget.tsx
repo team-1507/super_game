@@ -1,5 +1,5 @@
 import React, {
-    HTMLProps, PureComponent, createContext, useContext,
+    HTMLProps, createContext, useContext,
 } from 'react';
 import { Link } from 'react-router-dom';
 import './TabsWidget.scss';
@@ -35,17 +35,15 @@ type TabsWidgetProps = HTMLProps<HTMLDivElement> & {
     activeTab: string,
 };
 
-export class TabsWidget extends PureComponent<TabsWidgetProps> {
-    render() {
-        const { children, activeTab } = this.props;
-        return (
-            <div className="tabs-widget">
-                <ActiveTabWidgetContext.Provider value={activeTab}>
-                    {children}
-                </ActiveTabWidgetContext.Provider>
-            </div>
-        );
-    }
-}
+export const TabsWidget = (props: TabsWidgetProps) => {
+    const { children, activeTab } = props;
+    return (
+        <div className="tabs-widget">
+            <ActiveTabWidgetContext.Provider value={activeTab}>
+                {children}
+            </ActiveTabWidgetContext.Provider>
+        </div>
+    );
+};
 
 export default { TabsWidget, Tab };
