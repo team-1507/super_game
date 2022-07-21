@@ -1,3 +1,5 @@
+@import "variables";
+
 @function if-important($important) {
 
     @return #{if($important, "!important", "")};
@@ -23,4 +25,29 @@
 
 @mixin roundedTopRight($radius: 20px) {
     border-radius: 0 $radius 0 0;
+}
+
+@mixin font-style(
+    $font-size: 20px,
+    $color: $dark-text,
+    $font-family: Ubuntu,
+    $font-weight: 400,
+    $line-height: 23px,
+    $letter-spacing: 3px,
+    $hover-color: null
+) {
+    font-family: $font-family;
+    font-size: $font-size;
+    font-weight: $font-weight;
+    line-height: $line-height;
+    color: $color;
+    letter-spacing: $letter-spacing;
+
+    transition: color 70ms ease;
+
+    @if $hover-color {
+        &:hover {
+            color: $hover-color;
+        }
+    }
 }

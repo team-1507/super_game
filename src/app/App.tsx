@@ -6,6 +6,7 @@ import SignUp from '../pages/sign-up/SignUp';
 import GameOver from '../pages/game-over/GameOver';
 import SignIn from '../pages/sign-in';
 import Settings from '../pages/settings';
+import Leaderboard from '../pages/leaderboard/Leaderboard';
 
 const App = () => {
     return (
@@ -15,6 +16,7 @@ const App = () => {
             <Route path="sign-in" element={<SignIn />} />
             <Route path="game-over" element={<GameOver />} />
             <Route path="settings" element={<Settings />} />
+            <Route path="leaderboard" element={<Leaderboard />} />
         </Routes>
     );
 };
