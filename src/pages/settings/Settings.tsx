@@ -4,7 +4,7 @@ import FormButton from '../../components/form/FormButton';
 import TextInput from '../../components/form/TextInput';
 import UploadInput from '../../components/form/UploadInput';
 import EnterKey from '../../components/icons/EnterKey';
-import HeaderBackButton from '../../components/sections/header-back-button';
+import HeaderBackButton from '../../components/sections/HeaderBackButton';
 import { TabsWidget, Tab } from '../../components/sections/TabsWidget/TabsWidget';
 import './Settings.scss';
 

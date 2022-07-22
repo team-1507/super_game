@@ -5,7 +5,6 @@
     border: none;
 
     span {
-
         @include font-style($font-size: 60px, $color: $light-text, $font-family: VT323);
     }
 
@@ -18,6 +17,7 @@
 
         border-radius: 0 20px 0 0;
     }
+
     &.ant-btn-icon-only {
         width: 90px;
 

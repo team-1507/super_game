@@ -1,30 +1,38 @@
 @import "/src/styles/index";
 
 .sign-up-page {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
     min-height: 100vh;
     padding: 40px 100px;
 
     background-color: $red;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+
     &__title h3 {
         @include font-style($font-size: 80px, $line-height: 80px, $font-family: VT323);
-        text-align: center;
+
         margin-top: 130px;
+
+        text-align: center;
     }
+
     &__form-items {
         width: 431px;
-
     }
+
     &__buttons {
-        width: 431px;
         display: flex;
-        justify-content: space-between;
         align-items: flex-end;
+        justify-content: space-between;
+
+        width: 431px;
+
         &__sign-in {
             @include font-style($font-size: 16px, $letter-spacing: 1px, $color: $light-text, $font-family: Ubuntu);
         }
+
         &__button .ant-btn-primary {
             width: 171px;
             height: 46px;
@@ -34,5 +42,4 @@
             }
         }
     }
-
 }

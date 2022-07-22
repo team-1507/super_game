@@ -54,18 +54,22 @@ const HomePage = () => {
                         </Link>
                     </div>
                     <div className="home-page__buttons-group__two-button__btn">
-                        <Button type="primary">
-                            FORUM
-                            <ArrowTopRight />
-                        </Button>
+                        <Link to="/forum">
+                            <Button type="primary">
+                                FORUM
+                                <ArrowTopRight />
+                            </Button>
+                        </Link>
                     </div>
                 </div>
                 <div className="home-page__buttons-group__two-button">
                     <div className="home-page__buttons-group__two-button__btn">
-                        <Button type="primary">
-                            PROFILE
-                            <ArrowTopRight />
-                        </Button>
+                        <Link to="/settings">
+                            <Button type="primary">
+                                SETTINGS
+                                <ArrowTopRight />
+                            </Button>
+                        </Link>
                     </div>
                     <div className="home-page__buttons-group__two-button__btn">
                         <Button type="primary">

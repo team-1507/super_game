@@ -8,13 +8,21 @@
     background-image: url("../../../static/images/background.png");
     background-repeat: no-repeat;
 
+    &__subtitle p {
+        @include font-style($color: $red, $font-size: 36px, $font-weight: 700, $line-height: 41px);
+
+        width: 260px;
+        margin-top: 0;
+        margin-bottom: 0;
+        margin-left: 370px;
+    }
+
     &__info {
         display: grid;
         grid-template-columns: repeat(3, 1fr);
         column-gap: 50px;
 
         &__header h1 {
-
             @include font-style($font-size: 150px, $letter-spacing: -0.06em, $font-family: UbuntuCondensed);
 
             position: relative;
@@ -26,7 +34,6 @@
         }
 
         &__about p {
-
             @include font-style($color: $red);
 
             text-align: justify;
@@ -35,16 +42,6 @@
                 padding-left: 90px;
             }
         }
-    }
-
-    &__subtitle p {
-
-        @include font-style($color: $red, $font-size: 36px, $font-weight: 700, $line-height: 41px);
-
-        width: 260px;
-        margin-top: 0;
-        margin-bottom: 0;
-        margin-left: 370px;
     }
 
     &__buttons-group {
