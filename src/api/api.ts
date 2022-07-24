@@ -1,12 +1,12 @@
 import { GetRequestParams, PostRequestParams } from './types';
 
-const backendName = 'https://ya-praktikum.tech/api/v2';
+const API_URL = 'https://ya-praktikum.tech/api/v2';
 
 function getUrl(
     address: string,
     queryParams?: Record<string, unknown>,
 ): URL {
-    const url = new URL(`${backendName}/${address}`);
+    const url = new URL(`${API_URL}/${address}`);
 
     if (queryParams) {
         Object.keys(queryParams).forEach((key) => url.searchParams
