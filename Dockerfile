@@ -1,5 +1,5 @@
 FROM node:16
-WORKDIR /home/anastasiia/Desktop/project/super_game
+WORKDIR /var/www
 
 
 COPY ./package.json package.json
