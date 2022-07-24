@@ -5,8 +5,8 @@ import HomePage from '../pages/home-page/HomePage';
 import SignUp from '../pages/sign-up/SignUp';
 import GameOver from '../pages/game-over/GameOver';
 import SignIn from '../pages/sign-in';
-import Settings from '../pages/settings';
 import Leaderboard from '../pages/leaderboard/Leaderboard';
+import Settings from '../pages/settings';
 
 const App = () => {
     return (
