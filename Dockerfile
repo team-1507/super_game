@@ -9,4 +9,4 @@ COPY . .
 RUN ["npm", "run", "build"]
 
 EXPOSE 4751
-CMD ["npm", "run", "start"]
+CMD ["npm", "run", "serve"]
