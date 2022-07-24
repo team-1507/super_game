@@ -8,6 +8,7 @@ import Settings from '../pages/settings';
 import GameOver from '../pages/game-over/GameOver';
 import Leaderboard from '../pages/leaderboard/Leaderboard';
 import HomePage from '../pages/home-page/HomePage';
+import Forum from '../pages/forum';
 
 const App = () => {
     return (
@@ -18,6 +19,7 @@ const App = () => {
             <Route path="/settings" element={<Settings />} />
             <Route path="/game-over" element={<GameOver />} />
             <Route path="/leaderboard" element={<Leaderboard />} />
+            <Route path="/forum" element={<Forum />} />
             <Route path="/" element={<HomePage />} />
         </Routes>
     );

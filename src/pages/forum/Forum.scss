@@ -1,0 +1,27 @@
+@import "/src/styles";
+
+.forum-page {
+    min-width: 100vh;
+    min-height: 100vh;
+    padding: 40px 120px;
+
+    background-color: $light-text;
+
+    .header-back-button h1 {
+        color: $dark-text;
+    }
+
+    .create-post-icon {
+        float: right;
+
+        margin-top: 1.25rem;
+    }
+
+    .forum-body {
+        .close-button {
+            background-color: transparent;
+            border: 0;
+            outline: 0;
+        }
+    }
+}
