@@ -9,8 +9,7 @@
         "build": "webpack --mode production",
         "lint": "stylelint ./src/**/*.scss && eslint \"src/**/*.{ts,tsx}\"",
         "lint-fix": "stylelint --fix ./src/**/*.scss && eslint --fix \"src/**/*.{ts,tsx}\"",
-        "test": "echo \"Error: no test specified\" && exit 1",
-        "heroku-postbuild": "npm run start"
+        "test": "echo \"Error: no test specified\" && exit 1"
     },
     "repository": {
         "type": "git",
