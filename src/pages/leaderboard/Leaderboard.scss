@@ -37,4 +37,34 @@
             white-space: nowrap;
         }
     }
+
+    .header-back-button h1 {
+        color: $dark-text;
+    }
+
+    ol.leaders-list {
+        display: flex;
+        flex-flow: column wrap;
+
+        height: 75vh;
+
+        font-size: 3.7rem;
+
+        li {
+            @include VT323;
+
+            overflow: hidden;
+            flex-shrink: 3;
+
+            width: 30%;
+            min-width: 200px;
+
+            font-size: 3.7rem;
+            line-height: 3.7rem;
+            color: $light-text;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            list-style-position: inside;
+        }
+    }
 }

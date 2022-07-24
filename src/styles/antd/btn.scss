@@ -3,15 +3,35 @@
 
     background: $dark-text;
     border: none;
+    box-shadow: inset 0 0 0 $brown;
+
+    transition: background-color 0.3s, box-shadow 0.3s;
 
     span {
         @include font-style($font-size: 60px, $color: $light-text, $font-family: VT323);
+
+        letter-spacing: normal !important;
+    }
+
+    *:only-child {
+        flex-grow: 1;
+    }
+
+    &:active,
+    &:focus,
+    &:hover {
+        background-color: $dark-hilighted;
+        box-shadow: inset 0 -5px 0 0 $brown;
+    }
+
+    svg {
+        fill: $light-text;
     }
 
     &:not(.ant-btn-icon-only) {
         display: flex;
         align-items: center;
-        justify-content: space-around;
+        justify-content: space-between;
 
         width: 100%;
 

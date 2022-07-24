@@ -1,5 +1,5 @@
+import { Button } from 'antd';
 import React, { HTMLProps } from 'react';
-import FormButton from '../FormButton';
 import './UploadInput.scss';
 
 type UploadInputProps = HTMLProps<HTMLInputElement> & {
@@ -20,9 +20,9 @@ const UploadInput = React.forwardRef<HTMLInputElement, UploadInputProps>((props,
     return (
         <label htmlFor={id} data-title={label} className={`upload-input ${className || ''}`}>
             <input type="file" id={id} name={name} ref={ref} />
-            <FormButton type="button" onClick={onClickHandler}>
+            <Button htmlType="button" type="primary" onClick={onClickHandler}>
                 Upload
-            </FormButton>
+            </Button>
         </label>
     );
 });

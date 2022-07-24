@@ -1,9 +1,8 @@
+import { Button } from 'antd';
 import React from 'react';
 import { useParams } from 'react-router-dom';
-import FormButton from '../../components/form/FormButton';
-import TextInput from '../../components/form/TextInput';
 import UploadInput from '../../components/form/UploadInput';
-import EnterKey from '../../components/icons/EnterKey';
+import UserinfoForm from '../../components/form/UserinfoForm';
 import HeaderBackButton from '../../components/sections/HeaderBackButton';
 import { TabsWidget, Tab } from '../../components/sections/TabsWidget/TabsWidget';
 import './Settings.scss';
@@ -12,7 +11,7 @@ const Settings = () => {
     const { activeTab } = useParams();
     return (
         <main className="settings-page">
-            <HeaderBackButton />
+            <HeaderBackButton header="Settings" />
             <TabsWidget activeTab={activeTab || 'profile'}>
                 <Tab header="Profile" url="profile">
                     <section className="avatar-upload-wrapper">
@@ -22,29 +21,17 @@ const Settings = () => {
                         <form action="/" method="post" className="avatar-buttons-form">
                             <UploadInput label="Upload" />
                             <br />
-                            <FormButton type="button" className="delete-avatar-button">
+                            <Button htmlType="submit" type="primary">
                                 Delete
-                            </FormButton>
+                            </Button>
                         </form>
                     </section>
                     <section className="login-password-forms-wrapper">
                         <div className="col-left">
-                            <form action="/" method="post">
-                                <TextInput name="login" label="Login" />
-                                <TextInput name="email" label="E-mail" />
-                                <FormButton type="submit">
-                                    Save
-                                    <EnterKey />
-                                </FormButton>
-                            </form>
+                            <UserinfoForm formInputs={['login', 'email', 'submit']} submitTitle="Save changes" />
                         </div>
                         <div className="col-right">
-                            <TextInput name="password" type="password" label="Password" />
-                            <TextInput name="password-repeat" type="password" label="Password (one more time)" />
-                            <FormButton type="submit">
-                                Change password
-                                <EnterKey />
-                            </FormButton>
+                            <UserinfoForm formInputs={['password', 'confirmPassword', 'submit']} submitTitle="Change password" />
                         </div>
                     </section>
                 </Tab>
