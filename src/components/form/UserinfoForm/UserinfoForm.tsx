@@ -1,18 +1,12 @@
 import React, { createRef, HTMLProps, useEffect } from 'react';
-// import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import {
     Button, Input, Form, InputRef,
 } from 'antd';
-import { ValidateErrorEntity } from 'rc-field-form/lib/interface';
+import SignUpApi from '../../../api/sign-up/sign-up';
+import { SignUpData } from '../../../api/sign-up/types';
 import EnterKey from '../../icons/EnterKey';
 import './UserinfoForm.scss';
-
-type FormValues = {
-    login: string,
-    email: string,
-    password: string,
-    confirmPassword: string,
-};
 
 type UserinfoFormProps = HTMLProps<HTMLElement> & {
     formInputs: (keyof typeof inputs)[],
@@ -40,7 +34,7 @@ const inputs = {
             label="E-MAIL"
             name="email"
             rules={[{ required: true, message: 'Please input your email' }, {
-                pattern: /^\S+@\S+\.\S+$/,
+                type: 'email',
                 message: 'Format is wrong',
             }]}
         >
@@ -105,14 +99,27 @@ const inputs = {
 
 const UserinfoForm = (props: UserinfoFormProps) => {
     const { formInputs, children, submitTitle } = props;
-    const onFinish = (values: FormValues) => {
-        // eslint-disable-next-line no-console
-        console.log('Success:', values);
+    const navigate = useNavigate();
+    const onFinish = (values: SignUpData) => {
+        const signUpData:SignUpData = {
+            first_name: 'Иван',
+            second_name: 'Дачный',
+            login: values.login,
+            email: values.email,
+            password: values.password,
+            phone: '89999999999',
+        };
+        SignUpApi.signUp(signUpData).then((response) => {
+            if (response) {
+                navigate('/');
+            }
+        })
+            .catch((error) => {
+                // eslint-disable-next-line no-console
+                console.log(error);
+            });
     };
-    const onFinishFailed = (errorInfo: ValidateErrorEntity<FormValues>) => {
-        // eslint-disable-next-line no-console
-        console.log('Failed:', errorInfo);
-    };
+
     useEffect(() => {
         loginInput.current?.focus();
     }, []);
@@ -121,7 +128,6 @@ const UserinfoForm = (props: UserinfoFormProps) => {
             name="basic"
             initialValues={{ remember: true }}
             onFinish={onFinish}
-            onFinishFailed={onFinishFailed}
             autoComplete="off"
             className="userinfo__form-items userinfo"
         >
