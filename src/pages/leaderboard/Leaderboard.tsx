@@ -1,34 +1,21 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import './Leaderboard.scss';
-import { Button, Row, Col } from 'antd';
-import ArrowLeft from '../../components/icons/ArrowLeft';
 import users from './users';
+import HeaderBackButton from '../../components/sections/HeaderBackButton';
 
 const Leaderboard = () => {
     const generateCols = users
-        .map((item, index) => (
-            <Col span={8} key={item} title={item}>
-                <span className="leaderboard-page__grid__number">
-                    {index + 1}
-                    .
-                </span>
-                <span className="leaderboard-page__grid__text">{item}</span>
-            </Col>
+        .map((item) => (
+            <li>{item}</li>
         ));
 
     return (
         <main className="leaderboard-page">
-            <section className="btn-back">
-                <Link to="/">
-                    <Button type="primary" icon={<ArrowLeft />} />
-                </Link>
-                <span className="page-title">Leaderboard</span>
-            </section>
+            <HeaderBackButton header="Leaderboard" />
             <section className="leaderboard-page__grid">
-                <Row gutter={[8, 2]}>
+                <ol className="leaders-list">
                     {generateCols}
-                </Row>
+                </ol>
             </section>
         </main>
     );

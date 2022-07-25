@@ -1,19 +1,37 @@
 @import "/src/styles/index";
 
 .game-over-page {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
     min-height: 100vh;
     padding: 40px 100px;
 
     background-color: $red;
 
-    &__title h3 {
-        @include font-style($font-size: 80px, $line-height: 80px, $font-family: VT323);
+    h3 {
+        @include font-style($font-size: $xxxl, $line-height: 1em, $font-family: VT323);
+
+        margin: 0;
+        margin-bottom: 0.25em;
+
         text-align: center;
-        margin-top: 290px;
+        letter-spacing: normal !important;
     }
+
     &__score h3 {
-        @include font-style($font-size: 80px, $color: $light-text, $line-height: 80px, $font-family: VT323);
-        text-align: center;
-        margin-top: 20px;
+        color: $light-text;
+    }
+
+    .game-over__buttons-group {
+        width: 430px;
+
+        .ant-btn-primary {
+            margin: $xxl 0;
+
+            text-align: left;
+        }
     }
 }

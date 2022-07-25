@@ -20,13 +20,14 @@ const MODE = {
 const getOutputConfig = (mode) => ({
     filename: mode === MODE.DEV ? '[name].js' : '[name].[fullhash].js',
     path: path.resolve(__dirname, 'build'),
+    publicPath: path.resolve(__dirname, '/'),
 });
 
 module.exports = (_, argv) => {
     const mode = argv.mode || MODE.DEV;
     return {
         mode,
-        entry: './src/index.tsx',
+        entry: '/src/index.tsx',
         output: getOutputConfig(mode),
         target: 'web',
         devServer: {

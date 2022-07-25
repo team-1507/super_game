@@ -1,0 +1,21 @@
+@import "/src/styles";
+
+.upload-input {
+    @include roundedTopRight;
+    @include VT323;
+
+    position: relative;
+
+    overflow: hidden;
+    display: block;
+
+    input {
+        position: absolute;
+        top: -1000px;
+        left: -1000px;
+    }
+
+    button {
+        margin: 0;
+    }
+}

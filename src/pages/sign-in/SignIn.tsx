@@ -1,39 +1,22 @@
-import React, {
-    createRef, useEffect,
-} from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
-import FormButton from '../../components/form/FormButton';
-import TextInput from '../../components/form/TextInput';
-import EnterKey from '../../components/icons/EnterKey';
-import './SignIn.scss';
+import UserinfoForm from '../../components/form/UserinfoForm';
+import './signIn.scss';
 
-const SignIn = () => {
-    const loginInput = createRef<HTMLInputElement>();
-    useEffect(() => {
-        loginInput.current?.focus();
-    }, [loginInput]);
-    return (
-        <main className="sign-in-page">
-            <section className="centeredForm">
-                <h1>Sign in</h1>
-                <form action="/" method="post">
-                    <TextInput name="login" ref={loginInput} label="Login" message={{ text: 'Allrighty!', status: 'info' }} />
-                    <TextInput name="password" type="password" label="Password" message={{ text: 'Oooopsy!', status: 'error' }} />
-                    <div className="submit-button-wrapper">
-                        <FormButton type="submit">
-                            Sign in
-                            <EnterKey />
-                        </FormButton>
-                        <span className="form-caption">
-                            Don`t have an account?
-                            {' '}
-                            <Link to="/sign-up">Sign up</Link>
-                        </span>
-                    </div>
-                </form>
-            </section>
-        </main>
-    );
-};
+const SignIn = () => (
+    <div className="sign-up-page">
+        <div className="sign-up-page__wrapper">
+            <div className="sign-up-page__title">
+                <h3>Sign in</h3>
+            </div>
+            <UserinfoForm formInputs={['login', 'password', 'submit']} submitTitle="Sign in">
+                <div className="sign-up-page__buttons__sign-in">
+                    Don`t have an account?&nbsp;
+                    <Link to="/sign-up">Sign up</Link>
+                </div>
+            </UserinfoForm>
+        </div>
+    </div>
+);
 
 export default SignIn;

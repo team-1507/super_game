@@ -1,0 +1,63 @@
+@import "/src/styles";
+
+.tabs-widget {
+    position: relative;
+
+    .tabs-widget-tab-header {
+        @include VT323;
+
+        position: relative;
+
+        display: inline-block;
+
+        margin-left: -3px;
+        padding: 15px 25px;
+
+        font-size: $xxl;
+        color: $red;
+        text-decoration: none;
+
+        background-color: $light-text;
+        border: 1px solid adjust-color($dark-hilighted, $alpha: 0);
+        border-bottom: 10px solid $brown;
+        border-radius: 2px 20px 2px 2px;
+        box-shadow: 0 -5px 5px 0 adjust-color($dark-hilighted, $alpha: -0.5);
+
+        transition: background-color 0.3s, transform 0.3s, box-shadow 0.3s;
+
+        @for $i from 1 through 10 {
+            &:nth-child(#{$i}) {
+                z-index: #{10 - $i};
+            }
+        }
+
+        &[data-active="true"] {
+            z-index: 20;
+
+            background-color: $brown;
+        }
+
+        &:active,
+        &:focus {
+            outline: none;
+        }
+
+        &:active {
+            transform: translate(0, -5px);
+
+            box-shadow: 0 -2px 5px 0 adjust-color($dark-hilighted, $alpha: -0.5);
+        }
+    }
+
+    .tabs-widget-tab-content {
+        float: right;
+        display: block;
+
+        width: 100%;
+        margin-top: 10px;
+
+        &[data-active="false"] {
+            display: none;
+        }
+    }
+}
