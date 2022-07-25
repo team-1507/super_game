@@ -1,4 +1,7 @@
 import React, { HTMLProps } from 'react';
+import { Form } from 'antd';
+import TextArea from 'antd/lib/input/TextArea';
+
 import CloseButton from '../../components/icons/CloseButton';
 import CreatePost from '../../components/icons/CreatePost';
 import HeaderBackButton from '../../components/sections/HeaderBackButton';
@@ -38,6 +41,22 @@ const Post = (props: ForumPostProps) => {
 Post.defaultProps = {
     header: '',
 };
+
+const ReplyForm = () => (
+    <div className="reply-form-wrapper">
+        <Form
+            name="basic"
+            initialValues={{ remember: true }}
+            autoComplete="off"
+            className="reply-form"
+        >
+            <Form.Item label="Reply::">
+                {/* почему-то съедает одно двоеточие, с двумя работает */}
+                <TextArea rows={3} />
+            </Form.Item>
+        </Form>
+    </div>
+);
 
 const Forum = () => (
     <main className="forum-page">
@@ -94,6 +113,7 @@ const Forum = () => (
                     ds the viewer. Gregor then turned to look out the window at the dull wea
                     ther.
                 </Post>
+                <ReplyForm />
             </article>
             <article className="forum-topic">
                 <button className="close-button">

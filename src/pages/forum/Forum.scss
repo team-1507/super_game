@@ -23,6 +23,8 @@
 
             position: relative;
 
+            overflow: hidden;
+
             margin: 0 0 20px;
             padding: 15px;
 
@@ -117,6 +119,74 @@
                         font-size: $l;
                         font-weight: 300;
                         line-height: normal;
+                    }
+                }
+            }
+
+            .reply-form-wrapper {
+                overflow: hidden;
+
+                margin-left: 90px;
+
+                * {
+                    @include Ubuntu;
+
+                    font-size: $m;
+                    color: $dark-text;
+                    letter-spacing: normal;
+                }
+
+                .ant-form-item {
+                    margin: 0;
+                }
+
+                .ant-form-item-label {
+                    top: 2px;
+                    left: 8px;
+
+                    overflow: visible;
+
+                    text-align: left;
+
+                    label {
+                        @include VT323;
+
+                        font-size: 2.5rem;
+                        line-height: 1em;
+
+                        opacity: 1;
+                        background-color: adjust-color($light-text, $alpha: -0.5);
+                        box-shadow: 0 -2px 5px 5px adjust-color($light-text, $alpha: -0.5);
+                    }
+                }
+
+                textarea.ant-input {
+                    margin-bottom: -60px;
+                    padding: 40px 45px 8px 8px;
+
+                    line-height: normal;
+
+                    background-color: $light-text !important;
+                    box-shadow: none;
+
+                    transition: margin-bottom 0.3s;
+
+                    &:active,
+                    &:hover,
+                    &:focus,
+                    &:not(:empty) {
+                        margin-bottom: 0;
+
+                        background-color: $light-text !important;
+                        box-shadow: none;
+                    }
+                }
+
+                &:active,
+                &:hover,
+                &:focus {
+                    textarea.ant-input {
+                        margin-bottom: 0;
                     }
                 }
             }
