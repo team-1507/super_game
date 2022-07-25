@@ -18,10 +18,108 @@
     }
 
     .forum-body {
-        .close-button {
-            background-color: transparent;
-            border: 0;
-            outline: 0;
+        .forum-topic {
+            @include roundedTopRight;
+
+            position: relative;
+
+            margin: 0 0 20px;
+            padding: 15px;
+
+            background-color: $dark-text;
+
+            * {
+                font-size: $m;
+                color: $light-text;
+            }
+
+            .close-button {
+                position: absolute;
+                top: 15px;
+                right: 15px;
+
+                margin: 0;
+                padding: 0;
+
+                background-color: transparent;
+                border: 0;
+                border-radius: 15px;
+                outline: 0;
+
+                transition: box-shadow 0.5s;
+
+                &:hover {
+                    box-shadow: 0 0 5px 0 $red, inset 0 3px 5px 0 $red;
+                }
+            }
+
+            .forum-post {
+                display: flex;
+
+                margin: 0 0 15px 90px;
+
+                .avatar-wrapper {
+                    overflow: hidden;
+                    flex-basis: 40px;
+                    flex-shrink: 0;
+
+                    width: 40px;
+                    height: 40px;
+                    margin-right: 10px;
+
+                    border-radius: 20px;
+
+                    img {
+                        width: 100%;
+
+                        object-fit: cover;
+                    }
+                }
+
+                .topic-header {
+                    display: none;
+                }
+
+                .post-header {
+                    margin-bottom: 6px;
+
+                    opacity: 0.5;
+
+                    span {
+                        margin-right: 30px;
+                    }
+                }
+
+                .post-body {
+                    font-feature-settings: normal;
+                    font-weight: 300;
+                    line-height: normal;
+                }
+
+                &:first-of-type {
+                    margin-left: 0;
+
+                    .avatar-wrapper {
+                        flex-basis: 80px;
+
+                        width: 80px;
+                        height: 80px;
+
+                        border-radius: 10px;
+                    }
+
+                    .topic-header {
+                        display: block;
+
+                        margin: 0 0 8px;
+                        padding: 0;
+
+                        font-size: $l;
+                        font-weight: 300;
+                        line-height: normal;
+                    }
+                }
+            }
         }
     }
 }
