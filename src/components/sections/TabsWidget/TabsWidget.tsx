@@ -15,9 +15,10 @@ export const Tab = (props: TabProps) => {
     const { header, children, url } = props;
     const activeTab = useContext(ActiveTabWidgetContext);
     const isActive = activeTab === url;
+    const pathnameTrimmed = window.location.pathname.replace(/\/$/, '');
     const baseUrl = new RegExp(`${activeTab}[/]?$`).test(window.location.pathname)
-        ? window.location.pathname.replace(/\/$/, '').split('/').slice(1, -1).join('/')
-        : window.location.pathname.replace(/\/$/, '').replace(/^\//, '');
+        ? pathnameTrimmed.split('/').slice(1, -1).join('/')
+        : pathnameTrimmed.replace(/^\//, '');
     return (
         <>
             <Link to={`/${baseUrl}/${url}`} className="tabs-widget-tab-header" data-active={isActive}>

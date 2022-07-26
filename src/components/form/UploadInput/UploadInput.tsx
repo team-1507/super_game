@@ -1,5 +1,5 @@
-import { Button } from 'antd';
 import React, { HTMLProps } from 'react';
+import { Button } from 'antd';
 import './UploadInput.scss';
 
 type UploadInputProps = HTMLProps<HTMLInputElement> & {
