@@ -11,27 +11,60 @@
 
         .ant-row {
             .ant-col {
-                display: flex;
-
                 @include font-style($font-size: 48px, $line-height: 42px, $color: $light-text, $font-family: VT323);
 
+                display: flex;
+
                 span {
-                    color: inherit;
                     font-size: inherit;
                     line-height: inherit;
+                    color: inherit;
                     text-align: right;
                 }
             }
         }
+
         &__number {
             width: 70px;
             min-width: 70px;
             margin-right: 10px;
         }
+
         &__text {
             overflow: hidden;
+
             text-overflow: ellipsis;
             white-space: nowrap;
+        }
+    }
+
+    .header-back-button h1 {
+        color: $dark-text;
+    }
+
+    ol.leaders-list {
+        display: flex;
+        flex-flow: column wrap;
+
+        height: 75vh;
+
+        font-size: 3.7rem;
+
+        li {
+            @include VT323;
+
+            overflow: hidden;
+            flex-shrink: 3;
+
+            width: 30%;
+            min-width: 200px;
+
+            font-size: 3.7rem;
+            line-height: 3.7rem;
+            color: $light-text;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            list-style-position: inside;
         }
     }
 }
