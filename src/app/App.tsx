@@ -19,6 +19,7 @@ const App = () => {
             <Route path="/settings" element={<Settings />} />
             <Route path="/game-over" element={<GameOver />} />
             <Route path="/leaderboard" element={<Leaderboard />} />
+            <Route path="/forum/:topicId" element={<Forum />} />
             <Route path="/forum" element={<Forum />} />
             <Route path="/" element={<HomePage />} />
         </Routes>
