@@ -4,12 +4,11 @@ import { Button, Form } from 'antd';
 import TextArea from 'antd/lib/input/TextArea';
 
 import CloseButton from '../../components/icons/CloseButton';
-import CreatePost from '../../components/icons/CreatePost';
 import HeaderBackButton from '../../components/sections/HeaderBackButton';
-// import styles from './Forum.module.scss';
 import './Forum.scss';
 import ReplyCounterArrow from '../../components/icons/ReplyCounterArrow';
-import SendBtn from '../../components/icons/SendBtn';
+import ArrowSend from '../../components/icons/ArrowSend';
+import Pencil from '../../components/icons/Pencil';
 
 type ForumPostProps = HTMLProps<HTMLElement> & {
     avatar: string,
@@ -59,7 +58,7 @@ const ReplyForm = () => (
             </Form.Item>
             <Form.Item className="reply-form-send-button">
                 <Button htmlType="submit" type="primary">
-                    <SendBtn />
+                    <ArrowSend />
                 </Button>
             </Form.Item>
         </Form>
@@ -71,7 +70,7 @@ const Forum = () => {
     return (
         <main className="forum-page">
             <HeaderBackButton header="Forum">
-                <CreatePost />
+                <Pencil />
             </HeaderBackButton>
             <section className="forum-body">
                 <article className={`forum-topic ${topicId === '1' ? 'expanded' : ''}`}>
