@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import UserinfoForm from '../../components/form/UserinfoForm';
-import './signIn.scss';
+import './SignIn.scss';
 
 const SignIn = () => (
     <div className="sign-up-page">
