@@ -5,10 +5,12 @@ import UploadInput from '../../components/form/UploadInput';
 import UserinfoForm from '../../components/form/UserinfoForm';
 import HeaderBackButton from '../../components/sections/HeaderBackButton';
 import { TabsWidget, Tab } from '../../components/sections/TabsWidget/TabsWidget';
+import { useAppSelector } from '../../store/hooks';
 import './Settings.scss';
 
 const Settings = () => {
     const { activeTab } = useParams();
+    const user = useAppSelector(state => state);
     return (
         <main className="settings-page">
             <HeaderBackButton header="Settings" />
@@ -16,7 +18,7 @@ const Settings = () => {
                 <Tab header="Profile" url="profile">
                     <section className="avatar-upload-wrapper">
                         <div className="avatar-img-cont">
-                            <img src="https://i.pravatar.cc/300" alt="avatar" />
+                            <img src={user.avatar} alt="avatar" />
                         </div>
                         <form action="/" method="post" className="avatar-buttons-form">
                             <UploadInput label="Upload" />
@@ -28,7 +30,7 @@ const Settings = () => {
                     </section>
                     <section className="login-password-forms-wrapper">
                         <div className="col-left">
-                            <UserinfoForm formInputs={['login', 'email', 'submit']} submitTitle="Save changes" />
+                            <UserinfoForm formInputs={['login', 'email', 'submit']} submitTitle="Save changes" user={user} />
                         </div>
                         <div className="col-right">
                             <UserinfoForm formInputs={['password', 'confirmPassword', 'submit']} submitTitle="Change password" />

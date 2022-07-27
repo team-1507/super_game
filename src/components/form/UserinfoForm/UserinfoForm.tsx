@@ -6,16 +6,19 @@ import {
 import SignUpApi from '../../../api/sign-up/sign-up';
 import { SignUpData } from '../../../api/sign-up/types';
 import EnterKey from '../../icons/EnterKey';
+import { setUser, IUserState } from '../../../store/reducers';
+import { useAppDispatch } from '../../../store/hooks';
 import './UserinfoForm.scss';
 
 type UserinfoFormProps = HTMLProps<HTMLElement> & {
     formInputs: (keyof typeof inputs)[],
     submitTitle: string,
+    user?: IUserState,
 };
 
 const loginInput = createRef<InputRef>();
 const inputs = {
-    login: () => (
+    login: (props: UserinfoFormProps) => (
         <Form.Item
             label="LOGIN"
             name="login"
@@ -25,11 +28,11 @@ const inputs = {
             }]}
         >
             <div className="form-item userinfo__form-items_input">
-                <Input ref={loginInput} />
+                <Input ref={loginInput} value={props.user?.login} />
             </div>
         </Form.Item>
     ),
-    email: () => (
+    email: (props: UserinfoFormProps) => (
         <Form.Item
             label="E-MAIL"
             name="email"
@@ -39,7 +42,7 @@ const inputs = {
             }]}
         >
             <div className="form-item userinfo__form-items_input">
-                <Input />
+                <Input value={props.user?.email}/>
             </div>
         </Form.Item>
     ),
@@ -98,10 +101,12 @@ const inputs = {
 };
 
 const UserinfoForm = (props: UserinfoFormProps) => {
-    const { formInputs, children, submitTitle } = props;
+    const { formInputs, children, submitTitle, user } = props;
     const navigate = useNavigate();
+    const dispatch = useAppDispatch();
     const onFinish = (values: SignUpData) => {
         const signUpData:SignUpData = {
+            avatar: 'https://i.pravatar.cc/300',
             first_name: 'Иван',
             second_name: 'Дачный',
             login: values.login,
@@ -111,6 +116,7 @@ const UserinfoForm = (props: UserinfoFormProps) => {
         };
         SignUpApi.signUp(signUpData).then((response) => {
             if (response) {
+                dispatch(setUser(signUpData));
                 navigate('/');
             }
         })
@@ -131,7 +137,7 @@ const UserinfoForm = (props: UserinfoFormProps) => {
             autoComplete="off"
             className="userinfo__form-items userinfo"
         >
-            {formInputs.map((input) => (inputs[input]({ ...props, submitTitle, children })))}
+            {formInputs.map((input) => (inputs[input]({ ...props, submitTitle, children, key: input, user })))}
         </Form>
     );
 };
