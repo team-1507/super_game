@@ -64,6 +64,8 @@
         position: absolute;
         right: 0;
         bottom: 0;
+
+        min-height: 0 !important;
     }
 
     &-explain-error {
@@ -76,9 +78,5 @@
 
         color: $red;
         white-space: nowrap;
-    }
-
-    &-explain {
-        min-height: 0 !important;
     }
 }
