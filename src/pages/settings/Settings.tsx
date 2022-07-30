@@ -28,10 +28,18 @@ const Settings = () => {
                     </section>
                     <section className="login-password-forms-wrapper">
                         <div className="col-left">
-                            <UserinfoForm formInputs={['login', 'email', 'submit']} submitTitle="Save changes" />
+                            <UserinfoForm
+                                formInputs={['login', 'email', 'submit']}
+                                submitTitle="Save changes"
+                                valuesToSend={{}}
+                            />
                         </div>
                         <div className="col-right">
-                            <UserinfoForm formInputs={['password', 'confirmPassword', 'submit']} submitTitle="Change password" />
+                            <UserinfoForm
+                                formInputs={['password', 'confirmPassword', 'submit']}
+                                submitTitle="Change password"
+                                valuesToSend={{}}
+                            />
                         </div>
                     </section>
                 </Tab>
