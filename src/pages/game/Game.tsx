@@ -1,8 +1,24 @@
 import React, { useEffect } from 'react';
 import GameBackButton from './components/GameBackButton';
 
+type ILoadImage = {
+    src: string,
+    ctx: CanvasRenderingContext2D,
+    width: number,
+    height: number
+};
+
+function drowImage ({ src, ctx, width, height }: ILoadImage) {
+    const image = new Image();
+    image.src = src;
+
+    image.onload = () => {
+        return ctx.drawImage(image, 0, 0, width, height);
+    }
+}
+
 const Game = () => {
-    const { innerWidth, innerHeight } = window;
+    const { innerWidth: width, innerHeight: height } = window;
     const canvasRef = React.createRef<HTMLCanvasElement>();
 
     useEffect(() => {
@@ -11,7 +27,8 @@ const Game = () => {
 
         if (!ctx) return;
 
-        ctx.clearRect(0, 0, innerHeight, innerWidth);
+        ctx.clearRect(0, 0, height, width);
+        drowImage({ src: require('/static/images/game.png'), ctx, width, height });
         return () => {
             document.body.style.overflow = '';
         }

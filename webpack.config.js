@@ -53,6 +53,10 @@ module.exports = (_, argv) => {
                         { loader: "sass-loader", options: { sourceMap: mode === MODE.DEV } },
                     ],
                 },
+                {
+                  test: /\.(png)$/,
+                  type: 'asset/resource'
+                },
             ],
         },
         plugins: [new HtmlWebpackPlugin(htmlPluginConfig), new MiniCssExtractPlugin()],
