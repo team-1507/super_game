@@ -1,0 +1,7 @@
+@import "/src/styles/index";
+
+.game-page {
+    body & {
+        overflow: hidden;
+    }
+}
