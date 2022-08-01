@@ -3,16 +3,22 @@ import { useNavigate } from 'react-router-dom';
 import {
     Button, Input, Form, InputRef,
 } from 'antd';
-import SignUpApi from '../../../api/sign-up/sign-up';
-import { SignUpData } from '../../../api/sign-up/types';
 import EnterKey from '../../icons/EnterKey';
-import { setUser, IUserState } from '../../../store/reducers';
+import { setUser, IUserState, initialState } from '../../../store/reducers';
 import { useAppDispatch } from '../../../store/hooks';
 import './UserinfoForm.scss';
+import { SignUpData, SignUpDataDto } from '../../../api/sign-up/types';
+import { SignInData, SignInDataDto } from '../../../api/sign-in/types';
+
+type CallbackFnData = SignUpData | SignInData | Record<string, never>;
+type CallbackFnReturn = SignUpDataDto | SignInDataDto | null;
 
 type UserinfoFormProps = HTMLProps<HTMLElement> & {
     formInputs: (keyof typeof inputs)[],
     submitTitle: string,
+    callbackFn?(this: void, body: CallbackFnData): Promise<CallbackFnReturn>,
+    valuesToSend: CallbackFnData,
+    navigateOnSuccess?: string,
     user?: IUserState,
 };
 
@@ -20,6 +26,7 @@ const loginInput = createRef<InputRef>();
 const inputs = {
     login: (props: UserinfoFormProps) => (
         <Form.Item
+            key={props.key}
             label="LOGIN"
             name="login"
             rules={[{ required: true, message: 'Please input your login' }, {
@@ -34,6 +41,7 @@ const inputs = {
     ),
     email: (props: UserinfoFormProps) => (
         <Form.Item
+            key={props.key}
             label="E-MAIL"
             name="email"
             rules={[{ required: true, message: 'Please input your email' }, {
@@ -42,12 +50,13 @@ const inputs = {
             }]}
         >
             <div className="form-item userinfo__form-items_input">
-                <Input value={props.user?.email}/>
+                <Input value={props.user?.email} />
             </div>
         </Form.Item>
     ),
-    password: () => (
+    password: (props: UserinfoFormProps) => (
         <Form.Item
+            key={props.key}
             label="PASSWORD"
             name="password"
             rules={[{ required: true, message: 'Please input your password' }]}
@@ -57,8 +66,9 @@ const inputs = {
             </div>
         </Form.Item>
     ),
-    confirmPassword: () => (
+    confirmPassword: (props: UserinfoFormProps) => (
         <Form.Item
+            key={props.key}
             label="PASSWORD (one more time)"
             name="confirmPassword"
             dependencies={['password']}
@@ -83,9 +93,9 @@ const inputs = {
         </Form.Item>
     ),
     submit: (props: UserinfoFormProps) => {
-        const { children, submitTitle } = props;
+        const { children, submitTitle, key } = props;
         return (
-            <Form.Item>
+            <Form.Item key={key}>
                 <div className="userinfo__buttons">
                     {children}
                     <div className="userinfo__buttons__button">
@@ -101,23 +111,26 @@ const inputs = {
 };
 
 const UserinfoForm = (props: UserinfoFormProps) => {
-    const { formInputs, children, submitTitle, user } = props;
+    const {
+        formInputs, children, submitTitle, callbackFn, valuesToSend, navigateOnSuccess, user,
+    } = props;
     const navigate = useNavigate();
     const dispatch = useAppDispatch();
-    const onFinish = (values: SignUpData) => {
-        const signUpData:SignUpData = {
-            avatar: 'https://i.pravatar.cc/300',
-            first_name: 'Иван',
-            second_name: 'Дачный',
-            login: values.login,
-            email: values.email,
-            password: values.password,
-            phone: '89999999999',
-        };
-        SignUpApi.signUp(signUpData).then((response) => {
+    const onFinish = (values: CallbackFnData) => {
+        if (!callbackFn) {
+            return;
+        }
+        const callBackFnData = { ...valuesToSend };
+        Object.keys(valuesToSend).forEach((key) => {
+            const fieldName = key as keyof CallbackFnData;
+            callBackFnData[fieldName] = values[fieldName];
+        });
+        callbackFn(callBackFnData).then((response) => {
             if (response) {
-                dispatch(setUser(signUpData));
-                navigate('/');
+                dispatch(setUser(callBackFnData));
+                if (navigateOnSuccess) {
+                    navigate(navigateOnSuccess);
+                }
             }
         })
             .catch((error) => {
@@ -137,9 +150,19 @@ const UserinfoForm = (props: UserinfoFormProps) => {
             autoComplete="off"
             className="userinfo__form-items userinfo"
         >
-            {formInputs.map((input) => (inputs[input]({ ...props, submitTitle, children, key: input, user })))}
+            {formInputs.map(
+                (input) => (inputs[input]({
+                    ...props, submitTitle, children, key: input, user,
+                })),
+            )}
         </Form>
     );
+};
+
+UserinfoForm.defaultProps = {
+    navigateOnSuccess: undefined,
+    callbackFn: undefined,
+    user: initialState,
 };
 
 export default UserinfoForm;
