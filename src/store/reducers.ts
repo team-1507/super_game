@@ -3,13 +3,13 @@ import type { PayloadAction } from '@reduxjs/toolkit';
 import type { RootState } from '.';
 
 export interface IUserState {
-    avatar: string
-    first_name: string
-    second_name: string
-    login: string
-    email: string
-    password: string
-    phone: string
+    avatar?: string
+    first_name?: string
+    second_name?: string
+    login?: string
+    email?: string
+    password?: string
+    phone?: string
 }
 
 export const initialState: IUserState = {
