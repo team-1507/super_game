@@ -4,6 +4,8 @@ import {
     Button, Input, Form, InputRef,
 } from 'antd';
 import EnterKey from '../../icons/EnterKey';
+import { setUser, IUserState } from '../../../store/reducers';
+import { useAppDispatch } from '../../../store/hooks';
 import './UserinfoForm.scss';
 import { SignUpData, SignUpDataDto } from '../../../api/sign-up/types';
 import { SignInData, SignInDataDto } from '../../../api/sign-in/types';
@@ -17,6 +19,7 @@ type UserinfoFormProps = HTMLProps<HTMLElement> & {
     callbackFn?(this: void, body: CallbackFnData): Promise<CallbackFnReturn>,
     valuesToSend: CallbackFnData,
     navigateOnSuccess?: string,
+    user?: IUserState,
 };
 
 const loginInput = createRef<InputRef>();
@@ -32,7 +35,7 @@ const inputs = {
             }]}
         >
             <div className="form-item userinfo__form-items_input">
-                <Input ref={loginInput} />
+                <Input ref={loginInput} value={props.user?.login} />
             </div>
         </Form.Item>
     ),
@@ -47,7 +50,7 @@ const inputs = {
             }]}
         >
             <div className="form-item userinfo__form-items_input">
-                <Input />
+                <Input value={props.user?.email} />
             </div>
         </Form.Item>
     ),
@@ -109,9 +112,10 @@ const inputs = {
 
 const UserinfoForm = (props: UserinfoFormProps) => {
     const {
-        formInputs, children, submitTitle, callbackFn, valuesToSend, navigateOnSuccess,
+        formInputs, children, submitTitle, callbackFn, valuesToSend, navigateOnSuccess, user,
     } = props;
     const navigate = useNavigate();
+    const dispatch = useAppDispatch();
     const onFinish = (values: CallbackFnData) => {
         if (!callbackFn) {
             return;
@@ -123,6 +127,7 @@ const UserinfoForm = (props: UserinfoFormProps) => {
         });
         callbackFn(callBackFnData).then((response) => {
             if (response) {
+                dispatch(setUser(callBackFnData));
                 if (navigateOnSuccess) {
                     navigate(navigateOnSuccess);
                 }
@@ -146,8 +151,8 @@ const UserinfoForm = (props: UserinfoFormProps) => {
             className="userinfo__form-items userinfo"
         >
             {formInputs.map(
-                (input, key) => (inputs[input]({
-                    ...props, submitTitle, children, key,
+                (input) => (inputs[input]({
+                    ...props, submitTitle, children, key: input, user,
                 })),
             )}
         </Form>

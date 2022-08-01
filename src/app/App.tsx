@@ -2,6 +2,7 @@ import React from 'react';
 import './App.scss';
 import { Route, Routes } from 'react-router-dom';
 
+import Game from '../pages/game';
 import SignUp from '../pages/sign-up/SignUp';
 import SignIn from '../pages/sign-in';
 import Settings from '../pages/settings';
@@ -13,6 +14,7 @@ import Forum from '../pages/forum';
 const App = () => {
     return (
         <Routes>
+            <Route path="/game" element={<Game />} />
             <Route path="/sign-up" element={<SignUp />} />
             <Route path="/sign-in" element={<SignIn />} />
             <Route path="/settings/:activeTab" element={<Settings />} />

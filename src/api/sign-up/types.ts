@@ -1,13 +1,14 @@
 export interface SignUpData {
-    first_name: string,
-    second_name: string,
-    login: string,
-    email: string,
-    password: string,
-    phone: string,
+    avatar: string
+    first_name: string
+    second_name: string
+    login: string
+    email: string
+    password: string
+    phone: string
 }
 
 export interface SignUpDataDto {
-    id?: string,
+    id?: string
     reason?: string
 }

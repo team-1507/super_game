@@ -18,9 +18,11 @@ const GameOver = () => {
             </div>
             <div className="game-over__buttons-group">
                 <div className="game-over__buttons-group__two-button__btn">
-                    <Button type="primary">
-                        START AGAIN
-                    </Button>
+                    <Link to="/game">
+                        <Button type="primary">
+                            START AGAIN
+                        </Button>
+                    </Link>
                 </div>
                 <div className="game-over__buttons-group__two-button__btn">
                     <Link to="/">
