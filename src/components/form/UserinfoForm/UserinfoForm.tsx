@@ -4,7 +4,7 @@ import {
     Button, Input, Form, InputRef,
 } from 'antd';
 import EnterKey from '../../icons/EnterKey';
-import { setUser, IUserState } from '../../../store/reducers';
+import { setUser, IUserState, initialState } from '../../../store/reducers';
 import { useAppDispatch } from '../../../store/hooks';
 import './UserinfoForm.scss';
 import { SignUpData, SignUpDataDto } from '../../../api/sign-up/types';
@@ -162,6 +162,7 @@ const UserinfoForm = (props: UserinfoFormProps) => {
 UserinfoForm.defaultProps = {
     navigateOnSuccess: undefined,
     callbackFn: undefined,
+    user: initialState,
 };
 
 export default UserinfoForm;
