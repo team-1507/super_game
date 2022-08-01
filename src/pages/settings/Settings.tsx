@@ -10,7 +10,7 @@ import './Settings.scss';
 
 const Settings = () => {
     const { activeTab } = useParams();
-    const user = useAppSelector(state => state);
+    const user = useAppSelector((state) => state);
     return (
         <main className="settings-page">
             <HeaderBackButton header="Settings" />
@@ -30,10 +30,19 @@ const Settings = () => {
                     </section>
                     <section className="login-password-forms-wrapper">
                         <div className="col-left">
-                            <UserinfoForm formInputs={['login', 'email', 'submit']} submitTitle="Save changes" user={user} />
+                            <UserinfoForm
+                                formInputs={['login', 'email', 'submit']}
+                                submitTitle="Save changes"
+                                valuesToSend={{}}
+                                user={user}
+                            />
                         </div>
                         <div className="col-right">
-                            <UserinfoForm formInputs={['password', 'confirmPassword', 'submit']} submitTitle="Change password" />
+                            <UserinfoForm
+                                formInputs={['password', 'confirmPassword', 'submit']}
+                                submitTitle="Change password"
+                                valuesToSend={{}}
+                            />
                         </div>
                     </section>
                 </Tab>
