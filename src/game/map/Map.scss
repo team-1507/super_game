@@ -1,0 +1,9 @@
+.game-map-map_layer {
+    display: grid;
+    grid-template-columns: repeat(20, 16px);
+    grid-template-rows: repeat(20, 16px);
+
+    canvas {
+        image-rendering: pixelated;
+    }
+}
