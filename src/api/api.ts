@@ -55,7 +55,28 @@ async function postRequest<B, R>({
     return await response.json() as unknown as R;
 }
 
+async function putRequest<B, R>({
+    address,
+    body,
+    queryParams,
+}: PostRequestParams<B>): Promise<R | null> {
+    const url = getUrl(address, queryParams);
+
+    const headers = {
+        'Content-Type': 'application/json',
+    };
+
+    const response = await fetch(url.toString(), {
+        method: 'PUT',
+        headers,
+        body: body ? JSON.stringify(body) : null,
+    });
+
+    return await response.json() as unknown as R;
+}
+
 export default {
     getRequest,
     postRequest,
+    putRequest,
 };
