@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom';
 import UserinfoForm from '../../components/form/UserinfoForm';
 import { SignInData } from '../../api/sign-in/types';
 import SignInApi from '../../api/sign-in/sign-in';
-import './signIn.scss';
 import './SignIn.scss';
 
 const SignIn = () => {
