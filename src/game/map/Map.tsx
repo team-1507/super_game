@@ -6,7 +6,10 @@ import './Map.scss';
 
 const Map = () => {
     return (
-        <MapLayer layerConfig={MAP[0]} />
+        <div className="game-map">
+            <MapLayer layerConfig={MAP[0]} />
+            <MapLayer layerConfig={MAP[1]} />
+        </div>
     );
 };
 

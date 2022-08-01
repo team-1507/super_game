@@ -5,8 +5,8 @@ import GameBackButton from './components/GameBackButton';
 const Game = () => {
     return (
         <main className="game-page">
-            <GameBackButton />
             <Map />
+            <GameBackButton />
         </main>
     );
 };
