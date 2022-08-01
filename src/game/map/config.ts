@@ -1,5 +1,5 @@
 /* eslint-disable no-multi-spaces */
-import sptitesheet from '../../../static/assets/sptitesheet.png';
+import sptitesheet from '../../../static/assets/map_sptitesheet.png';
 
 export const SPRITE_SHEET = sptitesheet;
 
