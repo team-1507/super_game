@@ -42,7 +42,9 @@ const HomePage = () => {
             </div>
             <div className="home-page__buttons-group">
                 <div className="home-page__buttons-group__one-button">
-                    <Button type="primary">START</Button>
+                    <Link to="/game">
+                        <Button type="primary">START</Button>
+                    </Link>
                 </div>
                 <div className="home-page__buttons-group__two-button">
                     <div className="home-page__buttons-group__two-button__btn">

@@ -8,13 +8,14 @@ type HeaderBackButtonProps = HTMLProps<HTMLElement> & {
 };
 
 const HeaderBackButton = (props: HeaderBackButtonProps) => {
-    const { header } = props;
+    const { header, children } = props;
     return (
         <header className="header-back-button">
             <Link to="/" className="back-button">
                 <ArrowBack />
             </Link>
             <h1>{header}</h1>
+            { children }
         </header>
     );
 };

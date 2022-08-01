@@ -1,6 +1,9 @@
 @import "/src/styles";
 
-.header-back-button {
+.game-back-button {
+    position: fixed;
+    bottom: 10px;
+    right: 10px;
     margin-bottom: 35px;
 
     .back-button {
@@ -35,18 +38,5 @@
         .arrow-back-icon {
             fill: $light-text;
         }
-    }
-
-    h1 {
-        @include VT323;
-
-        display: inline;
-
-        margin: 0;
-        padding: 0;
-
-        font-size: $xxxl;
-        color: $red;
-        vertical-align: middle;
     }
 }
