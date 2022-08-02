@@ -1,58 +1,95 @@
 interface ISpriteSheet {
     SPRITE_SHEET: string,
-    TILE_SIZE: {
+    SPRITE_SIZE: {
         width: number,
         height: number,
         gap: number,
-        scale: number,
     },
     ASSET_TILE_TYPES: Record<number, string>,
     ASSET_TILE_COORDS: Record<string, [number, number]>,
-    MAP_DIMENSIONS?: {
-        width: number;
-        height: number;
-    },
+    MAP_SIZE: [number, number],
+    TILE_SIZE: number,
 }
 export class SpriteSheet implements ISpriteSheet {
     SPRITE_SHEET: string;
 
-    TILE_SIZE: {
+    SPRITE_SIZE: {
         width: number,
         height: number,
         gap: number,
-        scale: number,
     };
 
     ASSET_TILE_TYPES: Record<number, string>;
 
     ASSET_TILE_COORDS: Record<string, [number, number]>;
 
-    MAP_DIMENSIONS?: {
-        width: number;
-        height: number;
-    };
+    MAP_SIZE: [number, number];
+
+    TILE_SIZE: number;
 
     private sptitesheetImageElement: HTMLImageElement;
 
+    readonly canvasWidth: number;
+
+    readonly canvasHeight: number;
+
+    readonly spriteScale: number;
+
+    readonly spriteOffset: { x: number, y: number };
+
     constructor(config: ISpriteSheet) {
         this.SPRITE_SHEET = config.SPRITE_SHEET;
-        this.TILE_SIZE = config.TILE_SIZE;
+        this.SPRITE_SIZE = config.SPRITE_SIZE;
         this.ASSET_TILE_TYPES = config.ASSET_TILE_TYPES;
         this.ASSET_TILE_COORDS = config.ASSET_TILE_COORDS;
-        this.MAP_DIMENSIONS = config.MAP_DIMENSIONS;
+        this.MAP_SIZE = config.MAP_SIZE;
+        this.TILE_SIZE = config.TILE_SIZE;
         this.sptitesheetImageElement = new Image();
         this.sptitesheetImageElement.src = this.SPRITE_SHEET;
+        this.canvasWidth = this.TILE_SIZE * this.MAP_SIZE[1];
+        this.canvasHeight = this.TILE_SIZE * this.MAP_SIZE[0];
+        this.spriteScale = this.getSpriteScale();
+        this.spriteOffset = this.getSpriteOffset();
     }
 
     private getTileCoordsOnSptiteSheet(tileType: number) {
         const [row, coloumn] = this.ASSET_TILE_COORDS[this.ASSET_TILE_TYPES[tileType]];
-        const sourceX = (coloumn - 1) * (this.TILE_SIZE.width + this.TILE_SIZE.gap);
-        const sourceY = (row - 1) * (this.TILE_SIZE.height + this.TILE_SIZE.gap);
+        const sourceX = (coloumn - 1) * (this.SPRITE_SIZE.width + this.SPRITE_SIZE.gap);
+        const sourceY = (row - 1) * (this.SPRITE_SIZE.height + this.SPRITE_SIZE.gap);
         return {
             sourceX,
             sourceY,
-            sourceWidth: this.TILE_SIZE.width,
-            sourceHeight: this.TILE_SIZE.height,
+            sourceWidth: this.SPRITE_SIZE.width,
+            sourceHeight: this.SPRITE_SIZE.height,
+        };
+    }
+
+    private getSpriteScale() {
+        if (
+            this.SPRITE_SIZE.width === this.SPRITE_SIZE.height
+            || this.SPRITE_SIZE.width > this.SPRITE_SIZE.height
+        ) {
+            return this.TILE_SIZE / this.SPRITE_SIZE.width;
+        }
+        return this.TILE_SIZE / this.SPRITE_SIZE.height;
+    }
+
+    private getSpriteOffset() {
+        if (this.SPRITE_SIZE.width === this.SPRITE_SIZE.height) {
+            return {
+                x: 0,
+                y: 0,
+            };
+        }
+        if (this.SPRITE_SIZE.width > this.SPRITE_SIZE.height) {
+            return {
+                x: 0,
+                y: (this.TILE_SIZE - (this.SPRITE_SIZE.height * this.spriteScale)) / 2,
+            };
+        }
+        return {
+            x: (this.TILE_SIZE - (this.SPRITE_SIZE.width * this.spriteScale)) / 2,
+            y: 0,
         };
     }
 
@@ -64,9 +101,9 @@ export class SpriteSheet implements ISpriteSheet {
         const img = this.sptitesheetImageElement.cloneNode() as HTMLImageElement;
         const ctx = canvas?.getContext('2d');
         let [row, col] = [1, 1];
-        if (this.MAP_DIMENSIONS && (typeof position === 'number')) {
-            row = Math.ceil((position + 1) / this.MAP_DIMENSIONS.width);
-            col = (position % this.MAP_DIMENSIONS.width) + 1;
+        if (typeof position === 'number') {
+            row = Math.ceil((position + 1) / this.MAP_SIZE[1]);
+            col = (position % this.MAP_SIZE[0]) + 1;
         } else if (Array.isArray(position)) {
             [row, col] = position;
         }
@@ -79,10 +116,10 @@ export class SpriteSheet implements ISpriteSheet {
             destWidth,
             destHeight,
         ] = [
-            (this.TILE_SIZE.height * this.TILE_SIZE.scale) * (col - 1),
-            (this.TILE_SIZE.width * this.TILE_SIZE.scale) * (row - 1),
-            this.TILE_SIZE.width * this.TILE_SIZE.scale,
-            this.TILE_SIZE.height * this.TILE_SIZE.scale,
+            this.TILE_SIZE * (col - 1) + this.spriteOffset.x,
+            this.TILE_SIZE * (row - 1) + this.spriteOffset.y,
+            this.SPRITE_SIZE.width * this.spriteScale,
+            this.SPRITE_SIZE.height * this.spriteScale,
         ];
         img.onload = () => {
             if (!ctx) {

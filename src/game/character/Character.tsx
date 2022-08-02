@@ -3,7 +3,7 @@ import React, {
 } from 'react';
 import { SpriteSheet } from '../SpriteSheet';
 import * as config from './config';
-import * as mapConfig from '../map/config';
+import * as constants from '../constants';
 
 import './Character.scss';
 
@@ -11,19 +11,14 @@ type Position = [number, number];
 
 const Character = () => {
     const characterRef = React.createRef<HTMLCanvasElement>();
-    const spriteSheet = useMemo(() => new SpriteSheet(config), []);
+    const spriteSheet = useMemo(() => new SpriteSheet({ ...config, ...constants }), []);
+    const { canvasWidth, canvasHeight } = spriteSheet;
     const [currentPosition, setCurrentPosition] = useState<Position>(
         [
-            Math.ceil(mapConfig.MAP_DIMENSIONS.height / 2),
-            Math.ceil(mapConfig.MAP_DIMENSIONS.width / 2),
+            Math.ceil(spriteSheet.MAP_SIZE[0] / 2),
+            Math.ceil(spriteSheet.MAP_SIZE[0] / 2),
         ],
     );
-    const canvasWidth = mapConfig.TILE_SIZE.width
-    * mapConfig.TILE_SIZE.scale
-    * (mapConfig.MAP_DIMENSIONS?.width || 1);
-    const canvasHeight = mapConfig.TILE_SIZE.height
-    * mapConfig.TILE_SIZE.scale
-    * (mapConfig.MAP_DIMENSIONS?.height || 1);
 
     const redrawCharacter = (position: Position) => {
         characterRef.current?.getContext('2d')?.clearRect(0, 0, canvasWidth, canvasHeight);

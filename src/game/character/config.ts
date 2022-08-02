@@ -2,11 +2,10 @@ import sptitesheet from '../../../static/assets/character_sptitesheet.png';
 
 export const SPRITE_SHEET = sptitesheet;
 
-export const TILE_SIZE = {
+export const SPRITE_SIZE = {
     width: 16,
     height: 24, // in px on astual sptitesheet
     gap: 0, // between sprites
-    scale: 2.66, // multiplier applied on rendering
 };
 
 export const ASSET_TILE_TYPES: Record<number, string> = {
@@ -54,5 +53,5 @@ export const ASSET_TILE_COORDS: Record<string, [number, number]> = {
 };
 
 export default {
-    TILE_SIZE, ASSET_TILE_COORDS, SPRITE_SHEET, ASSET_TILE_TYPES,
+    SPRITE_SIZE, ASSET_TILE_COORDS, SPRITE_SHEET, ASSET_TILE_TYPES,
 };

@@ -1,6 +1,7 @@
 import React, { useEffect, useMemo } from 'react';
 import { SpriteSheet } from '../SpriteSheet';
 import * as config from './config';
+import * as constants from '../constants';
 
 type MapLayerProps = {
     layerConfig: number[],
@@ -9,10 +10,10 @@ type MapLayerProps = {
 const MapLayer = (props: MapLayerProps) => {
     const { layerConfig } = props;
     const canvas = React.createRef<HTMLCanvasElement>();
-    const spriteSheet = useMemo(() => new SpriteSheet(config), []);
+    const spriteSheet = useMemo(() => new SpriteSheet({ ...config, ...constants }), []);
     const tiles = layerConfig.map((tile, i) => {
-        const row = Math.ceil((i + 1) / config.MAP_DIMENSIONS.width);
-        const col = (i % config.MAP_DIMENSIONS.width) + 1;
+        const row = Math.ceil((i + 1) / constants.MAP_SIZE[0]);
+        const col = (i % constants.MAP_SIZE[0]) + 1;
         return {
             tileType: tile,
             row,
@@ -27,19 +28,13 @@ const MapLayer = (props: MapLayerProps) => {
             spriteSheet.drawTile(tile.tileType, canvas.current, i);
         });
     }, [spriteSheet, canvas, tiles]);
-    // eslint-disable-next-line no-restricted-syntax
-    // tiles.forEach((tile, i) => {
-    //     useEffect(() => {
-    //         spriteSheet.drawTile(tile.tileType, canvas.current, i);
-    //     }, [tile.tileType, i]);
-    // });
 
-    const canvasWidth = spriteSheet.TILE_SIZE.width
-        * spriteSheet.TILE_SIZE.scale
-        * (spriteSheet.MAP_DIMENSIONS?.width || 1);
-    const canvasHeight = spriteSheet.TILE_SIZE.height
-        * spriteSheet.TILE_SIZE.scale
-        * (spriteSheet.MAP_DIMENSIONS?.height || 1);
+    const canvasWidth = spriteSheet.SPRITE_SIZE.width
+        * spriteSheet.spriteScale
+        * constants.MAP_SIZE[1];
+    const canvasHeight = spriteSheet.SPRITE_SIZE.height
+        * spriteSheet.spriteScale
+        * constants.MAP_SIZE[0];
     return (
         <canvas ref={canvas} width={canvasWidth} height={canvasHeight} />
     );

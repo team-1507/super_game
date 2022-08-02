@@ -3,11 +3,10 @@ import sptitesheet from '../../../static/assets/map_sptitesheet.png';
 
 export const SPRITE_SHEET = sptitesheet;
 
-export const TILE_SIZE = {
+export const SPRITE_SIZE = {
     width: 16,
     height: 16, // in px on astual sptitesheet
     gap: 1, // between sprites
-    scale: 4, // multiplier applied on rendering
 };
 
 export const ASSET_TILE_TYPES: Record<number, string> = {
@@ -68,11 +67,6 @@ export const ASSET_TILE_COORDS: Record<string, [number, number]> = {
     WINDOW: [2, 43],
 };
 
-export const MAP_DIMENSIONS = { // in tiles
-    width: 20,
-    height: 20,
-};
-
 export const MAP = [
     [ // layer 1:
         2,  2,  2,  1,  2,  1,  1,  1,  2,  1,  1,  2,  1,  2,  2,  1,  2,  2,  1,  2,
@@ -121,5 +115,5 @@ export const MAP = [
 ];
 
 export default {
-    MAP_DIMENSIONS, MAP, TILE_SIZE, ASSET_TILE_COORDS, SPRITE_SHEET, ASSET_TILE_TYPES,
+    MAP, SPRITE_SIZE, ASSET_TILE_COORDS, SPRITE_SHEET, ASSET_TILE_TYPES,
 };
