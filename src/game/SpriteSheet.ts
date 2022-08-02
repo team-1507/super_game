@@ -46,7 +46,7 @@ export class SpriteSheet implements ISpriteSheet {
         };
     }
 
-    public drawTile(tileType: number, canvas: HTMLCanvasElement | null) {
+    public drawTile(tileType: number, canvas: HTMLCanvasElement | null, tileNumber = 0) {
         const img = this.sptitesheetImageElement.cloneNode() as HTMLImageElement;
         const ctx = canvas?.getContext('2d');
         const {
