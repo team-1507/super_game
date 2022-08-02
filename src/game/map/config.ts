@@ -10,38 +10,38 @@ export const TILE_SIZE = {
     scale: 4, // multiplier applied on rendering
 };
 
-export enum AssetTileTypes {
-    EMPTY = 0,
-    GRASS_1 = 1,
-    GRASS_2 = 2,
-    SOIL_1 = 3,
-    SOIL_2 = 4,
-    TREE_SMALL = 5,
-    WALL_MIDDLE = 30,
-    WALL_BOTTOM_LEFT = 31,
-    WALL_BOTTOM = 32,
-    WALL_BOTTOM_RIGHT = 33,
-    WALL_LEFT = 34,
-    WALL_RIGHT = 35,
-    ROOF_LEFT_BOTTOM = 36,
-    ROOF_RIGHT_BOTTOM = 37,
-    ROOF_CENTER_BOTTOM = 38,
-    ROOF_LEFT_CENTER = 39,
-    ROOF_RIGHT_CENTER = 40,
-    ROOF_LEFT_TOP = 41,
-    ROOF_RIGHT_TOP = 42,
-    ROOF_CENTER = 43,
-    ROOF_CENTER_TOP = 44,
-    DOOR = 45,
-    WINDOW = 46,
-}
+export const ASSET_TILE_TYPES: Record<number, string> = {
+    0: 'EMPTY',
+    1: 'GRASS_1',
+    2: 'GRASS_2',
+    3: 'SOIL_1',
+    4: 'SOIL_2',
+    5: 'TREE_SMALL',
+    30: 'WALL_MIDDLE',
+    31: 'WALL_BOTTOM_LEFT',
+    32: 'WALL_BOTTOM',
+    33: 'WALL_BOTTOM_RIGHT',
+    34: 'WALL_LEFT',
+    35: 'WALL_RIGHT',
+    36: 'ROOF_LEFT_BOTTOM',
+    37: 'ROOF_RIGHT_BOTTOM',
+    38: 'ROOF_CENTER_BOTTOM',
+    39: 'ROOF_LEFT_CENTER',
+    40: 'ROOF_RIGHT_CENTER',
+    41: 'ROOF_LEFT_TOP',
+    42: 'ROOF_RIGHT_TOP',
+    43: 'ROOF_CENTER',
+    44: 'ROOF_CENTER_TOP',
+    45: 'DOOR',
+    46: 'WINDOW',
+};
 
 /*
 ASSET_COORDS: {
     TILE_TYPE: [row, coloumn]
 }
 */
-// export const ASSET_TILE_COORDS: Record<keyof typeof AssetTileTypes, [number, number]> = {
+// export const ASSET_TILE_COORDS: Record<keyof typeof ASSET_TILE_TYPES, [number, number]> = {
 export const ASSET_TILE_COORDS: Record<string, [number, number]> = {
     EMPTY: [6, 1],
     GRASS_1: [1, 6],
@@ -121,5 +121,5 @@ export const MAP = [
 ];
 
 export default {
-    MAP_DIMENSIONS, MAP, TILE_SIZE, ASSET_TILE_COORDS, SPRITE_SHEET, AssetTileTypes,
+    MAP_DIMENSIONS, MAP, TILE_SIZE, ASSET_TILE_COORDS, SPRITE_SHEET, ASSET_TILE_TYPES,
 };

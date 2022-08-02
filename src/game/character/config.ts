@@ -9,12 +9,31 @@ export const TILE_SIZE = {
     scale: 4, // multiplier applied on rendering
 };
 
+export const ASSET_TILE_TYPES: Record<number, string> = {
+    1: 'FRONT_1',
+    2: 'FRONT_2',
+    3: 'FRONT_3',
+    4: 'FRONT_4',
+    5: 'RIGHT_1',
+    6: 'RIGHT_2',
+    7: 'RIGHT_3',
+    8: 'RIGHT_4',
+    9: 'LEFT_1',
+    10: 'LEFT_2',
+    11: 'LEFT_3',
+    12: 'LEFT_4',
+    13: 'REAR_1',
+    14: 'REAR_2',
+    15: 'REAR_3',
+    16: 'REAR_4',
+};
+
 /*
 ASSET_COORDS: {
     TILE_TYPE: [row, coloumn]
 }
 */
-// export const ASSET_TILE_COORDS: Record<keyof typeof AssetTileTypes, [number, number]> = {
+// export const ASSET_TILE_COORDS: Record<keyof typeof ASSET_TILE_TYPES, [number, number]> = {
 export const ASSET_TILE_COORDS: Record<string, [number, number]> = {
     FRONT_1: [1, 1],
     FRONT_2: [1, 2],
@@ -35,5 +54,5 @@ export const ASSET_TILE_COORDS: Record<string, [number, number]> = {
 };
 
 export default {
-    TILE_SIZE, ASSET_TILE_COORDS, SPRITE_SHEET,
+    TILE_SIZE, ASSET_TILE_COORDS, SPRITE_SHEET, ASSET_TILE_TYPES,
 };

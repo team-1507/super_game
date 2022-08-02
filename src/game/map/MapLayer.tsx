@@ -1,53 +1,6 @@
 import React, { useEffect } from 'react';
-import {
-    SPRITE_SHEET, ASSET_TILE_COORDS, AssetTileTypes, TILE_SIZE, MAP_DIMENSIONS,
-} from './config';
-
-function getTileCoordsOnSptiteSheet(tileType: number) {
-    const [row, coloumn] = ASSET_TILE_COORDS[AssetTileTypes[tileType]];
-    const sourceX = (coloumn - 1) * (TILE_SIZE.width + TILE_SIZE.gap);
-    const sourceY = (row - 1) * (TILE_SIZE.height + TILE_SIZE.gap);
-    return {
-        sourceX,
-        sourceY,
-        sourceWidth: TILE_SIZE.width,
-        sourceHeight: TILE_SIZE.height,
-    };
-}
-
-const sptitesheetImageElement = new Image();
-sptitesheetImageElement.src = SPRITE_SHEET;
-
-function drawTile(tileType: number, canvas: HTMLCanvasElement | null) {
-    const img = sptitesheetImageElement.cloneNode() as HTMLImageElement;
-    const ctx = canvas?.getContext('2d');
-    const {
-        sourceX, sourceY, sourceWidth, sourceHeight,
-    } = getTileCoordsOnSptiteSheet(tileType);
-    const [
-        destX, destY, destWidth, destHeight,
-    ] = [
-        0, 0, TILE_SIZE.width * TILE_SIZE.scale, TILE_SIZE.height * TILE_SIZE.scale,
-    ];
-    img.onload = () => {
-        if (!ctx) {
-            return canvas;
-        }
-        ctx.imageSmoothingEnabled = false;
-        return ctx.drawImage(
-            img,
-            sourceX,
-            sourceY,
-            sourceWidth,
-            sourceHeight,
-            destX,
-            destY,
-            destWidth,
-            destHeight,
-        );
-    };
-    return canvas;
-}
+import { SpriteSheet } from '../SpriteSheet';
+import * as config from './config';
 
 type MapLayerProps = {
     layerConfig: number[],
@@ -55,9 +8,10 @@ type MapLayerProps = {
 
 const MapLayer = (props: MapLayerProps) => {
     const { layerConfig } = props;
+    const spriteSheet = new SpriteSheet(config);
     const tiles = layerConfig.map((tile, i) => {
-        const row = Math.ceil((i + 1) / MAP_DIMENSIONS.width);
-        const col = (i % MAP_DIMENSIONS.width) + 1;
+        const row = Math.ceil((i + 1) / config.MAP_DIMENSIONS.width);
+        const col = (i % config.MAP_DIMENSIONS.width) + 1;
         return {
             ref: React.createRef<HTMLCanvasElement>(),
             tileType: tile,
@@ -70,12 +24,12 @@ const MapLayer = (props: MapLayerProps) => {
 
     useEffect(() => {
         tiles.forEach((tile) => {
-            drawTile(tile.tileType, tile.ref?.current);
+            spriteSheet.drawTile(tile.tileType, tile.ref?.current);
         });
     });
 
-    const canvasWidth = TILE_SIZE.width * TILE_SIZE.scale;
-    const canvasHeight = TILE_SIZE.height * TILE_SIZE.scale;
+    const canvasWidth = config.TILE_SIZE.width * config.TILE_SIZE.scale;
+    const canvasHeight = config.TILE_SIZE.height * config.TILE_SIZE.scale;
 
     const canvases = tiles.map((tile) => {
         return (
@@ -92,8 +46,8 @@ const MapLayer = (props: MapLayerProps) => {
         <div
             className="game-map-map_layer"
             style={{
-                gridTemplateRows: `repeat(${MAP_DIMENSIONS.height}, ${canvasHeight}px)`,
-                gridTemplateColumns: `repeat(${MAP_DIMENSIONS.width}, ${canvasWidth}px)`,
+                gridTemplateRows: `repeat(${config.MAP_DIMENSIONS.height}, ${canvasHeight}px)`,
+                gridTemplateColumns: `repeat(${config.MAP_DIMENSIONS.width}, ${canvasWidth}px)`,
             }}
         >
             {canvases}
