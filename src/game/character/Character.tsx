@@ -1,4 +1,6 @@
-import React, { KeyboardEvent, useEffect, useState } from 'react';
+import React, {
+    KeyboardEvent, useEffect, useMemo, useState,
+} from 'react';
 import { SpriteSheet } from '../SpriteSheet';
 import * as config from './config';
 import * as mapConfig from '../map/config';
@@ -9,8 +11,13 @@ type Position = [number, number];
 
 const Character = () => {
     const characterRef = React.createRef<HTMLCanvasElement>();
-    const spriteSheet = new SpriteSheet(config);
-    const [currentPosition, setCurrentPosition] = useState<Position>([1, 1]);
+    const spriteSheet = useMemo(() => new SpriteSheet(config), []);
+    const [currentPosition, setCurrentPosition] = useState<Position>(
+        [
+            Math.ceil(mapConfig.MAP_DIMENSIONS.height / 2),
+            Math.ceil(mapConfig.MAP_DIMENSIONS.width / 2),
+        ],
+    );
     const canvasWidth = mapConfig.TILE_SIZE.width
     * mapConfig.TILE_SIZE.scale
     * (mapConfig.MAP_DIMENSIONS?.width || 1);
@@ -39,11 +46,9 @@ const Character = () => {
     };
 
     useEffect(() => {
-        // document.addEventListener('keypress', (e) => {
-        //     moveCharacter(moves[e.code]);
-        // });
         spriteSheet.drawTile(1, characterRef.current, currentPosition);
-    });
+        characterRef.current?.focus();
+    }, [currentPosition, characterRef, spriteSheet]);
     return (
         <canvas
             ref={characterRef}
