@@ -6,7 +6,7 @@ export const TILE_SIZE = {
     width: 16,
     height: 24, // in px on astual sptitesheet
     gap: 0, // between sprites
-    scale: 4, // multiplier applied on rendering
+    scale: 2.66, // multiplier applied on rendering
 };
 
 export const ASSET_TILE_TYPES: Record<number, string> = {
