@@ -56,13 +56,19 @@ export class SpriteSheet implements ISpriteSheet {
         };
     }
 
-    public drawTile(tileType: number, canvas: HTMLCanvasElement | null, tileNumber = 0) {
+    public drawTile(
+        tileType: number,
+        canvas: HTMLCanvasElement | null,
+        position: number | [number, number] = 0,
+    ) {
         const img = this.sptitesheetImageElement.cloneNode() as HTMLImageElement;
         const ctx = canvas?.getContext('2d');
         let [row, col] = [1, 1];
-        if (this.MAP_DIMENSIONS) {
-            row = Math.ceil((tileNumber + 1) / this.MAP_DIMENSIONS.width);
-            col = (tileNumber % this.MAP_DIMENSIONS.width) + 1;
+        if (this.MAP_DIMENSIONS && (typeof position === 'number')) {
+            row = Math.ceil((position + 1) / this.MAP_DIMENSIONS.width);
+            col = (position % this.MAP_DIMENSIONS.width) + 1;
+        } else if (Array.isArray(position)) {
+            [row, col] = position;
         }
         const {
             sourceX, sourceY, sourceWidth, sourceHeight,
