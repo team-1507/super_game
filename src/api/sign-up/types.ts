@@ -1,5 +1,5 @@
 export interface SignUpData {
-    avatar: string
+    avatar?: string
     first_name: string
     second_name: string
     login: string

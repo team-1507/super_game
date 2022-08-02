@@ -1,113 +1,20 @@
-import React, { createRef, HTMLProps, useEffect } from 'react';
+import React, { FC, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import {
-    Button, Input, Form, InputRef,
-} from 'antd';
-import EnterKey from '../../icons/EnterKey';
-import { setUser, IUserState, initialState } from '../../../store/reducers';
+import { Form } from 'antd';
+import { setUser, initialState } from '../../../store/reducers';
 import { useAppDispatch } from '../../../store/hooks';
 import './UserinfoForm.scss';
-import { SignUpData, SignUpDataDto } from '../../../api/sign-up/types';
-import { SignInData, SignInDataDto } from '../../../api/sign-in/types';
+import { CallbackFnData, UserinfoFormProps } from './types';
+import {
+    Login, loginInputRef, Email, Password, ConfirmPassword, Submit,
+} from './FormItems';
 
-type CallbackFnData = SignUpData | SignInData | Record<string, never>;
-type CallbackFnReturn = SignUpDataDto | SignInDataDto | null;
-
-type UserinfoFormProps = HTMLProps<HTMLElement> & {
-    formInputs: (keyof typeof inputs)[],
-    submitTitle: string,
-    callbackFn?(this: void, body: CallbackFnData): Promise<CallbackFnReturn>,
-    valuesToSend: CallbackFnData,
-    navigateOnSuccess?: string,
-    user?: IUserState,
-};
-
-const loginInput = createRef<InputRef>();
-const inputs = {
-    login: (props: UserinfoFormProps) => (
-        <Form.Item
-            key={props.key}
-            label="LOGIN"
-            name="login"
-            rules={[{ required: true, message: 'Please input your login' }, {
-                pattern: /([a-zA-Z]{3,30}\s*)+/,
-                message: 'Format is wrong',
-            }]}
-        >
-            <div className="form-item userinfo__form-items_input">
-                <Input ref={loginInput} value={props.user?.login} />
-            </div>
-        </Form.Item>
-    ),
-    email: (props: UserinfoFormProps) => (
-        <Form.Item
-            key={props.key}
-            label="E-MAIL"
-            name="email"
-            rules={[{ required: true, message: 'Please input your email' }, {
-                type: 'email',
-                message: 'Format is wrong',
-            }]}
-        >
-            <div className="form-item userinfo__form-items_input">
-                <Input value={props.user?.email} />
-            </div>
-        </Form.Item>
-    ),
-    password: (props: UserinfoFormProps) => (
-        <Form.Item
-            key={props.key}
-            label="PASSWORD"
-            name="password"
-            rules={[{ required: true, message: 'Please input your password' }]}
-        >
-            <div className="form-item userinfo__form-items_input">
-                <Input />
-            </div>
-        </Form.Item>
-    ),
-    confirmPassword: (props: UserinfoFormProps) => (
-        <Form.Item
-            key={props.key}
-            label="PASSWORD (one more time)"
-            name="confirmPassword"
-            dependencies={['password']}
-            rules={[
-                {
-                    required: true,
-                    message: 'Please confirm your password',
-                },
-                ({ getFieldValue }) => ({
-                    validator(_, value) {
-                        if (!value || getFieldValue('password') === value) {
-                            return Promise.resolve();
-                        }
-                        return Promise.reject(new Error('passwords do not match'));
-                    },
-                }),
-            ]}
-        >
-            <div className="form-item userinfo__form-items_input">
-                <Input />
-            </div>
-        </Form.Item>
-    ),
-    submit: (props: UserinfoFormProps) => {
-        const { children, submitTitle, key } = props;
-        return (
-            <Form.Item key={key}>
-                <div className="userinfo__buttons">
-                    {children}
-                    <div className="userinfo__buttons__button">
-                        <Button htmlType="submit" type="primary">
-                            {submitTitle}
-                            <EnterKey />
-                        </Button>
-                    </div>
-                </div>
-            </Form.Item>
-        );
-    },
+const inputs:Record<string, FC<UserinfoFormProps>> = {
+    login: Login,
+    email: Email,
+    password: Password,
+    confirmPassword: ConfirmPassword,
+    submit: Submit,
 };
 
 const UserinfoForm = (props: UserinfoFormProps) => {
@@ -140,7 +47,7 @@ const UserinfoForm = (props: UserinfoFormProps) => {
     };
 
     useEffect(() => {
-        loginInput.current?.focus();
+        loginInputRef.current?.focus();
     }, []);
     return (
         <Form
