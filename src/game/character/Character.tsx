@@ -1,22 +1,22 @@
-import React, { RefObject, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { SpriteSheet } from '../SpriteSheet';
 import * as config from './config';
+import * as mapConfig from '../map/config';
 
 import './Character.scss';
 
-type CharacterProps = {
-    canvas: RefObject<HTMLCanvasElement>,
-};
-
-const Character = (props: CharacterProps) => {
-    const { canvas } = props;
+const Character = () => {
     const characterRef = React.createRef<HTMLCanvasElement>();
     const spriteSheet = new SpriteSheet(config);
     useEffect(() => {
-        spriteSheet.drawTile(1, canvas.current);
+        spriteSheet.drawTile(1, characterRef.current);
     });
-    const canvasWidth = config.TILE_SIZE.width * config.TILE_SIZE.scale;
-    const canvasHeight = config.TILE_SIZE.height * config.TILE_SIZE.scale;
+    const canvasWidth = mapConfig.TILE_SIZE.width
+        * mapConfig.TILE_SIZE.scale
+        * (mapConfig.MAP_DIMENSIONS?.width || 1);
+    const canvasHeight = mapConfig.TILE_SIZE.height
+        * mapConfig.TILE_SIZE.scale
+        * (mapConfig.MAP_DIMENSIONS?.height || 1);
     return (
         <canvas
             ref={characterRef}
