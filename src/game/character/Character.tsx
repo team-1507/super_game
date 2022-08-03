@@ -4,6 +4,7 @@ import React, {
 import { SpriteSheet } from '../SpriteSheet';
 import * as config from './config';
 import * as constants from '../constants';
+import * as mapConfig from '../map/config';
 
 import './Character.scss';
 
@@ -44,11 +45,27 @@ const Character = () => {
         return currentMoveState;
     };
 
+    const ifBoundry = (position: Position) => {
+        const tileNum = spriteSheet.coordsToTileNum(position);
+        return (mapConfig.BOUNDARIES[tileNum] !== 0);
+    };
+
+    const ifEndOfMap = (position: Position) => {
+        return (
+            position[0] <= 0
+            || position[1] <= 0
+            || position[0] > constants.MAP_SIZE[0]
+            || position[1] > constants.MAP_SIZE[1]
+        );
+    };
+
     const redrawCharacter = (position: Position) => {
         characterRef.current?.getContext('2d')?.clearRect(0, 0, canvasWidth, canvasHeight);
         const newMoveState = getNextMoveState(position);
         setCurrentMoveState(newMoveState);
-        setCurrentPosition(position);
+        if (!ifBoundry(position) && !ifEndOfMap(position)) {
+            setCurrentPosition(position);
+        }
     };
 
     const moveCharacter = (delta: Position) => {
