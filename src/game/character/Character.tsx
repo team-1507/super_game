@@ -73,7 +73,11 @@ const Character = () => {
     };
 
     const keyPressHandler = (e: KeyboardEvent) => {
-        moveCharacter(constants.MOVES[e.code]);
+        const move = constants.MOVES[e.code];
+        if (move) {
+            e.preventDefault();
+            moveCharacter(move);
+        }
     };
 
     useEffect(() => {
