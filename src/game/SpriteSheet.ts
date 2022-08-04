@@ -93,17 +93,29 @@ export class SpriteSheet implements ISpriteSheet {
         };
     }
 
+    public tileNumToCoords(tileNum: number) {
+        const row = Math.ceil((tileNum + 1) / this.MAP_SIZE[1]);
+        const col = (tileNum % this.MAP_SIZE[1]) + 1;
+        return [row, col]; // from 1
+    }
+
+    public coordsToTileNum(coords: [number, number]) {
+        const [row, col] = coords;
+        const tileNum = (row - 1) * this.MAP_SIZE[1] + col - 1;
+        return tileNum; // from 0;
+    }
+
     public drawTile(
         tileType: number,
         canvas: HTMLCanvasElement | null,
         position: number | [number, number] = 0,
+        crearBeforeDraw = false,
     ) {
         const img = this.sptitesheetImageElement.cloneNode() as HTMLImageElement;
         const ctx = canvas?.getContext('2d');
         let [row, col] = [1, 1];
         if (typeof position === 'number') {
-            row = Math.ceil((position + 1) / this.MAP_SIZE[1]);
-            col = (position % this.MAP_SIZE[0]) + 1;
+            [row, col] = this.tileNumToCoords(position);
         } else if (Array.isArray(position)) {
             [row, col] = position;
         }
@@ -126,6 +138,9 @@ export class SpriteSheet implements ISpriteSheet {
                 return canvas;
             }
             ctx.imageSmoothingEnabled = false;
+            if (crearBeforeDraw) {
+                ctx.clearRect(0, 0, this.canvasWidth, this.canvasHeight);
+            }
             return ctx.drawImage(
                 img,
                 sourceX,

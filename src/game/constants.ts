@@ -11,6 +11,10 @@ export const MOVES: Record<string, [number, number]> = {
     KeyA: [0, -1],
     KeyS: [1, 0],
     KeyD: [0, 1],
+    ArrowUp: [-1, 0],
+    ArrowLeft: [0, -1],
+    ArrowDown: [1, 0],
+    ArrowRight: [0, 1],
 };
 
 export default { MAP_SIZE, TILE_SIZE, MOVES };
