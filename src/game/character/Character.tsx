@@ -55,14 +55,12 @@ const Character = (props: CharacterProps) => {
         return (mapConfig.BOUNDARIES[tileNum] !== 0);
     };
 
-    const ifEndOfMap = (position: Position) => {
-        return (
-            position[0] <= 0
-            || position[1] <= 0
-            || position[0] > constants.MAP_SIZE[0]
-            || position[1] > constants.MAP_SIZE[1]
-        );
-    };
+    const ifEndOfMap = (position: Position) => (
+        position[0] <= 0
+        || position[1] <= 0
+        || position[0] > constants.MAP_SIZE[0]
+        || position[1] > constants.MAP_SIZE[1]
+    );
 
     const redrawCharacter = (position: Position) => {
         const newMoveState = getNextMoveState(position);
