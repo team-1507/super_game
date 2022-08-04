@@ -1,5 +1,5 @@
 import React, {
-    KeyboardEvent, useEffect, useMemo, useState,
+    KeyboardEvent, RefObject, useEffect, useMemo, useState,
 } from 'react';
 import { SpriteSheet } from '../SpriteSheet';
 import * as config from './config';
@@ -10,7 +10,12 @@ import './Character.scss';
 
 type Position = [number, number];
 
-const Character = () => {
+type CharacterProps = {
+    container: RefObject<HTMLElement>;
+};
+
+const Character = (props: CharacterProps) => {
+    const { container } = props;
     const characterRef = React.createRef<HTMLCanvasElement>();
     const spriteSheet = useMemo(() => new SpriteSheet({ ...config, ...constants }), []);
     const { canvasWidth, canvasHeight } = spriteSheet;
@@ -60,7 +65,6 @@ const Character = () => {
     };
 
     const redrawCharacter = (position: Position) => {
-        characterRef.current?.getContext('2d')?.clearRect(0, 0, canvasWidth, canvasHeight);
         const newMoveState = getNextMoveState(position);
         setCurrentMoveState(newMoveState);
         if (!ifBoundry(position) && !ifEndOfMap(position)) {
@@ -74,16 +78,52 @@ const Character = () => {
 
     const keyPressHandler = (e: KeyboardEvent) => {
         const move = constants.MOVES[e.code];
-        if (move) {
+        const isModKey = (e.altKey || e.ctrlKey || e.metaKey);
+        if (move && !isModKey) {
             e.preventDefault();
             moveCharacter(move);
         }
     };
 
     useEffect(() => {
-        spriteSheet.drawTile(currentMoveState, characterRef.current, currentPosition);
+        const scrollToFitCharacter = () => {
+            if (!container.current) {
+                return;
+            }
+            const charPosOnScreen = {
+                top: (currentPosition[0] + 1) * constants.TILE_SIZE,
+                left: (currentPosition[1] + 1) * constants.TILE_SIZE,
+            };
+
+            if (charPosOnScreen.left > window.innerWidth) {
+                container.current.style.marginLeft = `${window.innerWidth - charPosOnScreen.left}px`;
+            } else {
+                container.current.style.marginLeft = '0px';
+            }
+            if (charPosOnScreen.top > window.innerHeight) {
+                container.current.style.marginTop = `${window.innerHeight - charPosOnScreen.top}px`;
+            } else {
+                container.current.style.marginTop = '0px';
+            }
+        };
+
+        const drawFrame = () => {
+            scrollToFitCharacter();
+            characterRef.current?.getContext('2d')?.clearRect(0, 0, canvasWidth, canvasHeight);
+            spriteSheet.drawTile(currentMoveState, characterRef.current, currentPosition);
+        };
+
+        window.requestAnimationFrame(drawFrame);
         characterRef.current?.focus();
-    }, [currentPosition, characterRef, spriteSheet, currentMoveState]);
+    }, [
+        currentPosition,
+        characterRef,
+        spriteSheet,
+        currentMoveState,
+        canvasHeight,
+        canvasWidth,
+        container,
+    ]);
     return (
         <canvas
             ref={characterRef}
