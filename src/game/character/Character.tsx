@@ -109,8 +109,7 @@ const Character = (props: CharacterProps) => {
 
         const drawFrame = () => {
             scrollToFitCharacter();
-            characterRef.current?.getContext('2d')?.clearRect(0, 0, canvasWidth, canvasHeight);
-            spriteSheet.drawTile(currentMoveState, characterRef.current, currentPosition);
+            spriteSheet.drawTile(currentMoveState, characterRef.current, currentPosition, true);
         };
 
         window.requestAnimationFrame(drawFrame);

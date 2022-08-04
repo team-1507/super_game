@@ -109,6 +109,7 @@ export class SpriteSheet implements ISpriteSheet {
         tileType: number,
         canvas: HTMLCanvasElement | null,
         position: number | [number, number] = 0,
+        crearBeforeDraw = false,
     ) {
         const img = this.sptitesheetImageElement.cloneNode() as HTMLImageElement;
         const ctx = canvas?.getContext('2d');
@@ -137,6 +138,9 @@ export class SpriteSheet implements ISpriteSheet {
                 return canvas;
             }
             ctx.imageSmoothingEnabled = false;
+            if (crearBeforeDraw) {
+                ctx.clearRect(0, 0, this.canvasWidth, this.canvasHeight);
+            }
             return ctx.drawImage(
                 img,
                 sourceX,
