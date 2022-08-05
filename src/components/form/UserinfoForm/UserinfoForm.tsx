@@ -6,13 +6,14 @@ import { useAppDispatch } from '../../../store/hooks';
 import './UserinfoForm.scss';
 import { CallbackFnData, UserinfoFormProps } from './types';
 import {
-    Login, loginInputRef, Email, Password, ConfirmPassword, Submit,
+    Login, loginInputRef, Email, Password, ConfirmPassword, Submit, OldPassword,
 } from './FormItems';
 
 const inputs:Record<string, FC<UserinfoFormProps>> = {
     login: Login,
     email: Email,
     password: Password,
+    oldPassword: OldPassword,
     confirmPassword: ConfirmPassword,
     submit: Submit,
 };
@@ -27,11 +28,13 @@ const UserinfoForm = (props: UserinfoFormProps) => {
         if (!callbackFn) {
             return;
         }
+
         const callBackFnData = { ...valuesToSend };
         Object.keys(valuesToSend).forEach((key) => {
             const fieldName = key as keyof CallbackFnData;
-            callBackFnData[fieldName] = values[fieldName];
+            callBackFnData[fieldName] = values[fieldName] ?? valuesToSend[fieldName];
         });
+        console.log(valuesToSend, callBackFnData);
         callbackFn(callBackFnData).then((response) => {
             if (response) {
                 dispatch(setUser(callBackFnData));

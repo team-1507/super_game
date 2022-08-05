@@ -8,6 +8,13 @@ async function signIn(body: SignInData): Promise<SignInDataDto | null> {
     });
 }
 
+async function logOut(): Promise<string | null> {
+    return ApiService.postRequest({
+        address: 'auth/logout',
+    });
+}
+
 export default {
     signIn,
+    logOut,
 };

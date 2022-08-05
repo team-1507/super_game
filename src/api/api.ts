@@ -18,7 +18,6 @@ function getUrl(
 async function getRequest<R>({
     address,
     queryParams,
-    body,
 }: GetRequestParams): Promise<R | null> {
     const url = getUrl(address, queryParams);
 
@@ -29,10 +28,14 @@ async function getRequest<R>({
     const response = await fetch(url.toString(), {
         method: 'GET',
         headers,
-        body: body ? JSON.stringify(body) : null,
+        mode: 'cors',
+        credentials: 'include',
     });
 
-    return await response.json() as unknown as R;
+    if (response.status === 200) {
+        return await response.json() as unknown as R;
+    }
+    return null;
 }
 
 async function postRequest<B, R>({
@@ -49,10 +52,14 @@ async function postRequest<B, R>({
     const response = await fetch(url.toString(), {
         method: 'POST',
         headers,
+        mode: 'cors',
         body: body ? JSON.stringify(body) : null,
+        credentials: 'include',
     });
-
-    return await response.json() as unknown as R;
+    if (response.status === 200) {
+        return response as unknown as R;
+    }
+    return null;
 }
 
 async function putRequest<B, R>({
@@ -70,9 +77,13 @@ async function putRequest<B, R>({
         method: 'PUT',
         headers,
         body: body ? JSON.stringify(body) : null,
+        credentials: 'include',
     });
 
-    return await response.json() as unknown as R;
+    if (response.status === 200) {
+        return await response.json() as unknown as R;
+    }
+    return null;
 }
 
 export default {

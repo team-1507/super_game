@@ -1,6 +1,6 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import './App.scss';
-import { Route, Routes } from 'react-router-dom';
+import { Route, Routes, useNavigate } from 'react-router-dom';
 
 import Game from '../pages/game';
 import SignUp from '../pages/sign-up/SignUp';
@@ -10,8 +10,22 @@ import GameOver from '../pages/game-over/GameOver';
 import Leaderboard from '../pages/leaderboard/Leaderboard';
 import HomePage from '../pages/home-page/HomePage';
 import Forum from '../pages/forum';
+import UserApi from '../api/user/user';
+import { useAppDispatch } from '../store/hooks';
+import { setUser } from '../store/reducers';
 
 const App = () => {
+    const dispatch = useAppDispatch();
+    const navigate = useNavigate();
+    useEffect(() => {
+        UserApi.getCurrentUser().then((response) => {
+            if (response) {
+                dispatch(setUser(response));
+            }
+        }).catch(() => {
+            navigate('/sign-in');
+        });
+    }, []);
     return (
         <Routes>
             <Route path="/game" element={<Game />} />
