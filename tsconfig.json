@@ -103,7 +103,7 @@
     },
     "include": [
         "src",
-        "typings/**/*.d.ts",
+        "typings/*.d.ts",
         "./node_modules/@types"
     ],
     "exclude": [
