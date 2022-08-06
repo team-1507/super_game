@@ -5,13 +5,13 @@
 
     .ant-input,
     .ant-input-status-error {
-        @include font-style($font-size: 40px, $color: $light-text, $font-family: VT323);
+        @include font-style($font-size: 40px, $color: $white, $font-family: VT323);
 
         cursor: pointer;
 
         padding: 24px 15px;
 
-        background: $dark-text !important;
+        background: $black !important;
         border: 0;
         border-radius: 0 20px 0 0;
 
@@ -32,10 +32,10 @@
                 @include VT323(true);
 
                 /* stylelint-disable-next-line property-no-vendor-prefix */
-                -webkit-box-shadow: 0 0 0 100px $dark-text inset;
-                box-shadow: 0 0 0 100px $dark-text inset;
+                -webkit-box-shadow: 0 0 0 100px $black inset;
+                box-shadow: 0 0 0 100px $black inset;
 
-                -webkit-text-fill-color: $light-text;
+                -webkit-text-fill-color: $white;
             }
         }
     }
@@ -47,7 +47,7 @@
         left: 11px;
 
         & label {
-            @include font-style($font-size: $m, $color: $light-text, $font-family: Ubuntu, $font-weight: 300);
+            @include font-style($font-size: $m, $color: $white, $font-family: Ubuntu, $font-weight: 300);
 
             letter-spacing: normal;
 

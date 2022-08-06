@@ -3,7 +3,7 @@
     align-items: center;
 
     .page-title {
-        @include font-style($font-size: 80px, $color: $dark-text, $font-family: VT323);
+        @include font-style($font-size: 80px, $color: $black, $font-family: VT323);
 
         padding-left: 20px;
     }

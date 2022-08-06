@@ -13,7 +13,7 @@
 
     a {
         font-size: inherit;
-        color: $dark-text;
+        color: $black;
         text-decoration: underline;
     }
 
@@ -41,7 +41,7 @@
             @include font-style(
                 $font-size: 16px,
                 $letter-spacing: normal,
-                $color: $light-text,
+                $color: $white,
                 $font-family: Ubuntu,
                 $font-weight: 300
             );
@@ -52,7 +52,7 @@
             height: 46px;
 
             span {
-                @include font-style($font-size: 33px, $color: $light-text, $font-family: VT323);
+                @include font-style($font-size: 33px, $color: $white, $font-family: VT323);
             }
         }
     }

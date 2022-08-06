@@ -1,6 +1,7 @@
 import React, { createRef } from 'react';
 import Character from '../../game/character/Character';
 import Map from '../../game/map/Map';
+import PauseMenu from '../../game/ui/PauseMenu';
 import GameBackButton from './components/GameBackButton';
 import './Game.scss';
 
@@ -13,6 +14,7 @@ const Game = () => {
                 <Character container={container} />
                 <GameBackButton />
             </div>
+            <PauseMenu />
         </main>
     );
 };
