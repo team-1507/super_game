@@ -4,6 +4,8 @@
     position: absolute;
     top: 0;
     left: 0;
+    transform: translate(0, 0);
+    transform-origin: center center;
 
     display: flex;
     flex-direction: column;
@@ -14,4 +16,44 @@
     height: 100vh;
 
     background-color: adjust-color($black-hilighted, $alpha: -0.5);
+
+    &.active {
+        animation-name: scale-open;
+        animation-duration: 0.5s;
+        animation-fill-mode: both;
+    }
+
+    &:not(.active) {
+        display: none;
+    }
+
+    h1 {
+        @include VT323;
+
+        font-size: $xxxl;
+        color: $white;
+    }
+
+    .ant-btn-primary {
+        width: 320px !important;
+        margin: 20px 0;
+    }
+}
+
+@keyframes scale-open {
+    from {
+        transform: scale(0);
+
+        display: none;
+
+        opacity: 0;
+    }
+
+    to {
+        transform: scale(1);
+
+        display: block;
+
+        opacity: 1;
+    }
 }

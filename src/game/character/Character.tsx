@@ -11,12 +11,12 @@ import './Character.scss';
 type Position = [number, number];
 
 type CharacterProps = {
-    container: RefObject<HTMLElement>;
+    container: RefObject<HTMLElement>,
+    characterRef: RefObject<HTMLCanvasElement>,
 };
 
 const Character = (props: CharacterProps) => {
-    const { container } = props;
-    const characterRef = React.createRef<HTMLCanvasElement>();
+    const { container, characterRef } = props;
     const spriteSheet = useMemo(() => new SpriteSheet({ ...config, ...constants }), []);
     const { canvasWidth, canvasHeight } = spriteSheet;
     const [currentPosition, setCurrentPosition] = useState<Position>(

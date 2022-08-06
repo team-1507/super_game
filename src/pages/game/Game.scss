@@ -1,5 +1,9 @@
 @import "/src/styles/index";
 
+[tabindex="0"] {
+    outline: 0;
+}
+
 .game-page {
     position: relative;
 
