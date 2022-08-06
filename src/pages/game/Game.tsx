@@ -1,8 +1,8 @@
 import React, { createRef, KeyboardEvent } from 'react';
 import Character from '../../game/character/Character';
 import Map from '../../game/map/Map';
+import ActionButtons from '../../game/ui/ActionButtons';
 import PauseMenu from '../../game/ui/PauseMenu';
-import GameBackButton from './components/GameBackButton';
 import './Game.scss';
 
 const Game = () => {
@@ -35,9 +35,9 @@ const Game = () => {
                 <div className="game-page-map-container" ref={container}>
                     <Map />
                     <Character container={container} characterRef={characterRef} />
-                    <GameBackButton />
                     <PauseMenu wrapperRef={pauseMenu} toggleFn={togglePauseMenu} />
                 </div>
+                <ActionButtons />
             </div>
         </main>
     );

@@ -89,8 +89,8 @@ const Character = (props: CharacterProps) => {
                 return;
             }
             const charPosOnScreen = {
-                top: (currentPosition[0] + 1) * constants.TILE_SIZE,
-                left: (currentPosition[1] + 1) * constants.TILE_SIZE,
+                top: (currentPosition[0] + 3) * constants.TILE_SIZE,
+                left: (currentPosition[1] + 3) * constants.TILE_SIZE,
             };
 
             if (charPosOnScreen.left > window.innerWidth) {

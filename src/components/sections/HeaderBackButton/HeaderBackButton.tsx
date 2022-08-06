@@ -1,6 +1,6 @@
 import React, { HTMLProps } from 'react';
-import { Link } from 'react-router-dom';
 import ArrowBack from '../../icons/ArrowBack';
+import SquareButton from '../SquareButton';
 import './HeaderBackButton.scss';
 
 type HeaderBackButtonProps = HTMLProps<HTMLElement> & {
@@ -11,9 +11,9 @@ const HeaderBackButton = (props: HeaderBackButtonProps) => {
     const { header, children } = props;
     return (
         <header className="header-back-button">
-            <Link to="/" className="back-button">
+            <SquareButton to="/">
                 <ArrowBack />
-            </Link>
+            </SquareButton>
             <h1>{header}</h1>
             { children }
         </header>
