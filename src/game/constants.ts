@@ -17,4 +17,8 @@ export const MOVES: Record<string, [number, number]> = {
     ArrowRight: [0, 1],
 };
 
-export default { MAP_SIZE, TILE_SIZE, MOVES };
+export const SOUNDS = {
+    'steps': require('../../static/audio/sounds/step-one.ogg')
+};
+
+export default { MAP_SIZE, TILE_SIZE, MOVES, SOUNDS };

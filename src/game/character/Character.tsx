@@ -5,6 +5,7 @@ import { SpriteSheet } from '../SpriteSheet';
 import * as config from './config';
 import * as constants from '../constants';
 import * as mapConfig from '../map/config';
+import audio from '../../audio';
 
 import './Character.scss';
 
@@ -28,6 +29,7 @@ const Character = (props: CharacterProps) => {
     const [currentMoveState, setCurrentMoveState] = useState(1);
 
     const getMoveStateCycleStep = (rangeStart: number, rangeEnd: number) => {
+        audio(constants.SOUNDS.steps);
         if (currentMoveState >= rangeStart && currentMoveState <= (rangeEnd - 1)) {
             return (currentMoveState + 1);
         }
