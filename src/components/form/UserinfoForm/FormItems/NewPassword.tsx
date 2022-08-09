@@ -7,8 +7,8 @@ const Password = (props: UserinfoFormProps) => {
     return (
         <Form.Item
             key={key}
-            label="OLD PASSWORD"
-            name="oldPassword"
+            label="NEW PASSWORD"
+            name="newPassword"
             rules={[{ required: true, message: 'Please input your password' }]}
         >
             <div className="form-item userinfo__form-items_input">

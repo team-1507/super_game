@@ -86,8 +86,28 @@ async function putRequest<B, R>({
     return null;
 }
 
+async function putFileRequest<R>({
+    address,
+    body,
+    queryParams,
+}: PostRequestParams<FormData>): Promise<R | null> {
+    const url = getUrl(address, queryParams);
+
+    const response = await fetch(url.toString(), {
+        method: 'PUT',
+        body,
+        credentials: 'include',
+    });
+
+    if (response.status === 200) {
+        return await response.json() as unknown as R;
+    }
+    return null;
+}
+
 export default {
     getRequest,
     postRequest,
     putRequest,
+    putFileRequest,
 };

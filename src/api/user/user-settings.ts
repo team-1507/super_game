@@ -14,8 +14,8 @@ async function changePassword(body: UserPasswordType): Promise<UserDto | null> {
         body,
     });
 }
-async function changeAvatar(body: UserDataType): Promise<UserDto | null> {
-    return ApiService.putRequest<UserDataType, UserDto>({
+async function changeAvatar(body: FormData): Promise<UserDto | null> {
+    return ApiService.putFileRequest<UserDto>({
         address: 'user/profile/avatar',
         body,
     });

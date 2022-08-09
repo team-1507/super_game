@@ -21,6 +21,8 @@ const App = () => {
         UserApi.getCurrentUser().then((response) => {
             if (response) {
                 dispatch(setUser(response));
+            } else {
+                navigate('/sign-in');
             }
         }).catch(() => {
             navigate('/sign-in');

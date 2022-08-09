@@ -16,12 +16,12 @@ const Settings = () => {
     const changeUserFn = UserSettingsApi.changeUser;
     const changePasswordFn = UserSettingsApi.changePassword;
     const valuesToSendUser: UserDataType = {
-        first_name: '',
-        second_name: '',
+        first_name: 'Иван',
+        second_name: 'Дачный',
         display_name: '',
         login: '',
         email: '',
-        phone: '',
+        phone: '89999999999',
     };
     const valuesToSendPassword: UserPasswordType = {
         oldPassword: '',
@@ -36,8 +36,8 @@ const Settings = () => {
                         <div className="avatar-img-cont">
                             <img src={user.avatar} alt="avatar" />
                         </div>
-                        <form action="/" method="post" className="avatar-buttons-form">
-                            <UploadInput label="Upload" />
+                        <form className="avatar-buttons-form">
+                            <UploadInput label="Upload" name="avatar" />
                             <br />
                             <Button htmlType="submit" type="primary">
                                 Delete
@@ -56,7 +56,7 @@ const Settings = () => {
                         </div>
                         <div className="col-right">
                             <UserinfoForm
-                                formInputs={['oldPassword', 'password', 'submit']}
+                                formInputs={['oldPassword', 'newPassword', 'submit']}
                                 submitTitle="Change password"
                                 valuesToSend={valuesToSendPassword}
                                 callbackFn={changePasswordFn}

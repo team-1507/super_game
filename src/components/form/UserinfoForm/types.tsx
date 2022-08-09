@@ -12,7 +12,6 @@ export type CallbackFnData =
 export type CallbackFnReturn = SignUpDataDto | SignInDataDto | UserDto | null;
 
 export type UserinfoFormProps = HTMLProps<HTMLElement> & {
-    // formInputs: (keyof typeof inputs)[],
     formInputs: string[],
     submitTitle: string,
     callbackFn?(this: void, body: CallbackFnData): Promise<CallbackFnReturn>,
