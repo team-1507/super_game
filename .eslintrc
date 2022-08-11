@@ -29,14 +29,15 @@
                 "unnamedComponents": "arrow-function"
             }
         ],
-        "react/static-property-placement": 
+        "react/static-property-placement":
             [
-                "error", 
+                "error",
                 "static public field"
             ],
         "react/button-has-type": "off",
         "no-unused-vars": "off",
-        "@typescript-eslint/no-unused-vars": ["off"]
+        "@typescript-eslint/no-unused-vars": ["off"],
+        "no-console": "off"
     },
 
     "plugins": [
