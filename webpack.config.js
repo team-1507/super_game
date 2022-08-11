@@ -2,12 +2,13 @@ const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const CssMinimizerPlugin = require("css-minimizer-webpack-plugin");
+const { ServiceWorkerPlugin } = require("service-worker-webpack");
 
 
 const htmlPluginConfig = {
     filename: 'index.html',
     title: 'SUPER_GAME',
-    template: 'src/template.html',
+    template: 'template.html',
     hash: true,
     path: path.resolve(__dirname, 'build'),
 };
@@ -27,7 +28,7 @@ module.exports = (_, argv) => {
     const mode = argv.mode || MODE.DEV;
     return {
         mode,
-        entry: '/src/index.tsx',
+        entry: '/index.tsx',
         output: getOutputConfig(mode),
         target: 'web',
         devServer: {
@@ -59,7 +60,7 @@ module.exports = (_, argv) => {
                 },
             ],
         },
-        plugins: [new HtmlWebpackPlugin(htmlPluginConfig), new MiniCssExtractPlugin()],
+        plugins: [new HtmlWebpackPlugin(htmlPluginConfig), new MiniCssExtractPlugin(), new ServiceWorkerPlugin()],
 
         devtool: mode === MODE.DEV ? 'source-map' : false,
 

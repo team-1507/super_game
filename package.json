@@ -47,6 +47,7 @@
         "postcss-scss": "4.0.4",
         "sass": "1.53.0",
         "sass-loader": "13.0.2",
+        "service-worker-webpack": "^0.0.11",
         "style-loader": "3.3.1",
         "stylelint": "14.9.1",
         "stylelint-config-clean-order": "0.8.0",
