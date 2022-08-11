@@ -1,8 +1,8 @@
+import login from './src/components/form/UserinfoForm/FormItems/Login';
+
 const CACHE_NAME = 'my-site-cache-v1';
 
 const URLS = [
-    '/',
-    '/application.tsx',
     '/index.tsx',
 ]
 
@@ -11,6 +11,7 @@ self.addEventListener("install", (event) => {
         caches.open(CACHE_NAME)
             .then(cache => {
                 console.log("Opened cache");
+                console.log(cache.addAll(URLS))
                 return cache.addAll(URLS);
             })
             .catch(err => {
@@ -21,21 +22,17 @@ self.addEventListener("install", (event) => {
 });
 
 self.addEventListener('fetch', event => {
+    console.log('fetch 21212');
     event.respondWith(
-        // Пытаемся найти ответ на такой запрос в кеше
         caches.match(event.request)
             .then(response => {
-                // Если ответ найден, выдаём его
                 if (response) {
                     return response;
                 }
 
                 const fetchRequest = event.request.clone();
-                // В противном случае делаем запрос на сервер
                 return fetch(fetchRequest)
-                    // Можно задавать дополнительные параметры запроса, если ответ вернулся некорректный.
                     .then(response => {
-                            // Если что-то пошло не так, выдаём в основной поток результат, но не кладём его в кеш
                             if(!response || response.status !== 200 || response.type !== 'basic') {
                                 return response;
                             }
@@ -44,10 +41,8 @@ self.addEventListener('fetch', event => {
                             // Получаем доступ к кешу по CACHE_NAME
                             caches.open(CACHE_NAME)
                                 .then(cache => {
-                                    // Записываем в кеш ответ, используя в качестве ключа запрос
                                     cache.put(event.request, responseToCache);
                                 });
-                            // Отдаём в основной поток ответ
                             return response;
                         }
                     );
@@ -60,7 +55,7 @@ self.addEventListener("activate", function(event) {
         caches.keys().then(cacheNames => {
             return Promise.all(
                 cacheNames
-                    .filter(name => {/* Нужно вернуть true, если хотите удалить этот файл из кеша совсем */})
+                    .filter(() => true)
                     .map(name => caches.delete(name))
             )
         })

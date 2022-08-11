@@ -8,7 +8,7 @@ const { ServiceWorkerPlugin } = require("service-worker-webpack");
 const htmlPluginConfig = {
     filename: 'index.html',
     title: 'SUPER_GAME',
-    template: 'template.html',
+    template: 'src/template.html',
     hash: true,
     path: path.resolve(__dirname, 'build'),
 };
@@ -28,7 +28,7 @@ module.exports = (_, argv) => {
     const mode = argv.mode || MODE.DEV;
     return {
         mode,
-        entry: '/index.tsx',
+        entry: '/src/index.tsx',
         output: getOutputConfig(mode),
         target: 'web',
         devServer: {
@@ -60,7 +60,9 @@ module.exports = (_, argv) => {
                 },
             ],
         },
-        plugins: [new HtmlWebpackPlugin(htmlPluginConfig), new MiniCssExtractPlugin(), new ServiceWorkerPlugin()],
+        plugins: [new HtmlWebpackPlugin(htmlPluginConfig), new MiniCssExtractPlugin(), new ServiceWorkerPlugin({
+            enableWorkboxLogging: true
+        })],
 
         devtool: mode === MODE.DEV ? 'source-map' : false,
 
