@@ -4,9 +4,11 @@ import { Link, LinkProps } from 'react-router-dom';
 import './SquareButton.scss';
 
 const SquareButton = (props: LinkProps & { to?: string }) => {
-    const { children, to, className } = props;
+    const {
+        children, to, className, onClick,
+    } = props;
     return (
-        <Link to={to} className={`square-button ${className || ''}`}>
+        <Link to={to} className={`square-button ${className || ''}`} onClick={onClick}>
             {children}
         </Link>
     );

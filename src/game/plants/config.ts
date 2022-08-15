@@ -59,7 +59,6 @@ ASSET_COORDS: {
     TILE_TYPE: [row, coloumn]
 }
 */
-// export const ASSET_TILE_COORDS: Record<keyof typeof ASSET_TILE_TYPES, [number, number]> = {
 export const ASSET_TILE_COORDS: Record<string, [number, number]> = {
     PLOWED_EARTH: [5, 2],
     TOMATOES_1: [1, 1],

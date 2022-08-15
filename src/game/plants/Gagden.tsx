@@ -2,6 +2,7 @@ import React, { HTMLProps } from 'react';
 import { SpriteSheet } from '../SpriteSheet';
 import * as config from './config';
 import * as constants from '../constants';
+import * as mapConfig from '../map/config';
 import Plant from './Plant';
 
 type PlantOrNone = Plant | 0 | 1;
@@ -19,7 +20,11 @@ class Garden extends React.PureComponent {
 
     constructor(props: HTMLProps<HTMLCanvasElement>) {
         super(props);
-        this.spriteSheet = new SpriteSheet({ ...config, ...constants });
+        this.spriteSheet = new SpriteSheet({
+            ...config,
+            ...constants,
+            BOUNDARIES: mapConfig.BOUNDARIES,
+        });
         this.canvasWidth = this.spriteSheet.canvasWidth;
         this.canvasHeight = this.spriteSheet.canvasHeight;
         const mapLength = constants.MAP_SIZE[0] * constants.MAP_SIZE[1];

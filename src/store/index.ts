@@ -1,11 +1,11 @@
 import { configureStore } from '@reduxjs/toolkit';
 import userReducer from './reducers';
-import characterReducer from '../game/store/characterSlice';
+import characterPositionReducer from '../game/store/characterPositionSlice';
 
 const store = configureStore({
     reducer: {
         user: userReducer,
-        character: characterReducer,
+        characterPosition: characterPositionReducer,
     },
     devTools: true,
 });

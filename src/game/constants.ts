@@ -17,4 +17,11 @@ export const MOVES: Record<string, [number, number]> = {
     ArrowRight: [0, 1],
 };
 
+export const HOTKEYS: Record<string, string> = {
+    Digit1: 'plow',
+    Digit2: 'plant',
+    Digit3: 'water',
+    Digit4: 'harvest',
+};
+
 export default { MAP_SIZE, TILE_SIZE, MOVES };
