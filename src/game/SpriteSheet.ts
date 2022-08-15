@@ -53,7 +53,14 @@ export class SpriteSheet implements ISpriteSheet {
     }
 
     private getTileCoordsOnSptiteSheet(tileType: number) {
-        const [row, coloumn] = this.ASSET_TILE_COORDS[this.ASSET_TILE_TYPES[tileType]];
+        const spriteName = this.ASSET_TILE_TYPES[tileType];
+        if (spriteName === undefined) {
+            throw new Error(`Sprite with index ${tileType} does not exist on this sheet`);
+        }
+        if (this.ASSET_TILE_COORDS[spriteName] === undefined) {
+            throw new Error(`"${spriteName}" coordinates are not defined`);
+        }
+        const [row, coloumn] = this.ASSET_TILE_COORDS[spriteName];
         const sourceX = (coloumn - 1) * (this.SPRITE_SIZE.width + this.SPRITE_SIZE.gap);
         const sourceY = (row - 1) * (this.SPRITE_SIZE.height + this.SPRITE_SIZE.gap);
         return {
@@ -109,8 +116,15 @@ export class SpriteSheet implements ISpriteSheet {
         tileType: number,
         canvas: HTMLCanvasElement | null,
         position: number | [number, number] = 0,
-        crearBeforeDraw = false,
+        clearWholeCanvas = false,
+        clearTile = false,
     ) {
+        /* TODO
+        * разобраться с 0 индексом
+        */
+        if (tileType === 0) {
+            return canvas;
+        }
         const img = this.sptitesheetImageElement.cloneNode() as HTMLImageElement;
         const ctx = canvas?.getContext('2d');
         let [row, col] = [1, 1];
@@ -138,8 +152,15 @@ export class SpriteSheet implements ISpriteSheet {
                 return canvas;
             }
             ctx.imageSmoothingEnabled = false;
-            if (crearBeforeDraw) {
+            if (clearWholeCanvas) {
                 ctx.clearRect(0, 0, this.canvasWidth, this.canvasHeight);
+            } else if (clearTile) {
+                ctx.clearRect(
+                    destX,
+                    destY,
+                    destWidth,
+                    destHeight,
+                );
             }
             return ctx.drawImage(
                 img,
