@@ -12,7 +12,7 @@ import { UserDataType, UserPasswordType } from '../../api/user/types';
 
 const Settings = () => {
     const { activeTab } = useParams();
-    const user = useAppSelector((state) => state);
+    const user = useAppSelector((state) => state.user);
     const changeUserFn = UserSettingsApi.changeUser;
     const changePasswordFn = UserSettingsApi.changePassword;
     const valuesToSendUser: UserDataType = {

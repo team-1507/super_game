@@ -1,6 +1,9 @@
 import React, {
     KeyboardEvent, RefObject, useEffect, useMemo, useState,
 } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import type { RootState } from '../../store';
+import { setPosition } from '../store/characterSlice';
 import { SpriteSheet } from '../SpriteSheet';
 import * as config from './config';
 import * as constants from '../constants';
@@ -19,12 +22,14 @@ const Character = (props: CharacterProps) => {
     const { container, characterRef } = props;
     const spriteSheet = useMemo(() => new SpriteSheet({ ...config, ...constants }), []);
     const { canvasWidth, canvasHeight } = spriteSheet;
-    const [currentPosition, setCurrentPosition] = useState<Position>(
-        [
-            Math.ceil(spriteSheet.MAP_SIZE[0] / 2),
-            Math.ceil(spriteSheet.MAP_SIZE[0] / 2),
-        ],
-    );
+    // const [currentPosition, setCurrentPosition] = useState<Position>(
+    //     [
+    //         Math.ceil(spriteSheet.MAP_SIZE[0] / 2),
+    //         Math.ceil(spriteSheet.MAP_SIZE[0] / 2),
+    //     ],
+    // );
+    const currentPosition = useSelector((state: RootState) => state.character);
+    const dispatch = useDispatch();
     const [currentMoveState, setCurrentMoveState] = useState(1);
 
     const getMoveStateCycleStep = (rangeStart: number, rangeEnd: number) => {
@@ -66,7 +71,8 @@ const Character = (props: CharacterProps) => {
         const newMoveState = getNextMoveState(position);
         setCurrentMoveState(newMoveState);
         if (!ifBoundry(position) && !ifEndOfMap(position)) {
-            setCurrentPosition(position);
+            // setCurrentPosition(position);
+            dispatch(setPosition(position));
         }
     };
 
@@ -120,6 +126,7 @@ const Character = (props: CharacterProps) => {
         canvasHeight,
         canvasWidth,
         container,
+        dispatch,
     ]);
     return (
         <canvas

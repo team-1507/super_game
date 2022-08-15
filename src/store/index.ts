@@ -1,8 +1,12 @@
 import { configureStore } from '@reduxjs/toolkit';
-import rootReducer from './reducers';
+import userReducer from './reducers';
+import characterReducer from '../game/store/characterSlice';
 
 const store = configureStore({
-    reducer: rootReducer,
+    reducer: {
+        user: userReducer,
+        character: characterReducer,
+    },
     devTools: true,
 });
 

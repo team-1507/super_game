@@ -11,10 +11,11 @@ class Controls implements IControls {
         this.character = props.character;
     }
 
+    // eslint-disable-next-line class-methods-use-this
     public handleKeyPress(event: KeyboardEvent) {
         const redirectedEvent = event;
         redirectedEvent.bubbles = false;
-        this.character.current?.dispatchEvent(redirectedEvent as unknown as Event);
+        // this.character.current?.dispatchEvent(redirectedEvent as unknown as Event);
     }
 }
 
