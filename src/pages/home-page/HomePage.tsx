@@ -1,10 +1,21 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import './home-page.scss';
 import { Button } from 'antd';
 import ArrowTopRight from '../../components/icons/ArrowTopRight';
+import UserApi from '../../api/sign-in/sign-in';
 
 const HomePage = () => {
+    const navigate = useNavigate();
+    const logOut = () => {
+        UserApi.logOut().then((response) => {
+            if (response) {
+                navigate('/sign-in');
+            }
+        }).catch((err) => {
+            console.log(err);
+        });
+    };
     return (
         <div className="home-page">
             <div className="home-page__info">
@@ -73,7 +84,7 @@ const HomePage = () => {
                             </Button>
                         </Link>
                     </div>
-                    <div className="home-page__buttons-group__two-button__btn">
+                    <div onClick={logOut} className="home-page__buttons-group__two-button__btn">
                         <Button type="primary">
                             LOG OUT
                             <ArrowTopRight />

@@ -1,6 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 import type { PayloadAction } from '@reduxjs/toolkit';
 import type { RootState } from '.';
+import { getAvatar } from './helpers';
 
 export interface IUserState {
     avatar?: string
@@ -13,7 +14,7 @@ export interface IUserState {
 }
 
 export const initialState: IUserState = {
-    avatar: 'https://i.pravatar.cc/300',
+    avatar: '',
     first_name: '',
     second_name: '',
     login: '',
@@ -28,9 +29,10 @@ const userSlice = createSlice({
     initialState,
     reducers: {
         setUser: (state, action: PayloadAction<IUserState>) => {
-            const { login, email } = action.payload;
+            const { login, email, avatar } = action.payload;
             state.login = login;
             state.email = email;
+            state.avatar = getAvatar(avatar);
         },
     },
 });

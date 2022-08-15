@@ -1,18 +1,21 @@
 import React, { FC, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Form } from 'antd';
-import { setUser, initialState } from '../../../store/reducers';
+import { setUser, initialState, IUserState } from '../../../store/reducers';
 import { useAppDispatch } from '../../../store/hooks';
 import './UserinfoForm.scss';
-import { CallbackFnData, UserinfoFormProps } from './types';
+import { CallbackFnData, CallbackFnReturn, UserinfoFormProps } from './types';
 import {
-    Login, loginInputRef, Email, Password, ConfirmPassword, Submit,
+    Login, loginInputRef, Email, Password, ConfirmPassword, Submit, OldPassword,
 } from './FormItems';
+import NewPassword from './FormItems/NewPassword';
 
 const inputs:Record<string, FC<UserinfoFormProps>> = {
     login: Login,
     email: Email,
     password: Password,
+    oldPassword: OldPassword,
+    newPassword: NewPassword,
     confirmPassword: ConfirmPassword,
     submit: Submit,
 };
@@ -30,11 +33,11 @@ const UserinfoForm = (props: UserinfoFormProps) => {
         const callBackFnData = { ...valuesToSend };
         Object.keys(valuesToSend).forEach((key) => {
             const fieldName = key as keyof CallbackFnData;
-            callBackFnData[fieldName] = values[fieldName];
+            callBackFnData[fieldName] = values[fieldName] ?? valuesToSend[fieldName];
         });
-        callbackFn(callBackFnData).then((response) => {
+        callbackFn(callBackFnData).then((response: CallbackFnReturn) => {
             if (response) {
-                dispatch(setUser(callBackFnData));
+                dispatch(setUser(response as IUserState));
                 if (navigateOnSuccess) {
                     navigate(navigateOnSuccess);
                 }
