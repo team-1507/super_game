@@ -7,9 +7,9 @@ enum LifeCycle {
 }
 
 abstract class Plant {
-    protected lifeState: LifeCycle;
+    protected lifeState?: LifeCycle;
 
-    protected canvas: HTMLCanvasElement;
+    protected canvas?: HTMLCanvasElement;
 
     constructor(canvas: HTMLCanvasElement) {
         this.lifeState = LifeCycle.sprout;

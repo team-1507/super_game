@@ -1,24 +1,40 @@
-import React, { HTMLProps } from 'react';
+/* eslint-disable react/require-default-props */
+import React from 'react';
+import { connect, ConnectedProps } from 'react-redux';
+
 import { SpriteSheet } from '../SpriteSheet';
 import * as config from './config';
 import * as constants from '../constants';
 import * as mapConfig from '../map/config';
-import Plant from './Plant';
+import { plow, PlantOrNone } from '../store/gardenStateSlice';
+import { RootState } from '../../store';
 
-type PlantOrNone = Plant | 0 | 1;
+const mapState = (state: RootState) => {
+    return {
+        user: state.user,
+        characterPosition: state.characterPosition,
+        gardenState: state.gardenState,
+    };
+};
 
-class Garden extends React.PureComponent {
+const mapDispatch = {
+    plow,
+};
+
+const connector = connect(mapState, mapDispatch);
+
+type PropsFromRedux = ConnectedProps<typeof connector>;
+
+class Garden extends React.PureComponent<PropsFromRedux> {
     private spriteSheet: SpriteSheet;
 
     private canvasWidth: number;
 
     private canvasHeight: number;
 
-    private plants: PlantOrNone[] = [];
-
     readonly canvas = React.createRef<HTMLCanvasElement>();
 
-    constructor(props: HTMLProps<HTMLCanvasElement>) {
+    constructor(props: PropsFromRedux) {
         super(props);
         this.spriteSheet = new SpriteSheet({
             ...config,
@@ -27,27 +43,26 @@ class Garden extends React.PureComponent {
         });
         this.canvasWidth = this.spriteSheet.canvasWidth;
         this.canvasHeight = this.spriteSheet.canvasHeight;
-        const mapLength = constants.MAP_SIZE[0] * constants.MAP_SIZE[1];
-        this.plants.length = mapLength;
-        this.plants.fill(0);
     }
 
     componentDidMount() {
-        this.plants.map((plant, tileNum) => this.renderTile(tileNum, plant));
+        const { gardenState } = this.props;
+        gardenState.map((plant, tileNum) => this.renderTile(tileNum, plant));
     }
 
-    componentDidUpdate() {
-
-    }
-
-    // eslint-disable-next-line react/no-unused-class-component-methods
-    public plow(coords: [number, number]) {
-        const tileNum = this.spriteSheet.coordsToTileNum(coords);
-        this.plants[tileNum] = 1;
+    componentDidUpdate(prevProps: PropsFromRedux) {
+        const { gardenState: gardenStatePrev } = prevProps;
+        const { gardenState } = this.props;
+        gardenState.forEach((plant, tileNum) => {
+            if (plant !== gardenStatePrev[tileNum]) {
+                this.renderTile(tileNum, plant);
+            }
+        });
     }
 
     private renderTile(tileNum: number, tile: PlantOrNone) {
-        if (this.plants[tileNum] === undefined) {
+        const { gardenState } = this.props;
+        if (gardenState[tileNum] === undefined) {
             throw new Error('Tile is out of the map boundaries');
         }
         const tileType = (typeof tile === 'number') ? tile : 1;
@@ -65,4 +80,4 @@ class Garden extends React.PureComponent {
     }
 }
 
-export default Garden;
+export default connector(Garden);
