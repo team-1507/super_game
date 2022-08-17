@@ -38,20 +38,68 @@ const getNextMoveState = (newPosition: Position, currentPosition: Position) => {
     return currentPosition.direction;
 };
 
+const getNewDirectionAndCoords = (newPosition: Position, currentPosition: Position) => {
+    const direction = getNextMoveState(newPosition, currentPosition);
+    let { coords } = currentPosition;
+    if (spriteSheet.ifTileAvailible(newPosition.coords)) {
+        coords = newPosition.coords;
+    }
+    return { coords, direction };
+};
+
 export const characterPositionSlice = createSlice({
     name: 'characterPosition',
     initialState,
     reducers: {
-        setPosition: (position, action: PayloadAction<Position>) => {
-            position.direction = getNextMoveState(action.payload, position);
-            if (spriteSheet.ifTileAvailible(action.payload.coords)) {
-                [position.coords[0], position.coords[1]] = action.payload.coords;
-            }
+        setPosition: (position: Position, action: PayloadAction<Position>) => {
+            const newPosition = getNewDirectionAndCoords(action.payload, position);
+            position.direction = newPosition.direction;
+            [position.coords[0], position.coords[1]] = newPosition.coords;
+        },
+        up: (position) => {
+            const newCoords: Position['coords'] = [...position.coords];
+            newCoords[0] -= 1;
+            const newPosition = getNewDirectionAndCoords(
+                { ...position, coords: newCoords },
+                position,
+            );
+            position.direction = newPosition.direction;
+            [position.coords[0], position.coords[1]] = newPosition.coords;
+        },
+        down: (position) => {
+            const newCoords: Position['coords'] = [...position.coords];
+            newCoords[0] += 1;
+            const newPosition = getNewDirectionAndCoords(
+                { ...position, coords: newCoords },
+                position,
+            );
+            position.direction = newPosition.direction;
+            [position.coords[0], position.coords[1]] = newPosition.coords;
+        },
+        left: (position) => {
+            const newCoords: Position['coords'] = [...position.coords];
+            newCoords[1] -= 1;
+            const newPosition = getNewDirectionAndCoords(
+                { ...position, coords: newCoords },
+                position,
+            );
+            position.direction = newPosition.direction;
+            [position.coords[0], position.coords[1]] = newPosition.coords;
+        },
+        right: (position) => {
+            const newCoords: Position['coords'] = [...position.coords];
+            newCoords[1] += 1;
+            const newPosition = getNewDirectionAndCoords(
+                { ...position, coords: newCoords },
+                position,
+            );
+            position.direction = newPosition.direction;
+            [position.coords[0], position.coords[1]] = newPosition.coords;
         },
     },
 });
 
 export const {
-    setPosition,
+    setPosition, up, down, left, right,
 } = characterPositionSlice.actions;
 export default characterPositionSlice.reducer;

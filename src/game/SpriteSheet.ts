@@ -1,3 +1,7 @@
+import * as charConfig from './character/config';
+import * as constants from './constants';
+import * as mapConfig from './map/config';
+
 interface ISpriteSheet {
     SPRITE_SHEET: string,
     SPRITE_SIZE: {
@@ -199,5 +203,11 @@ export class SpriteSheet implements ISpriteSheet {
         return !(this.ifBoundry(position) || this.ifEndOfMap(position));
     }
 }
+
+export const mapHelper = new SpriteSheet({
+    ...charConfig,
+    ...constants,
+    BOUNDARIES: mapConfig.BOUNDARIES,
+});
 
 export default SpriteSheet;

@@ -3,10 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import SquareButton from '../../../components/sections/SquareButton';
 import { RootState } from '../../../store';
 
-import { SpriteSheet } from '../../SpriteSheet';
-import * as config from '../../plants/config';
-import * as constants from '../../constants';
-import * as mapConfig from '../../map/config';
+import { mapHelper } from '../../SpriteSheet';
 
 import './ActionButtons.scss';
 import { plow } from '../../store/gardenStateSlice';
@@ -16,14 +13,9 @@ const ActionButtons = () => {
     const currentCharacterPosition = useSelector((state: RootState) => state.characterPosition);
 
     const dispatch = useDispatch();
-    const spriteSheet = new SpriteSheet({
-        ...config,
-        ...constants,
-        BOUNDARIES: mapConfig.BOUNDARIES,
-    });
 
     const handleClickPlow = () => {
-        const tileNum = spriteSheet.coordsToTileNum(currentCharacterPosition.coords);
+        const tileNum = mapHelper.coordsToTileNum(currentCharacterPosition.coords);
         dispatch(plow(tileNum));
     };
 
