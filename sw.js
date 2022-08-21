@@ -2,7 +2,7 @@ import {precacheAndRoute} from 'workbox-precaching';
 
 precacheAndRoute(self.__WB_MANIFEST);
 
-const CACHE_NAME = 'ivan\'s-dacha-v1';
+const CACHE_NAME = "ivan\'s-dacha-v1";
 
 const URLS = [
     './main.js',
@@ -10,7 +10,7 @@ const URLS = [
     './index.html'
 ]
 
-self.addEventListener("install", (event) => {
+self.addEventListener('install', (event) => {
     event.waitUntil(
         caches.open(CACHE_NAME)
             .then(cache => {
@@ -51,7 +51,7 @@ self.addEventListener('fetch', event => {
     );
 });
 
-self.addEventListener("activate", function(event) {
+self.addEventListener('activate', function(event) {
     event.waitUntil(
         caches.keys().then(cacheNames => {
             return Promise.all(

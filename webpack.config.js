@@ -7,7 +7,7 @@ const WorkboxPlugin = require("workbox-webpack-plugin");
 
 const htmlPluginConfig = {
     filename: 'index.html',
-    title: 'IVAN\'S DACHA',
+    title: "IVAN\'S DACHA",
     template: 'src/template.html',
     path: path.resolve(__dirname, 'build'),
 };
@@ -17,8 +17,8 @@ const MODE = {
     PROD: 'production',
 };
 
-const getOutputConfig = (mode) => ({
-    filename: mode === MODE.DEV ? '[name].js' : '[name].js',
+const getOutputConfig = () => ({
+    filename: '[name].js',
     path: path.resolve(__dirname, 'build'),
     publicPath: path.resolve(__dirname, '/'),
 });
