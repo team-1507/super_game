@@ -1,15 +1,14 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const MiniCssExtractPlugin = require("mini-css-extract-plugin");
-const CssMinimizerPlugin = require("css-minimizer-webpack-plugin");
-const { ServiceWorkerPlugin } = require("service-worker-webpack");
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
+const WorkboxPlugin = require("workbox-webpack-plugin");
 
 
 const htmlPluginConfig = {
     filename: 'index.html',
-    title: 'SUPER_GAME',
+    title: 'IVAN\'S DACHA',
     template: 'src/template.html',
-    hash: true,
     path: path.resolve(__dirname, 'build'),
 };
 
@@ -19,7 +18,7 @@ const MODE = {
 };
 
 const getOutputConfig = (mode) => ({
-    filename: mode === MODE.DEV ? '[name].js' : '[name].[fullhash].js',
+    filename: mode === MODE.DEV ? '[name].js' : '[name].js',
     path: path.resolve(__dirname, 'build'),
     publicPath: path.resolve(__dirname, '/'),
 });
@@ -50,8 +49,8 @@ module.exports = (_, argv) => {
                     test: /\.s[ac]ss$/i,
                     use: [
                         MiniCssExtractPlugin.loader,
-                        { loader: "css-loader", options: { sourceMap: mode === MODE.DEV } },
-                        { loader: "sass-loader", options: { sourceMap: mode === MODE.DEV } },
+                        { loader: 'css-loader', options: { sourceMap: mode === MODE.DEV } },
+                        { loader: 'sass-loader', options: { sourceMap: mode === MODE.DEV } },
                     ],
                 },
                 {
@@ -60,8 +59,10 @@ module.exports = (_, argv) => {
                 },
             ],
         },
-        plugins: [new HtmlWebpackPlugin(htmlPluginConfig), new MiniCssExtractPlugin(), new ServiceWorkerPlugin({
-            enableWorkboxLogging: true
+        plugins: [new HtmlWebpackPlugin(htmlPluginConfig), new MiniCssExtractPlugin(),  new WorkboxPlugin.InjectManifest({
+            swSrc: path.resolve(__dirname, './sw.js'),
+            maximumFileSizeToCacheInBytes: 50000000,
+            mode: 'production',
         })],
 
         devtool: mode === MODE.DEV ? 'source-map' : false,
@@ -72,7 +73,7 @@ module.exports = (_, argv) => {
                 new CssMinimizerPlugin({
                     minimizerOptions: {
                         preset: [
-                          "default",
+                          'default',
                           {
                             discardComments: { removeAll: true },
                           },

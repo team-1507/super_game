@@ -1,17 +1,19 @@
-import login from './src/components/form/UserinfoForm/FormItems/Login';
+import {precacheAndRoute} from 'workbox-precaching';
 
-const CACHE_NAME = 'my-site-cache-v1';
+precacheAndRoute(self.__WB_MANIFEST);
+
+const CACHE_NAME = 'ivan\'s-dacha-v1';
 
 const URLS = [
-    '/index.tsx',
+    './main.js',
+    './main.css',
+    './index.html'
 ]
 
 self.addEventListener("install", (event) => {
     event.waitUntil(
         caches.open(CACHE_NAME)
             .then(cache => {
-                console.log("Opened cache");
-                console.log(cache.addAll(URLS))
                 return cache.addAll(URLS);
             })
             .catch(err => {
@@ -22,7 +24,6 @@ self.addEventListener("install", (event) => {
 });
 
 self.addEventListener('fetch', event => {
-    console.log('fetch 21212');
     event.respondWith(
         caches.match(event.request)
             .then(response => {
@@ -61,3 +62,4 @@ self.addEventListener("activate", function(event) {
         })
 );
 });
+

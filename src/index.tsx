@@ -18,25 +18,12 @@ root.render(
     </React.StrictMode>,
 );
 
-// if ("serviceWorker" in navigator) {
-//     const wb = new Workbox("/service-worker.js");
-//     wb.register().then((registration) => {
-//         console.log('ServiceWorker registration successful with scope: ', registration?.scope);
-//     }).catch((error: string) => {
-//         console.log('ServiceWorker registration failed: ', error);
-//     });
-// }
-
-// function startServiceWorker() {
-//     if ('serviceWorker' in navigator) {
-//         window.addEventListener('load', () => {
-//             navigator.serviceWorker.register('/service-worker.js', { scope: '/' }).then((registration) => {
-//                 console.log('ServiceWorker registration successful with scope: ', registration.scope);
-//             }).catch((error: string) => {
-//                 console.log('ServiceWorker registration failed: ', error);
-//             });
-//         });
-//     }
-// }
-//
-// startServiceWorker();
+if ('serviceWorker' in navigator) {
+    window.addEventListener('load', () => {
+        navigator.serviceWorker.register('/sw.js').then(() => {
+            console.log('success sw');
+        }).catch((error) => {
+            console.log('error sw:', error);
+        });
+    });
+}
