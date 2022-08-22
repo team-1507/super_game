@@ -6,7 +6,7 @@ import HeaderBackButton from '../../components/sections/HeaderBackButton';
 const Leaderboard = () => {
     const generateCols = users
         .map((item) => (
-            <li>{item}</li>
+            <li key={item}>{item}</li>
         ));
 
     return (

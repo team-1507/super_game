@@ -105,8 +105,5 @@
         "src",
         "typings/*.d.ts",
         "./node_modules/@types"
-    ],
-    "exclude": [
-        "**/*.js"
     ]
 }
