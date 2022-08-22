@@ -29,9 +29,9 @@
                 "unnamedComponents": "arrow-function"
             }
         ],
-        "react/static-property-placement": 
+        "react/static-property-placement":
             [
-                "error", 
+                "error",
                 "static public field"
             ],
         "react/button-has-type": "off",
