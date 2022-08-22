@@ -1,13 +1,12 @@
-import { applyMiddleware, createStore } from '@reduxjs/toolkit';
-import thunk from 'redux-thunk';
+import { configureStore } from '@reduxjs/toolkit';
 import rootReducer from './reducers';
 
-// const store = configureStore({
-//     reducer: rootReducer,
-//     devTools: true,
-// });
+const store = configureStore({
+    reducer: rootReducer,
+    devTools: true,
+    middleware: (getDefaultMiddleware) => getDefaultMiddleware(),
+});
 
-const store = createStore(rootReducer, applyMiddleware(thunk));
 export default store;
 
 // Infer the `RootState` and `AppDispatch` types from the store itself
