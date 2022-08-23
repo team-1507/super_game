@@ -17,3 +17,13 @@ root.render(
         </Provider>
     </React.StrictMode>,
 );
+
+if ('serviceWorker' in navigator) {
+    window.addEventListener('load', () => {
+        navigator.serviceWorker.register('/sw.js').then(() => {
+            console.log('success sw');
+        }).catch((error) => {
+            console.log('error sw:', error);
+        });
+    });
+}
