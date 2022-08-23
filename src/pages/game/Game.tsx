@@ -6,6 +6,15 @@ import Garden from '../../game/plants/Gagden';
 import ActionButtons from '../../game/ui/ActionButtons';
 import PauseMenu from '../../game/ui/PauseMenu';
 import './Game.scss';
+import audio from '../../audio';
+
+const music = audio({ src: require('../../../static/audio/music/title.ogg'), loop: true, volume: 0.3 });
+const playMusic = () => {
+    music.play();
+    document.removeEventListener('click', playMusic);
+}
+
+document.addEventListener('click', playMusic);
 
 const Game = () => {
     const container = createRef<HTMLDivElement>();

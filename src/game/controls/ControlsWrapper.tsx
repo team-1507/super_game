@@ -6,7 +6,9 @@ import { mapHelper } from '../SpriteSheet';
 import {
     up, down, left, right,
 } from '../store/characterPositionSlice';
+import * as constants from '../constants';
 import { plow } from '../store/gardenStateSlice';
+import audio from '../../audio';
 
 const ControlsWrapper = (
     props: HTMLProps<HTMLDivElement> & { controlsWrapperRef: RefObject<HTMLDivElement> },
@@ -38,6 +40,7 @@ const ControlsWrapper = (
         const isModKey = (e.altKey || e.ctrlKey || e.metaKey);
         if (move && !isModKey) {
             e.preventDefault();
+            audio({ src: constants.SOUNDS.steps });
             dispatch(move);
         } else if (action && !isModKey) {
             e.preventDefault();
