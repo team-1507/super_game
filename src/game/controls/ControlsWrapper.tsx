@@ -9,6 +9,7 @@ import {
 import { plow } from '../store/mapStateSlice';
 import { plant } from '../store/gardenStateSlice';
 import Tomato from '../plants/Tomato';
+import { addAction, addMove } from '../store/timerSlice';
 
 const ControlsWrapper = (
     props: HTMLProps<HTMLDivElement> & {
@@ -55,9 +56,11 @@ const ControlsWrapper = (
         const isModKey = (e.altKey || e.ctrlKey || e.metaKey);
         if (move && !isModKey) {
             e.preventDefault();
+            dispatch(addMove);
             dispatch(move);
         } else if (action && !isModKey) {
             e.preventDefault();
+            dispatch(addAction);
             dispatch(action);
         }
     };
