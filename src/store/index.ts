@@ -12,6 +12,12 @@ const store = configureStore({
         mapState: mapStateReducer,
     },
     devTools: true,
+    middleware: (getDefaultMiddleware) => getDefaultMiddleware({
+        serializableCheck: {
+            ignoredActionPaths: ['payload.plant'],
+            ignoredPaths: ['gardenState'],
+        },
+    }),
 });
 
 export default store;

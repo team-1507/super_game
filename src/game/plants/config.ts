@@ -65,7 +65,7 @@ ASSET_COORDS: {
 }
 */
 export const ASSET_TILE_COORDS: Record<string, [number, number]> = {
-    PLOWED_EARTH: [2, 1],
+    PLOWED_EARTH: [5, 2],
     TOMATOES_1: [1, 1],
     TOMATOES_2: [2, 1],
     TOMATOES_3: [3, 1],

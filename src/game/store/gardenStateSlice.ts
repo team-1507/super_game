@@ -6,6 +6,11 @@ import Plant from '../plants/Plant';
 
 export type PlantOrNone = Plant | number;
 
+export type PlantAction = {
+    plant: Plant,
+    tileNum: number,
+};
+
 const mapLength = constants.MAP_SIZE[0] * constants.MAP_SIZE[1];
 const initialState: PlantOrNone[] = [];
 initialState.length = mapLength;
@@ -26,10 +31,14 @@ export const gardenStateSlice = createSlice({
             }
             plants[action.payload] = Number.parseInt(tileAlias, 10);
         },
+        plant: (plantsState: PlantOrNone[], action: PayloadAction<PlantAction>) => {
+            const { plant, tileNum } = action.payload;
+            plantsState[tileNum] = plant;
+        },
     },
 });
 
 export const {
-    plow,
+    plow, plant,
 } = gardenStateSlice.actions;
 export default gardenStateSlice.reducer;

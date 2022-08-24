@@ -12,6 +12,7 @@ const Game = () => {
     const pauseMenu = createRef<HTMLDivElement>();
     const controlsWrapperRef = createRef<HTMLDivElement>();
     const characterRef = createRef<HTMLCanvasElement>();
+    const gardenRef = createRef<HTMLCanvasElement>();
     const togglePauseMenu = () => {
         pauseMenu.current?.classList.toggle('active');
         if (pauseMenu.current?.classList.contains('active')) {
@@ -28,10 +29,11 @@ const Game = () => {
         <main className="game-page">
             <ControlsWrapper
                 controlsWrapperRef={controlsWrapperRef}
+                gardenRef={gardenRef}
             >
                 <div className="game-page-map-container" ref={container}>
                     <Map />
-                    <Garden />
+                    <Garden gardenRef={gardenRef} />
                     <Character container={container} characterRef={characterRef} />
                     <PauseMenu wrapperRef={pauseMenu} toggleFn={togglePauseMenu} />
                 </div>
