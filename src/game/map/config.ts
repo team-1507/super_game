@@ -87,7 +87,7 @@ export const ASSET_TILE_COORDS: Record<string, [number, number]> = {
     WINDOW: [2, 43],
 };
 
-export const MAP = [
+export const MAP: [number[], number[]] = [
     [ // layer 1:
         2,  2,  2,  1,  2,  1,  1,  1,  2,  1,  1,  2,  1,  2,  2,  1,  2,  2,  1,  2,
         1,  1,  1,  2,  1,  2,  2,  2,  2,  1,  2,  2,  1,  2,  1,  2,  2,  2,  2,  2,

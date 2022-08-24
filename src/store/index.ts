@@ -2,12 +2,14 @@ import { configureStore } from '@reduxjs/toolkit';
 import userReducer from './reducers';
 import characterPositionReducer from '../game/store/characterPositionSlice';
 import gardenStateReducer from '../game/store/gardenStateSlice';
+import mapStateReducer from '../game/store/mapStateSlice';
 
 const store = configureStore({
     reducer: {
         user: userReducer,
         characterPosition: characterPositionReducer,
         gardenState: gardenStateReducer,
+        mapState: mapStateReducer,
     },
     devTools: true,
 });

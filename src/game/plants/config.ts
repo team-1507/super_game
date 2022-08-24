@@ -1,11 +1,16 @@
-import sptitesheet from '../../../static/assets/plants_sptitesheet.png';
+import sptitesheet from '../../../static/assets/plants_sptitesheet1.png';
 
 export const SPRITE_SHEET = sptitesheet;
 
+// export const SPRITE_SIZE = {
+//     width: 32,
+//     height: 64, // in px on astual sptitesheet
+//     gap: 1, // between sprites
+// };
 export const SPRITE_SIZE = {
     width: 32,
-    height: 64, // in px on astual sptitesheet
-    gap: 1, // between sprites
+    height: 32, // in px on astual sptitesheet
+    gap: 0, // between sprites
 };
 
 export const ASSET_TILE_TYPES: Record<number, string> = {
@@ -60,7 +65,7 @@ ASSET_COORDS: {
 }
 */
 export const ASSET_TILE_COORDS: Record<string, [number, number]> = {
-    PLOWED_EARTH: [5, 2],
+    PLOWED_EARTH: [2, 1],
     TOMATOES_1: [1, 1],
     TOMATOES_2: [2, 1],
     TOMATOES_3: [3, 1],

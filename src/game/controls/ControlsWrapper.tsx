@@ -6,7 +6,7 @@ import { mapHelper } from '../SpriteSheet';
 import {
     up, down, left, right,
 } from '../store/characterPositionSlice';
-import { plow } from '../store/gardenStateSlice';
+import { plow } from '../store/mapStateSlice';
 
 const ControlsWrapper = (
     props: HTMLProps<HTMLDivElement> & { controlsWrapperRef: RefObject<HTMLDivElement> },
