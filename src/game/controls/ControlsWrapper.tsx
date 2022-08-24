@@ -19,12 +19,7 @@ const ControlsWrapper = (
 ) => {
     const { children, controlsWrapperRef, gardenRef } = props;
 
-    // if (!gardenRef.current) {
-    //     throw new Error('No garden canvas found');
-    // }
-
     const currentCharacterPosition = useSelector((state: RootState) => state.characterPosition);
-    // const currentGardenState = useSelector((state: RootState) => state.gardenState);
     const dispatch = useDispatch();
 
     const getCurrentCharacterTileNum = () => mapHelper.coordsToTileNum(
