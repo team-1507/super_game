@@ -10,6 +10,7 @@ const htmlPluginConfig = {
     title: "IVAN\'S DACHA",
     template: 'src/template.html',
     path: path.resolve(__dirname, 'build'),
+    favicon: 'static/images/favicon.ico',
 };
 
 const MODE = {

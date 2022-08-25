@@ -1,4 +1,4 @@
-import sptitesheet from '../../../static/assets/plants_sptitesheet1.png';
+import sptitesheet from '../../../static/assets/plants_sptitesheet32.png';
 
 export const SPRITE_SHEET = sptitesheet;
 
