@@ -27,7 +27,7 @@ const App = () => {
         }).catch(() => {
             navigate('/sign-in');
         });
-    }, []);
+    }, [dispatch, navigate]);
     return (
         <Routes>
             <Route path="/game" element={<Game />} />

@@ -17,11 +17,11 @@
         color: $red;
         text-decoration: none;
 
-        background-color: $light-text;
-        border: 1px solid adjust-color($dark-hilighted, $alpha: 0);
+        background-color: $white;
+        border: 1px solid adjust-color($black-hilighted, $alpha: 0);
         border-bottom: 10px solid $brown;
         border-radius: 2px 20px 2px 2px;
-        box-shadow: 0 -5px 5px 0 adjust-color($dark-hilighted, $alpha: -0.5);
+        box-shadow: 0 -5px 5px 0 adjust-color($black-hilighted, $alpha: -0.5);
 
         transition: background-color 0.3s, transform 0.3s, box-shadow 0.3s;
 
@@ -45,7 +45,7 @@
         &:active {
             transform: translate(0, -5px);
 
-            box-shadow: 0 -2px 5px 0 adjust-color($dark-hilighted, $alpha: -0.5);
+            box-shadow: 0 -2px 5px 0 adjust-color($black-hilighted, $alpha: -0.5);
         }
     }
 
