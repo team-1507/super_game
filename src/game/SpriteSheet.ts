@@ -1,4 +1,4 @@
-interface ISpriteSheet {
+export interface ISpriteSheet {
     SPRITE_SHEET: string,
     SPRITE_SIZE: {
         width: number,
