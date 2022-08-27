@@ -1,14 +1,17 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
+import { RootState } from '../../store';
+
 import MapLayer from './MapLayer';
-import { MAP } from './config';
 
 import './Map.scss';
 
 const Map = () => {
+    const mapState = useSelector((state: RootState) => state.mapState);
     return (
         <>
-            <MapLayer layerConfig={MAP[0]} />
-            <MapLayer layerConfig={MAP[1]} />
+            <MapLayer layerConfig={mapState[0]} />
+            <MapLayer layerConfig={mapState[1]} />
         </>
     );
 };

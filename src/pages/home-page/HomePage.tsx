@@ -84,8 +84,8 @@ const HomePage = () => {
                             </Button>
                         </Link>
                     </div>
-                    <div onClick={logOut} className="home-page__buttons-group__two-button__btn">
-                        <Button type="primary">
+                    <div className="home-page__buttons-group__two-button__btn">
+                        <Button type="primary" onClick={logOut}>
                             LOG OUT
                             <ArrowTopRight />
                         </Button>

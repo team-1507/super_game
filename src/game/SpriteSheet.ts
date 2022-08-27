@@ -1,3 +1,7 @@
+import * as charConfig from './character/config';
+import * as constants from './constants';
+import * as mapConfig from './map/config';
+
 export interface ISpriteSheet {
     SPRITE_SHEET: string,
     SPRITE_SIZE: {
@@ -9,6 +13,7 @@ export interface ISpriteSheet {
     ASSET_TILE_COORDS: Record<string, [number, number]>,
     MAP_SIZE: [number, number],
     TILE_SIZE: number,
+    BOUNDARIES: number[],
 }
 export class SpriteSheet implements ISpriteSheet {
     SPRITE_SHEET: string;
@@ -27,6 +32,8 @@ export class SpriteSheet implements ISpriteSheet {
 
     TILE_SIZE: number;
 
+    BOUNDARIES: number[];
+
     private sptitesheetImageElement: HTMLImageElement;
 
     readonly canvasWidth: number;
@@ -44,6 +51,7 @@ export class SpriteSheet implements ISpriteSheet {
         this.ASSET_TILE_COORDS = config.ASSET_TILE_COORDS;
         this.MAP_SIZE = config.MAP_SIZE;
         this.TILE_SIZE = config.TILE_SIZE;
+        this.BOUNDARIES = config.BOUNDARIES;
         this.sptitesheetImageElement = new Image();
         this.sptitesheetImageElement.src = this.SPRITE_SHEET;
         this.canvasWidth = this.TILE_SIZE * this.MAP_SIZE[1];
@@ -53,7 +61,14 @@ export class SpriteSheet implements ISpriteSheet {
     }
 
     private getTileCoordsOnSptiteSheet(tileType: number) {
-        const [row, coloumn] = this.ASSET_TILE_COORDS[this.ASSET_TILE_TYPES[tileType]];
+        const spriteName = this.ASSET_TILE_TYPES[tileType];
+        if (spriteName === undefined) {
+            throw new Error(`Sprite with index ${tileType} does not exist on this sheet`);
+        }
+        if (this.ASSET_TILE_COORDS[spriteName] === undefined) {
+            throw new Error(`"${spriteName}" coordinates are not defined`);
+        }
+        const [row, coloumn] = this.ASSET_TILE_COORDS[spriteName];
         const sourceX = (coloumn - 1) * (this.SPRITE_SIZE.width + this.SPRITE_SIZE.gap);
         const sourceY = (row - 1) * (this.SPRITE_SIZE.height + this.SPRITE_SIZE.gap);
         return {
@@ -109,8 +124,15 @@ export class SpriteSheet implements ISpriteSheet {
         tileType: number,
         canvas: HTMLCanvasElement | null,
         position: number | [number, number] = 0,
-        crearBeforeDraw = false,
+        clearWholeCanvas = false,
+        clearTile = false,
     ) {
+        /* TODO
+        * разобраться с 0 индексом
+        */
+        if (tileType === 0) {
+            return canvas;
+        }
         const img = this.sptitesheetImageElement.cloneNode() as HTMLImageElement;
         const ctx = canvas?.getContext('2d');
         let [row, col] = [1, 1];
@@ -138,8 +160,15 @@ export class SpriteSheet implements ISpriteSheet {
                 return canvas;
             }
             ctx.imageSmoothingEnabled = false;
-            if (crearBeforeDraw) {
+            if (clearWholeCanvas) {
                 ctx.clearRect(0, 0, this.canvasWidth, this.canvasHeight);
+            } else if (clearTile) {
+                ctx.clearRect(
+                    destX,
+                    destY,
+                    destWidth,
+                    destHeight,
+                );
             }
             return ctx.drawImage(
                 img,
@@ -155,6 +184,30 @@ export class SpriteSheet implements ISpriteSheet {
         };
         return canvas;
     }
+
+    public ifBoundry(position: [number, number]) {
+        const tileNum = this.coordsToTileNum(position);
+        return (this.BOUNDARIES[tileNum] !== 0);
+    }
+
+    public ifEndOfMap(position: [number, number]) {
+        return (
+            position[0] <= 0
+            || position[1] <= 0
+            || position[0] > this.MAP_SIZE[0]
+            || position[1] > this.MAP_SIZE[1]
+        );
+    }
+
+    public ifTileAvailible(position: [number, number]) {
+        return !(this.ifBoundry(position) || this.ifEndOfMap(position));
+    }
 }
+
+export const mapHelper = new SpriteSheet({
+    ...charConfig,
+    ...constants,
+    BOUNDARIES: mapConfig.BOUNDARIES,
+});
 
 export default SpriteSheet;
