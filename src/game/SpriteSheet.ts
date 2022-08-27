@@ -2,7 +2,7 @@ import * as charConfig from './character/config';
 import * as constants from './constants';
 import * as mapConfig from './map/config';
 
-interface ISpriteSheet {
+export interface ISpriteSheet {
     SPRITE_SHEET: string,
     SPRITE_SIZE: {
         width: number,
