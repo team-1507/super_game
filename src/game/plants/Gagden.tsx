@@ -1,5 +1,5 @@
 /* eslint-disable react/require-default-props */
-import React from 'react';
+import React, { RefObject } from 'react';
 import { connect, ConnectedProps } from 'react-redux';
 
 import { SpriteSheet } from '../SpriteSheet';
@@ -23,7 +23,9 @@ const mapDispatch = {
 
 const connector = connect(mapState, mapDispatch);
 
-type PropsFromRedux = ConnectedProps<typeof connector>;
+type PropsFromRedux = ConnectedProps<typeof connector> & {
+    gardenRef: RefObject<HTMLCanvasElement>;
+};
 
 class Garden extends React.PureComponent<PropsFromRedux> {
     private spriteSheet: SpriteSheet;
@@ -32,7 +34,7 @@ class Garden extends React.PureComponent<PropsFromRedux> {
 
     private canvasHeight: number;
 
-    readonly canvas = React.createRef<HTMLCanvasElement>();
+    private gardenRef: RefObject<HTMLCanvasElement>;
 
     constructor(props: PropsFromRedux) {
         super(props);
@@ -43,6 +45,7 @@ class Garden extends React.PureComponent<PropsFromRedux> {
         });
         this.canvasWidth = this.spriteSheet.canvasWidth;
         this.canvasHeight = this.spriteSheet.canvasHeight;
+        this.gardenRef = props.gardenRef;
     }
 
     componentDidMount() {
@@ -65,8 +68,8 @@ class Garden extends React.PureComponent<PropsFromRedux> {
         if (gardenState[tileNum] === undefined) {
             throw new Error('Tile is out of the map boundaries');
         }
-        const tileType = (typeof tile === 'number') ? tile : 1;
-        this.spriteSheet.drawTile(tileType, this.canvas.current, tileNum, false, true);
+        const tileType = (typeof tile === 'number') ? tile : tile.tileType;
+        this.spriteSheet.drawTile(tileType, this.gardenRef.current, tileNum, false, true);
     }
 
     render() {
@@ -74,7 +77,7 @@ class Garden extends React.PureComponent<PropsFromRedux> {
             <canvas
                 width={this.canvasWidth}
                 height={this.canvasHeight}
-                ref={this.canvas}
+                ref={this.gardenRef}
             />
         );
     }

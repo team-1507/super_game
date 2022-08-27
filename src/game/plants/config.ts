@@ -1,11 +1,16 @@
-import sptitesheet from '../../../static/assets/plants_sptitesheet.png';
+import sptitesheet from '../../../static/assets/plants_sptitesheet32.png';
 
 export const SPRITE_SHEET = sptitesheet;
 
+// export const SPRITE_SIZE = {
+//     width: 32,
+//     height: 64, // in px on astual sptitesheet
+//     gap: 1, // between sprites
+// };
 export const SPRITE_SIZE = {
     width: 32,
-    height: 64, // in px on astual sptitesheet
-    gap: 1, // between sprites
+    height: 32, // in px on astual sptitesheet
+    gap: 0, // between sprites
 };
 
 export const ASSET_TILE_TYPES: Record<number, string> = {

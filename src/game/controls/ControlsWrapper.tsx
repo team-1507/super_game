@@ -7,17 +7,26 @@ import {
     up, down, left, right,
 } from '../store/characterPositionSlice';
 import * as constants from '../constants';
-import { plow } from '../store/gardenStateSlice';
+import { plow } from '../store/mapStateSlice';
+import { plant } from '../store/gardenStateSlice';
+import Tomato from '../plants/Tomato';
+import { addAction, addMove } from '../store/timerSlice';
 import audio from '../../audio';
 
 const ControlsWrapper = (
-    props: HTMLProps<HTMLDivElement> & { controlsWrapperRef: RefObject<HTMLDivElement> },
+    props: HTMLProps<HTMLDivElement> & {
+        controlsWrapperRef: RefObject<HTMLDivElement>,
+        gardenRef: RefObject<HTMLCanvasElement>,
+    },
 ) => {
-    const { children, controlsWrapperRef } = props;
+    const { children, controlsWrapperRef, gardenRef } = props;
 
     const currentCharacterPosition = useSelector((state: RootState) => state.characterPosition);
-    // const currentGardenState = useSelector((state: RootState) => state.gardenState);
     const dispatch = useDispatch();
+
+    const getCurrentCharacterTileNum = () => mapHelper.coordsToTileNum(
+        currentCharacterPosition.coords,
+    );
 
     const moves: Record<KeyboardEvent['code'], PayloadAction<void>> = {
         KeyW: up(),
@@ -30,8 +39,12 @@ const ControlsWrapper = (
         ArrowRight: right(),
     };
 
-    const actions: Record<KeyboardEvent['code'], PayloadAction<number>> = {
-        Digit1: plow(mapHelper.coordsToTileNum(currentCharacterPosition.coords)),
+    const actions: Record<KeyboardEvent['code'], PayloadAction<unknown>> = {
+        Digit1: plow(getCurrentCharacterTileNum()),
+        Digit2: plant({
+            plant: new Tomato(gardenRef.current),
+            tileNum: getCurrentCharacterTileNum(),
+        }),
     };
 
     const keyPressHandler = (e: KeyboardEvent) => {
@@ -41,9 +54,11 @@ const ControlsWrapper = (
         if (move && !isModKey) {
             e.preventDefault();
             audio({ src: constants.SOUNDS.steps });
+            dispatch(addMove);
             dispatch(move);
         } else if (action && !isModKey) {
             e.preventDefault();
+            dispatch(addAction);
             dispatch(action);
         }
     };

@@ -10,6 +10,7 @@ const htmlPluginConfig = {
     title: "IVAN\'S DACHA",
     template: 'src/template.html',
     path: path.resolve(__dirname, 'build'),
+    favicon: 'static/images/favicon.ico',
 };
 
 const MODE = {
@@ -22,6 +23,23 @@ const getOutputConfig = () => ({
     path: path.resolve(__dirname, 'build'),
     publicPath: path.resolve(__dirname, '/'),
 });
+
+const getPluginsConfig = (mode) => {
+    const plugins = [
+        new HtmlWebpackPlugin(htmlPluginConfig),
+        new MiniCssExtractPlugin(),
+    ];
+    if(mode === MODE.PROD) {
+        plugins.push(
+            new WorkboxPlugin.InjectManifest({
+                swSrc: path.resolve(__dirname, './sw.js'),
+                maximumFileSizeToCacheInBytes: 50000000,
+                mode: 'production',
+            }),
+        );
+    }
+    return plugins;
+};
 
 module.exports = (_, argv) => {
     const mode = argv.mode || MODE.DEV;
@@ -59,11 +77,7 @@ module.exports = (_, argv) => {
                 },
             ],
         },
-        plugins: [new HtmlWebpackPlugin(htmlPluginConfig), new MiniCssExtractPlugin(),  new WorkboxPlugin.InjectManifest({
-            swSrc: path.resolve(__dirname, './sw.js'),
-            maximumFileSizeToCacheInBytes: 50000000,
-            mode: 'production',
-        })],
+        plugins: getPluginsConfig(mode),
 
         devtool: mode === MODE.DEV ? 'source-map' : false,
 
