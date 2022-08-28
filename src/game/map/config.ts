@@ -1,11 +1,11 @@
 /* eslint-disable no-multi-spaces */
-import sptitesheet from '../../../static/assets/map_sptitesheet.png';
+import spritesheet from '../../../static/assets/map_spritesheet.png';
 
-export const SPRITE_SHEET = sptitesheet;
+export const SPRITE_SHEET = spritesheet;
 
 export const SPRITE_SIZE = {
     width: 16,
-    height: 16, // in px on astual sptitesheet
+    height: 16, // in px on astual spritesheet
     gap: 1, // between sprites
 };
 

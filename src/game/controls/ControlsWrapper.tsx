@@ -6,10 +6,12 @@ import { mapHelper } from '../SpriteSheet';
 import {
     up, down, left, right,
 } from '../store/characterPositionSlice';
+import * as constants from '../constants';
 import { plow } from '../store/mapStateSlice';
 import { plant } from '../store/gardenStateSlice';
 import Tomato from '../plants/Tomato';
 import { addAction, addMove } from '../store/timerSlice';
+import audio from '../../audio';
 
 const ControlsWrapper = (
     props: HTMLProps<HTMLDivElement> & {
@@ -51,6 +53,7 @@ const ControlsWrapper = (
         const isModKey = (e.altKey || e.ctrlKey || e.metaKey);
         if (move && !isModKey) {
             e.preventDefault();
+            audio({ src: constants.SOUNDS.steps });
             dispatch(addMove);
             dispatch(move);
         } else if (action && !isModKey) {

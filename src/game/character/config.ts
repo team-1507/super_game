@@ -1,10 +1,10 @@
-import sptitesheet from '../../../static/assets/character_sptitesheet.png';
+import spritesheet from '../../../static/assets/character_spritesheet.png';
 
-export const SPRITE_SHEET = sptitesheet;
+export const SPRITE_SHEET = spritesheet;
 
 export const SPRITE_SIZE = {
     width: 16,
-    height: 24, // in px on astual sptitesheet
+    height: 24, // in px on astual spritesheet
     gap: 0, // between sprites
 };
 

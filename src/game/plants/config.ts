@@ -1,15 +1,15 @@
-import sptitesheet from '../../../static/assets/plants_sptitesheet32.png';
+import spritesheet from '../../../static/assets/plants_spritesheet.png';
 
-export const SPRITE_SHEET = sptitesheet;
+export const SPRITE_SHEET = spritesheet;
 
 // export const SPRITE_SIZE = {
 //     width: 32,
-//     height: 64, // in px on astual sptitesheet
+//     height: 64, // in px on astual spritesheet
 //     gap: 1, // between sprites
 // };
 export const SPRITE_SIZE = {
     width: 32,
-    height: 32, // in px on astual sptitesheet
+    height: 32, // in px on astual spritesheet
     gap: 0, // between sprites
 };
 
