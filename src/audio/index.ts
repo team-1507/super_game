@@ -1,4 +1,4 @@
-import { AudioParams } from "./types";
+import { AudioParams } from './types';
 
 function audio ({ src, loop = false, volume = 1 }: AudioParams) {
     const audioTrack = new Audio();
