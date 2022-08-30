@@ -9,4 +9,8 @@ export const TILE_SIZE = 64; // in px
 // number of actions you can make before day ends
 export const ACTIONS_PER_DAY = 10;
 
-export default { MAP_SIZE, TILE_SIZE, ACTIONS_PER_DAY };
+export const SOUNDS = {
+    'steps': require('../../static/audio/sounds/step-one.ogg')
+};
+
+export default { MAP_SIZE, TILE_SIZE, ACTIONS_PER_DAY, SOUNDS };
