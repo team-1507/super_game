@@ -12,7 +12,7 @@ import HomePage from '../pages/home-page/HomePage';
 import Forum from '../pages/forum';
 import UserApi from '../api/user/user';
 import { useAppDispatch } from '../store/hooks';
-import { setUser } from '../store/reducers';
+import { setUser } from '../store/reducers/userReducer';
 
 const App = () => {
     const dispatch = useAppDispatch();

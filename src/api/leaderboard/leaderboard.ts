@@ -4,7 +4,6 @@ import {
     SetLeaderboardData,
     GetLeaderboardData,
     SetLeaderboardDataDto,
-    GetLeaderboardDataDto,
 } from './types';
 
 function setPlayerScoreToLeaderboard({ teamName = TEAM_NAME, ...fields }: SetLeaderboardData): Promise<SetLeaderboardDataDto | null> {
@@ -15,7 +14,7 @@ function setPlayerScoreToLeaderboard({ teamName = TEAM_NAME, ...fields }: SetLea
     });
 };
 
-function getLeaderboard(body: GetLeaderboardData): Promise<GetLeaderboardDataDto[] | null> {
+function getLeaderboard(body: GetLeaderboardData): Promise<SetLeaderboardData[]> {
     return ApiService.postRequest<GetLeaderboardData, any>({
         address: `leaderboard/${TEAM_NAME}`,
         body,
