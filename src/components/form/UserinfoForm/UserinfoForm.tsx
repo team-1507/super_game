@@ -1,7 +1,7 @@
 import React, { FC, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Form } from 'antd';
-import { setUser, initialState, IUserState } from '../../../store/reducers/userReducer';
+import { setUser, initialState, IUserData } from '../../../store/reducers/userReducer';
 import { useAppDispatch } from '../../../store/hooks';
 import './UserinfoForm.scss';
 import { CallbackFnData, CallbackFnReturn, UserinfoFormProps } from './types';
@@ -24,6 +24,7 @@ const UserinfoForm = (props: UserinfoFormProps) => {
     const {
         formInputs, children, submitTitle, callbackFn, valuesToSend, navigateOnSuccess, user,
     } = props;
+    const login = user?.login;
     const navigate = useNavigate();
     const dispatch = useAppDispatch();
     const onFinish = (values: CallbackFnData) => {
@@ -37,7 +38,7 @@ const UserinfoForm = (props: UserinfoFormProps) => {
         });
         callbackFn(callBackFnData).then((response: CallbackFnReturn) => {
             if (response) {
-                dispatch(setUser(response as IUserState));
+                dispatch(setUser(response as IUserData));
                 if (navigateOnSuccess) {
                     navigate(navigateOnSuccess);
                 }
@@ -52,7 +53,8 @@ const UserinfoForm = (props: UserinfoFormProps) => {
     useEffect(() => {
         loginInputRef.current?.focus();
     }, []);
-    return (
+
+    return formInputs.includes('newPassword') || login ? (
         <Form
             name="basic"
             initialValues={{ remember: true }}
@@ -66,7 +68,7 @@ const UserinfoForm = (props: UserinfoFormProps) => {
                 })),
             )}
         </Form>
-    );
+    ) : (<></>);
 };
 
 UserinfoForm.defaultProps = {

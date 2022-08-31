@@ -23,8 +23,8 @@ export interface ILeaderboardItemState {
 };
 
 export interface ILeaderboardState {
-    data: ILeaderboardItemState[],
-    status: 'idle' | 'loading' | 'succeeded' | 'failed',
+    data: ILeaderboardItemState[]
+    status: 'idle' | 'loading' | 'succeeded' | 'failed'
     error: SerializedError | null
 };
 
@@ -45,15 +45,15 @@ const leaderboardSlice = createSlice({
     extraReducers: (builder) => {
         builder.addCase(fetchLeaderboard.pending, (state, action) => {
           if (state.status === 'idle') {
-            state.status = 'loading'
+            state.status = 'loading';
           }
         })
         builder.addCase(fetchLeaderboard.fulfilled, (state, action) => {
             state.data = action.payload;
         })
         builder.addCase(fetchLeaderboard.rejected, (state, action) => {
-            state.status = 'failed'
-            state.error = action.error
+            state.status = 'failed';
+            state.error = action.error;
         })
     },
 });

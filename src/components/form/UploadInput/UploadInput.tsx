@@ -2,7 +2,7 @@ import React, { ChangeEvent, HTMLProps } from 'react';
 import { Button } from 'antd';
 import './UploadInput.scss';
 import { useAppDispatch } from '../../../store/hooks';
-import { IUserState, setUser } from '../../../store/reducers/userReducer';
+import { IUserData, setUser } from '../../../store/reducers/userReducer';
 import UserSettingsApi from '../../../api/user/user-settings';
 
 type UploadInputProps = HTMLProps<HTMLInputElement> & {
@@ -26,7 +26,7 @@ const UploadInput = React.forwardRef<HTMLInputElement, UploadInputProps>((props,
         });
         UserSettingsApi.changeAvatar(formData).then((response) => {
             if (response) {
-                dispatch(setUser(response as IUserState));
+                dispatch(setUser(response as IUserData));
             }
         }).catch((err) => {
             console.error(err);
