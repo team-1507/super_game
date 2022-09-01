@@ -1,13 +1,13 @@
 export interface SetLeaderboardData {
-    data: GetLeaderboardDataDto
-    ratingFieldName: string
-    teamName: string
+    data: GetLeaderboardDataDto;
+    ratingFieldName: string;
+    teamName: string;
 }
 
 export interface GetLeaderboardData {
-    ratingFieldName: string
-    cursor: number
-    limit: number
+    ratingFieldName: string;
+    cursor: number;
+    limit: number;
 }
 
 export type SetLeaderboardDataDto = 'OK' | {
@@ -15,7 +15,7 @@ export type SetLeaderboardDataDto = 'OK' | {
 };
 
 export interface GetLeaderboardDataDto {
-    score: number
-    time: number
-    name: string
+    score: number;
+    time: number;
+    name: string;
 }
