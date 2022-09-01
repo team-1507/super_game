@@ -1,5 +1,5 @@
 import { HTMLProps } from 'react';
-import { IUserData } from '../../../store/reducers/userReducer';
+import { UserData } from '../../../store/reducers/userReducer';
 import { SignUpData, SignUpDataDto } from '../../../api/sign-up/types';
 import { SignInData, SignInDataDto } from '../../../api/sign-in/types';
 import { UserDataType, UserDto, UserPasswordType } from '../../../api/user/types';
@@ -17,5 +17,5 @@ export type UserinfoFormProps = HTMLProps<HTMLElement> & {
     callbackFn?(this: void, body: CallbackFnData): Promise<CallbackFnReturn>,
     valuesToSend: CallbackFnData,
     navigateOnSuccess?: string,
-    user?: IUserData,
+    user?: UserData,
 };

@@ -1,7 +1,8 @@
 import React, { FC, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Form } from 'antd';
-import { setUser, initialState, IUserData } from '../../../store/reducers/userReducer';
+import { setUser, initialState } from '../../../store/reducers/userReducer';
+import { UserDto } from '../../../api/user/types';
 import { useAppDispatch } from '../../../store/hooks';
 import './UserinfoForm.scss';
 import { CallbackFnData, CallbackFnReturn, UserinfoFormProps } from './types';
@@ -38,7 +39,7 @@ const UserinfoForm = (props: UserinfoFormProps) => {
         });
         callbackFn(callBackFnData).then((response: CallbackFnReturn) => {
             if (response) {
-                dispatch(setUser(response as IUserData));
+                dispatch(setUser(response as UserDto));
                 if (navigateOnSuccess) {
                     navigate(navigateOnSuccess);
                 }

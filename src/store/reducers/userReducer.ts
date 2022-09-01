@@ -1,19 +1,17 @@
 /* eslint-disable no-param-reassign */
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import UserApi from '../../api/user/user';
+import { UserDto } from '../../api/user/types';
 import type { PayloadAction, SerializedError } from '@reduxjs/toolkit';
 import type { RootState } from '..';
 import { getAvatar } from '../helpers';
 
 export const fetchUser = createAsyncThunk(
     'user/fetchUser',
-    async (thunkAPI) => {
-        const response = await UserApi.getCurrentUser()
-        return response
-    },
+    UserApi.getCurrentUser,
 );
 
-export interface IUserData {
+export interface UserData {
     avatar?: string
     first_name?: string
     second_name?: string
@@ -23,13 +21,13 @@ export interface IUserData {
     phone?: string
 }
 
-export interface IUserState {
-    data: IUserData
+export interface UserState {
+    data: UserData
     status: 'idle' | 'loading' | 'succeeded' | 'failed'
     error: SerializedError | null
 }
 
-export const initialState: IUserState = {
+export const initialState: UserState = {
     data: {
         avatar: '',
         first_name: '',
@@ -48,7 +46,7 @@ const userSlice = createSlice({
     name: 'user',
     initialState,
     reducers: {
-        setUser: (state, action: PayloadAction<IUserData>) => {
+        setUser: (state, action: PayloadAction<UserDto>) => {
             const { login, email, avatar } = action.payload;
             const { data } = state;
             data.login = login;
@@ -63,7 +61,7 @@ const userSlice = createSlice({
           }
         })
         builder.addCase(fetchUser.fulfilled, (state, action) => {
-            state.data = Object.assign({}, state.data, action.payload);
+            state.data = { ...state.data, ...action.payload };
         })
         builder.addCase(fetchUser.rejected, (state, action) => {
             state.status = 'failed';

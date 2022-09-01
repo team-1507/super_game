@@ -10,8 +10,8 @@ const Leaderboard = () => {
     const dispatch = useAppDispatch();
 
     const generateCols = data
-        .map(({ data }: any) => data)
-        .map(({ name, score = 0 }: any) => (
+        .map(({ data }) => data)
+        .map(({ name, score = 0 }) => (
             <li key={name} title={`score: ${score}`}>{name}</li>
         ));
 

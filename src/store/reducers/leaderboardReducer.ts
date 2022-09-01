@@ -7,14 +7,14 @@ import type { RootState } from '..';
 
 export const fetchLeaderboard = createAsyncThunk(
     'leaderboard/fetchByTeamName',
-    async (thunkAPI) => {
+    () => {
         const body = { cursor: CURSOR, limit: LIMIT, ratingFieldName: RATING_FIELD_NAME };
-        return await LeaderboardApi.getLeaderboard(body);
+        return LeaderboardApi.getLeaderboard(body);
     }
 );
 
 export interface ILeaderboardItemState {
-    data?: {
+    data: {
         name: string
         score: number
         time: number
