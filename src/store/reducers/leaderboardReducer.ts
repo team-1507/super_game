@@ -8,9 +8,8 @@ import type { RootState } from '..';
 export const fetchLeaderboard = createAsyncThunk(
     'leaderboard/fetchByTeamName',
     async (thunkAPI) => {
-    const body = { cursor: CURSOR, limit: LIMIT, ratingFieldName: RATING_FIELD_NAME };
-        const response = await LeaderboardApi.getLeaderboard(body)
-        return response
+        const body = { cursor: CURSOR, limit: LIMIT, ratingFieldName: RATING_FIELD_NAME };
+        return await LeaderboardApi.getLeaderboard(body);
     }
 );
 
