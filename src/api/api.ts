@@ -57,7 +57,7 @@ async function postRequest<B, R>({
         credentials: 'include',
     });
     if (response.status === 200) {
-        return response as unknown as R;
+        return response.json() as unknown as R;
     }
     return null;
 }

@@ -1,7 +1,7 @@
 import React, { FC, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Form } from 'antd';
-import { setUser, initialState, IUserState } from '../../../store/reducers';
+import { setUser, initialState, IUserState } from '../../../store/reducers/userReducer';
 import { useAppDispatch } from '../../../store/hooks';
 import './UserinfoForm.scss';
 import { CallbackFnData, CallbackFnReturn, UserinfoFormProps } from './types';
