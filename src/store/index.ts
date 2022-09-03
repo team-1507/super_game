@@ -5,6 +5,7 @@ import gardenStateReducer from '../game/store/gardenStateSlice';
 import mapStateReducer from '../game/store/mapStateSlice';
 import timerReducer from '../game/store/timerSlice';
 import uiReducer from '../game/store/uiSlice';
+import inventoryReducer from '../game/store/inventorySlice';
 
 const store = configureStore({
     reducer: {
@@ -15,6 +16,7 @@ const store = configureStore({
         mapState: mapStateReducer,
         timer: timerReducer,
         ui: uiReducer,
+        inventory: inventoryReducer,
     },
     devTools: true,
     middleware: (getDefaultMiddleware) => getDefaultMiddleware({

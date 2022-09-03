@@ -7,6 +7,7 @@ import Map from '../../game/map/Map';
 import Garden from '../../game/plants/Gagden';
 import ActionButtons from '../../game/ui/ActionButtons';
 import PauseMenu from '../../game/ui/PauseMenu';
+import Interface from '../../game/ui/Interface';
 import './Game.scss';
 import audio from '../../audio';
 
@@ -43,6 +44,7 @@ const Game = () => {
                     <Garden gardenRef={gardenRef} />
                     <Character container={container} characterRef={characterRef} />
                 </div>
+                <Interface />
                 <ActionButtons />
                 <PauseMenu active={isPause} wrapperRef={pauseMenu} toggleFn={togglePauseMenu} />
             </ControlsWrapper>
