@@ -4,6 +4,7 @@ import characterPositionReducer from '../game/store/characterPositionSlice';
 import gardenStateReducer from '../game/store/gardenStateSlice';
 import mapStateReducer from '../game/store/mapStateSlice';
 import timerReducer from '../game/store/timerSlice';
+import uiReducer from '../game/store/uiSlice';
 
 const store = configureStore({
     reducer: {
@@ -13,6 +14,7 @@ const store = configureStore({
         gardenState: gardenStateReducer,
         mapState: mapStateReducer,
         timer: timerReducer,
+        ui: uiReducer,
     },
     devTools: true,
     middleware: (getDefaultMiddleware) => getDefaultMiddleware({

@@ -9,6 +9,7 @@ import {
 import * as constants from '../constants';
 import { plow } from '../store/mapStateSlice';
 import { plant } from '../store/gardenStateSlice';
+import { togglePause } from '../store/uiSlice';
 import Tomato from '../plants/Tomato';
 import { addAction, addMove } from '../store/timerSlice';
 import audio from '../../audio';
@@ -47,19 +48,30 @@ const ControlsWrapper = (
         }),
     };
 
+    const customActions: Record<KeyboardEvent['code'], PayloadAction<unknown>> = {
+        Escape: togglePause(),
+    };
+
     const keyPressHandler = (e: KeyboardEvent) => {
         const move = moves[e.code];
         const action = actions[e.code];
+        const customAction = customActions[e.code];
         const isModKey = (e.altKey || e.ctrlKey || e.metaKey);
-        if (move && !isModKey) {
-            e.preventDefault();
-            audio({ src: constants.SOUNDS.steps });
-            dispatch(addMove);
-            dispatch(move);
-        } else if (action && !isModKey) {
-            e.preventDefault();
-            dispatch(addAction);
-            dispatch(action);
+
+        if (!isModKey) {
+            if (move) {
+                e.preventDefault();
+                audio({ src: constants.SOUNDS.steps });
+                dispatch(addMove);
+                dispatch(move);
+            } else if (action) {
+                e.preventDefault();
+                dispatch(addAction);
+                dispatch(action);
+            } else if (customAction) {
+                e.preventDefault();
+                dispatch(customAction);
+            }
         }
     };
 
