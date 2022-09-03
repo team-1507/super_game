@@ -4,7 +4,7 @@ import './Counter.scss';
 
 type props = {
     title: string;
-    text: string;
+    text: string | number;
 };
 
 const Counter = (props: props) => {
