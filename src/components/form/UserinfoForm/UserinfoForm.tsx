@@ -69,7 +69,7 @@ const UserinfoForm = (props: UserinfoFormProps) => {
                 })),
             )}
         </Form>
-    ) : (<></>);
+    ) : null;
 };
 
 UserinfoForm.defaultProps = {
