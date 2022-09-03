@@ -7,7 +7,7 @@ import {
 } from './types';
 
 function setPlayerScoreToLeaderboard({ teamName = TEAM_NAME, ...fields }: SetLeaderboardData): Promise<SetLeaderboardDataDto | null> {
-    const body = Object.assign(fields, { teamName });
+    const body = { teamName, ...fields };
     return ApiService.postRequest<SetLeaderboardData, SetLeaderboardDataDto>({
         address: `leaderboard`,
         body,

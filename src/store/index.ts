@@ -1,5 +1,5 @@
 import { configureStore } from '@reduxjs/toolkit';
-import { userReducer, leaderboardReducer } from './reducers/';
+import { userReducer, leaderboardReducer } from './reducers';
 import characterPositionReducer from '../game/store/characterPositionSlice';
 import gardenStateReducer from '../game/store/gardenStateSlice';
 import mapStateReducer from '../game/store/mapStateSlice';

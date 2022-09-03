@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import './App.scss';
 import { Route, Routes, useNavigate } from 'react-router-dom';
 
@@ -10,24 +10,32 @@ import GameOver from '../pages/game-over/GameOver';
 import Leaderboard from '../pages/leaderboard/Leaderboard';
 import HomePage from '../pages/home-page/HomePage';
 import Forum from '../pages/forum';
-import UserApi from '../api/user/user';
-import { useAppDispatch } from '../store/hooks';
-import { setUser } from '../store/reducers/userReducer';
+import { useAppSelector, useAppDispatch } from '../store/hooks';
+import { fetchUser } from '../store/reducers/userReducer';
 
 const App = () => {
+    const userState = useAppSelector((state) => state.user);
+    const { status } = userState;
     const dispatch = useAppDispatch();
-    const navigate = useNavigate();
-    useEffect(() => {
-        UserApi.getCurrentUser().then((response) => {
-            if (response) {
-                dispatch(setUser(response));
-            } else {
+
+    const getCurrentUser = async () => {
+        const navigate = useNavigate();
+
+        try {
+            const { payload: { id } }: any = await dispatch(fetchUser());
+
+            if (!id) {
                 navigate('/sign-in');
             }
-        }).catch(() => {
+        } catch (err) {
             navigate('/sign-in');
-        });
-    }, [dispatch, navigate]);
+        }
+    }
+
+    if (status === 'idle') {
+        getCurrentUser();
+    }
+
     return (
         <Routes>
             <Route path="/game" element={<Game />} />
