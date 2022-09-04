@@ -12,7 +12,7 @@ import { UserDataType, UserPasswordType } from '../../api/user/types';
 
 const Settings = () => {
     const { activeTab } = useParams();
-    const user = useAppSelector((state) => state.user);
+    const { data: user } = useAppSelector((state) => state.user);
     const changeUserFn = UserSettingsApi.changeUser;
     const changePasswordFn = UserSettingsApi.changePassword;
     const valuesToSendUser: UserDataType = {
@@ -27,6 +27,7 @@ const Settings = () => {
         oldPassword: '',
         newPassword: '',
     };
+
     return (
         <main className="settings-page">
             <HeaderBackButton header="Settings" />

@@ -4,6 +4,15 @@ import './home-page.scss';
 import { Button } from 'antd';
 import ArrowTopRight from '../../components/icons/ArrowTopRight';
 import UserApi from '../../api/sign-in/sign-in';
+import audio from '../../audio';
+
+const music = audio({ src: require('../../../static/audio/music/title.ogg'), loop: true, volume: 0.3 });
+const playMusic = () => {
+    music.play();
+    document.removeEventListener('click', playMusic);
+}
+
+document.addEventListener('click', playMusic);
 
 const HomePage = () => {
     const navigate = useNavigate();
@@ -16,6 +25,7 @@ const HomePage = () => {
             console.log(err);
         });
     };
+
     return (
         <div className="home-page">
             <div className="home-page__info">

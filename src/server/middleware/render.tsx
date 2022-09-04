@@ -13,7 +13,7 @@ export default (req: Request, res: Response) => {
     const context: StaticRouterContext = {};
     const jsx = (
         <ReduxProvider store={store}>
-            <StaticRouter context={context}  location={location}>
+            <StaticRouter location={location}>
                 <App />
             </StaticRouter>
         </ReduxProvider>
