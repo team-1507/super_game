@@ -52,7 +52,7 @@ export class SpriteSheet implements ISpriteSheet {
         this.MAP_SIZE = config.MAP_SIZE;
         this.TILE_SIZE = config.TILE_SIZE;
         this.BOUNDARIES = config.BOUNDARIES;
-        this.sptitesheetImageElement = new Image();
+        this.sptitesheetImageElement = {} as HTMLImageElement;
         this.sptitesheetImageElement.src = this.SPRITE_SHEET;
         this.canvasWidth = this.TILE_SIZE * this.MAP_SIZE[1];
         this.canvasHeight = this.TILE_SIZE * this.MAP_SIZE[0];

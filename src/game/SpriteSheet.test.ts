@@ -15,6 +15,7 @@ const mockConfig: ISpriteSheet = {
     },
     MAP_SIZE: [10, 10],
     TILE_SIZE: 30,
+    BOUNDARIES: []
 };
 
 describe('SpriteSheet class', () => {

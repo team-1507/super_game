@@ -2,7 +2,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 import type { PayloadAction } from '@reduxjs/toolkit';
 import type { RootState } from '.';
-import { getAvatar } from './helpers';
+import getAvatar from './helpers';
 
 export interface IUserState {
     avatar?: string

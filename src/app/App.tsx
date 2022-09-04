@@ -1,7 +1,6 @@
 import React, { useEffect } from 'react';
-import './App.scss';
 import { Route, Routes, useNavigate } from 'react-router-dom';
-
+import { hot } from 'react-hot-loader/root';
 import Game from '../pages/game';
 import SignUp from '../pages/sign-up/SignUp';
 import SignIn from '../pages/sign-in';
@@ -13,6 +12,7 @@ import Forum from '../pages/forum';
 import UserApi from '../api/user/user';
 import { useAppDispatch } from '../store/hooks';
 import { setUser } from '../store/reducers';
+import './App.scss';
 
 const App = () => {
     const dispatch = useAppDispatch();
@@ -25,7 +25,7 @@ const App = () => {
                 navigate('/sign-in');
             }
         }).catch(() => {
-            navigate('/sign-in');
+             navigate('/sign-in');
         });
     }, [dispatch, navigate]);
     return (
@@ -44,4 +44,4 @@ const App = () => {
     );
 };
 
-export default App;
+export default hot(App);
