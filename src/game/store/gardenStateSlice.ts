@@ -7,8 +7,8 @@ import Plant from '../plants/Plant';
 export type PlantOrNone = Plant | number;
 
 export type PlantAction = {
-    plant: Plant,
-    tileNum: number,
+    plant: Plant;
+    tileNum: number;
 };
 
 const mapLength = constants.MAP_SIZE[0] * constants.MAP_SIZE[1];

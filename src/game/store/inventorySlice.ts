@@ -6,7 +6,7 @@ type Inventory = {
 };
 
 const initialState: Inventory = {
-    money: 100
+    money: 100,
 };
 
 export const inventorySlice = createSlice({
