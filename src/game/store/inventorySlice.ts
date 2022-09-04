@@ -2,7 +2,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { SEED_PRICES } from '../plants/constants';
 
-interface Inventory {
+export interface Inventory {
     money: number;
     seeds: Seeds;
     isUse: keyof Seeds;
