@@ -1,7 +1,7 @@
 /* eslint-disable no-param-reassign */
 import { createSlice } from '@reduxjs/toolkit';
 
-type UI = {
+interface UI {
     pauseMenu: boolean;
     mute: boolean;
 };
