@@ -6,7 +6,7 @@ interface Inventory {
     money: number;
     seeds: Seeds;
     isUse: string;
-};
+}
 
 export interface Seeds {
     tomato: number;
@@ -15,19 +15,21 @@ export interface Seeds {
     cabbage: number;
     pepper: number;
     squash: number;
+}
+
+const initialSeeds: Seeds = {
+    tomato: 0,
+    potato: 0,
+    carrot: 0,
+    cabbage: 0,
+    pepper: 0,
+    squash: 0,
 };
 
 const initialState: Inventory = {
     money: 100,
-    seeds: {
-        tomato: 0,
-        potato: 0,
-        carrot: 0,
-        cabbage: 0,
-        pepper: 0,
-        squash: 0,
-    },
-    isUse: '',
+    seeds: initialSeeds,
+    isUse: 'tomato',
 };
 
 export const inventorySlice = createSlice({
@@ -43,8 +45,15 @@ export const inventorySlice = createSlice({
                 inventory.money -= SEED_PRICES[payload];
             }
         },
-        useIt: (inventory: Inventory, { payload }: PayloadAction<keyof Seeds>) => {
+        selectIt: (inventory: Inventory, { payload }: PayloadAction<keyof Seeds>) => {
             inventory.isUse = payload;
+        },
+        selectNext: (inventory: Inventory) => {
+            const seedTypes = Object.keys(inventory.seeds);
+            const currentInUseKey = seedTypes.findIndex((v) => (v === inventory.isUse));
+            const nextSeedType = (currentInUseKey + 1 === seedTypes.length)
+                ? seedTypes[0] : seedTypes[currentInUseKey + 1];
+            inventory.isUse = nextSeedType;
         },
     },
 });
@@ -52,7 +61,8 @@ export const inventorySlice = createSlice({
 export const {
     addMoney,
     buySeed,
-    useIt,
+    selectIt,
+    selectNext,
 } = inventorySlice.actions;
 
 export default inventorySlice.reducer;

@@ -11,10 +11,13 @@ export const TILE_SIZE = 64; // in px
 // number of actions you can make before day ends
 export const ACTIONS_PER_DAY = 10;
 
+// autoscroll screen when left less then x tiles
+export const SIDESPACE = 6;
+
 export const SOUNDS = {
     steps: stepSound,
 };
 
 export default {
-    MAP_SIZE, TILE_SIZE, ACTIONS_PER_DAY, SOUNDS,
+    MAP_SIZE, TILE_SIZE, ACTIONS_PER_DAY, SOUNDS, SIDESPACE,
 };

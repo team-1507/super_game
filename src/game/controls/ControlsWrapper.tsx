@@ -22,6 +22,7 @@ const ControlsWrapper = (
         Digit1: gameControls.doPlow,
         Digit2: gameControls.doPlant,
         Escape: gameControls.togglePause,
+        Tab: gameControls.loopThroughSeeds,
     };
 
     const keyPressHandler = (e: KeyboardEvent) => {

@@ -1,6 +1,6 @@
 import React from 'react';
 import { useAppSelector, useAppDispatch } from '../../../../../../store/hooks';
-import { buySeed, useIt, Seeds } from '../../../../../store/inventorySlice';
+import { buySeed, selectIt, Seeds } from '../../../../../store/inventorySlice';
 import FastBuy from '../../../../../../components/icons/FastBuy';
 import { SPRITE_SHEET, SPRITE_SIZE, ASSET_TILE_COORDS } from '../../../../../plants/config';
 import { SEED_PRICES } from '../../../../../plants/constants';
@@ -41,10 +41,10 @@ const SeedCounter = (props: props) => {
         e.stopPropagation();
         dispatch(buySeed(type));
     };
-    const useItFn = () => dispatch(useIt(type));
+    const selectItFn = () => dispatch(selectIt(type));
 
     return (
-        <div className={getClass('', activeClass)} onClick={useItFn}>
+        <div className={getClass('', activeClass)} onClick={selectItFn}>
             <span className={getClass('title')}>{title}</span>
             <div className={getClass('content')}>
                 <div className={getClass(`content__image image-${type}`)} style={imageStyles} />
