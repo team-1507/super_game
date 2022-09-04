@@ -21,7 +21,7 @@ import { plant } from '../store/gardenStateSlice';
 import {
     buySelectedSeed, Inventory, Seeds, selectNext,
 } from '../store/inventorySlice';
-import { plow } from '../store/mapStateSlice';
+import { plow, plowedEarthTileType } from '../store/mapStateSlice';
 import { addAction, addMove } from '../store/timerSlice';
 import { toggleMute, togglePause } from '../store/uiSlice';
 import { WithControlsProps } from './types';
@@ -45,12 +45,17 @@ const withControls = <T extends WithControlsProps = WithControlsProps>(
 
     const currentCharacterPosition = useSelector((state: RootState) => state.characterPosition);
     const inventory: Inventory = useSelector((state: RootState) => state.inventory);
+    const map = useSelector((state: RootState) => state.mapState);
 
     const dispatch = useDispatch();
 
     const getCurrentCharacterTileNum = () => mapHelper.coordsToTileNum(
         currentCharacterPosition.coords,
     );
+
+    const ifCanPlow = () => map[1][getCurrentCharacterTileNum()] === 0;
+
+    const ifCanPlant = () => map[1][getCurrentCharacterTileNum()] === plowedEarthTileType;
 
     const gameControls = {
         goUp: () => {
@@ -74,12 +79,18 @@ const withControls = <T extends WithControlsProps = WithControlsProps>(
             dispatch(right());
         },
         doPlow: () => {
+            if (!ifCanPlow()) {
+                return;
+            }
             dispatch(addAction());
             dispatch(
                 plow(getCurrentCharacterTileNum()),
             );
         },
         doPlant: () => {
+            if (!ifCanPlant()) {
+                return;
+            }
             dispatch(addAction());
             dispatch(
                 plant({
