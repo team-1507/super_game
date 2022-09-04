@@ -1,8 +1,9 @@
 .game-page-action-buttons {
     position: fixed;
     bottom: 1rem;
+    left: 50%;
 
-    width: 100vw;
+    transform: translate(-50%, 0);
 
     text-align: center;
 }

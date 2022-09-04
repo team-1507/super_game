@@ -1,0 +1,89 @@
+@import "/src/styles/index";
+
+.interface__seed-counter {
+    display: inline-flex;
+    flex-direction: column;
+
+    min-width: 130px;
+    min-height: 65px;
+    padding: 0 10px;
+    margin-top: 10px;
+
+    background-color: $black;
+    border-radius: 0 20px 0 0;
+    border-bottom: solid 4px transparent;
+
+    &--active {
+        border-bottom: solid 4px $red;
+    }
+
+    &__title {
+        @include font-style(
+            $font-size: 14px,
+            $letter-spacing: normal,
+            $color: $white,
+            $font-family: Ubuntu,
+            $font-weight: 300
+        );
+    }
+
+    &__content {
+        display: flex;
+        align-items: center;
+
+        > span {
+            margin: 0 5px;
+        }
+
+        &__image {
+            width: 35px;
+            height: 35px;
+
+            &.image {
+                &-tomato {
+                    transform: scale(2) translateY(-7px);
+                }
+                &-potato {
+                    transform: scale(1.6) translateY(-5px);
+                }
+                &-carrot {
+                    transform: scale(1.4);
+                }
+                &-cabbage {
+                    transform: scale(2.2) translateY(-7px);
+                }
+                &-pepper {
+                    transform: scale(2) translate(5px, -7px);
+                }
+                &-squash {
+                    transform: scale(1.8) translateY(-5px);
+                }
+            }
+        }
+
+        &__text {
+            @include font-style(
+                $font-size: 40px,
+                $color: $white,
+                $font-family: VT323
+            );
+        }
+
+        &__price {
+            @include font-style(
+                $font-size: 20px,
+                $letter-spacing: normal,
+                $color: $white,
+                $font-family: Ubuntu,
+                $font-weight: 300
+            );
+        }
+        &__buy-btn {
+            cursor: pointer;
+
+            svg {
+                fill: $white;
+            }
+        }
+    }
+}

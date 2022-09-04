@@ -23,4 +23,17 @@
             margin-bottom: 10px;
         }
     }
+
+    &__seed-counter {
+        position: absolute;
+        right: 10px;
+        bottom: 10px;
+
+        display: flex;
+        flex-direction: column;
+
+        .interface-counter {
+            margin-top: 10px;
+        }
+    }
 }
