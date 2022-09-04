@@ -23,6 +23,7 @@ const ControlsWrapper = (
         Digit2: gameControls.doPlant,
         Escape: gameControls.togglePause,
         Tab: gameControls.loopThroughSeeds,
+        KeyB: gameControls.buySelectedSeed,
     };
 
     const keyPressHandler = (e: KeyboardEvent) => {

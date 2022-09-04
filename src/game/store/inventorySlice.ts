@@ -5,7 +5,7 @@ import { SEED_PRICES } from '../plants/constants';
 interface Inventory {
     money: number;
     seeds: Seeds;
-    isUse: string;
+    isUse: keyof Seeds;
 }
 
 export interface Seeds {
@@ -45,6 +45,16 @@ export const inventorySlice = createSlice({
                 inventory.money -= SEED_PRICES[payload];
             }
         },
+        buySelectedSeed: (inventory: Inventory) => {
+            const selectedSeed = inventory.isUse;
+            if (
+                inventory.seeds[selectedSeed] < 99
+                && inventory.money >= SEED_PRICES[selectedSeed]
+            ) {
+                inventory.seeds[selectedSeed] += 1;
+                inventory.money -= SEED_PRICES[selectedSeed];
+            }
+        },
         selectIt: (inventory: Inventory, { payload }: PayloadAction<keyof Seeds>) => {
             inventory.isUse = payload;
         },
@@ -53,7 +63,7 @@ export const inventorySlice = createSlice({
             const currentInUseKey = seedTypes.findIndex((v) => (v === inventory.isUse));
             const nextSeedType = (currentInUseKey + 1 === seedTypes.length)
                 ? seedTypes[0] : seedTypes[currentInUseKey + 1];
-            inventory.isUse = nextSeedType;
+            inventory.isUse = nextSeedType as keyof Seeds;
         },
     },
 });
@@ -61,6 +71,7 @@ export const inventorySlice = createSlice({
 export const {
     addMoney,
     buySeed,
+    buySelectedSeed,
     selectIt,
     selectNext,
 } = inventorySlice.actions;

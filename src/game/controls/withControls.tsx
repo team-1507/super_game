@@ -10,7 +10,7 @@ import {
     down, left, right, up,
 } from '../store/characterPositionSlice';
 import { plant } from '../store/gardenStateSlice';
-import { selectNext } from '../store/inventorySlice';
+import { buySelectedSeed, selectNext } from '../store/inventorySlice';
 import { plow } from '../store/mapStateSlice';
 import { addAction, addMove } from '../store/timerSlice';
 import { togglePause } from '../store/uiSlice';
@@ -73,6 +73,9 @@ const withControls = <T extends WithControlsProps = WithControlsProps>(
         },
         loopThroughSeeds: () => {
             dispatch(selectNext());
+        },
+        buySelectedSeed: () => {
+            dispatch(buySelectedSeed());
         },
     };
 
