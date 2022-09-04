@@ -1,12 +1,12 @@
 /* eslint-disable no-param-reassign */
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
-type Inventory = {
+interface Inventory {
     money: number;
 };
 
 const initialState: Inventory = {
-    money: 100
+    money: 100,
 };
 
 export const inventorySlice = createSlice({

@@ -1,7 +1,7 @@
 /* eslint-disable no-param-reassign */
 import { createSlice } from '@reduxjs/toolkit';
 
-type Timer = {
+interface Timer {
     moves: number;
     actions: number;
     day: number;
