@@ -13,7 +13,7 @@ import { plant } from '../store/gardenStateSlice';
 import { buySelectedSeed, selectNext } from '../store/inventorySlice';
 import { plow } from '../store/mapStateSlice';
 import { addAction, addMove } from '../store/timerSlice';
-import { togglePause } from '../store/uiSlice';
+import { toggleMute, togglePause } from '../store/uiSlice';
 import { WithControlsProps } from './types';
 
 const withControls = <T extends WithControlsProps = WithControlsProps>(
@@ -70,6 +70,9 @@ const withControls = <T extends WithControlsProps = WithControlsProps>(
         },
         togglePause: () => {
             dispatch(togglePause());
+        },
+        toggleMute: () => {
+            dispatch(toggleMute());
         },
         loopThroughSeeds: () => {
             dispatch(selectNext());

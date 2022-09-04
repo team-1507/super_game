@@ -24,6 +24,7 @@ const ControlsWrapper = (
         Escape: gameControls.togglePause,
         Tab: gameControls.loopThroughSeeds,
         KeyB: gameControls.buySelectedSeed,
+        KeyM: gameControls.toggleMute,
     };
 
     const keyPressHandler = (e: KeyboardEvent) => {
