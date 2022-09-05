@@ -1,10 +1,12 @@
-import { ErrorResponse, GetRequestParams, PostRequestParams, PutRequestParams } from './types';
 import { notification } from 'antd';
-import { ErrorsList } from "./const";
+import {
+    ErrorResponse, GetRequestParams, PostRequestParams, PutRequestParams,
+} from './types';
+import { ErrorsList } from './const';
 
 const API_URL = 'https://ya-praktikum.tech/api/v2';
 
-const openNotification = (title: string, text: string ) => {
+const openNotification = (title: string, text: string) => {
     notification.open({
         message: title,
         description: text,
@@ -40,11 +42,11 @@ async function getRequest<R>({
         mode: 'cors',
         credentials: 'include',
     });
-
+    const responseJSON = await response.json() as unknown;
     if (response.status === 200) {
-        return await response.json() as unknown as R;
+        return responseJSON as R;
     }
-    openNotification(ErrorsList.serverError, (await response.json() as unknown as ErrorResponse).reason)
+    openNotification(ErrorsList.serverError, (responseJSON as ErrorResponse).reason);
     return null;
 }
 
@@ -66,10 +68,11 @@ async function postRequest<B, R>({
         body: body ? JSON.stringify(body) : null,
         credentials: 'include',
     });
+    const responseJSON = await response.json() as unknown;
     if (response.status === 200) {
-        return response.json() as unknown as R;
+        return responseJSON as R;
     }
-    openNotification(ErrorsList.serverError, (await response.json() as unknown as ErrorResponse).reason)
+    openNotification(ErrorsList.serverError, (await responseJSON as ErrorResponse).reason);
     return null;
 }
 
@@ -90,11 +93,11 @@ async function putRequest<B, R>({
         body: body ? JSON.stringify(body) : null,
         credentials: 'include',
     });
-
+    const responseJSON = await response.json() as unknown;
     if (response.status === 200) {
-        return await response.json() as unknown as R;
+        return responseJSON as R;
     }
-    openNotification(ErrorsList.serverError, (await response.json() as unknown as ErrorResponse).reason)
+    openNotification(ErrorsList.serverError, (responseJSON as ErrorResponse).reason);
     return null;
 }
 
@@ -110,11 +113,11 @@ async function putFileRequest<R>({
         body,
         credentials: 'include',
     });
-
+    const responseJSON = await response.json() as unknown;
     if (response.status === 200) {
-        return await response.json() as unknown as R;
+        return responseJSON as R;
     }
-    openNotification(ErrorsList.serverError, (await response.json() as unknown as ErrorResponse).reason)
+    openNotification(ErrorsList.serverError, (responseJSON as ErrorResponse).reason);
     return null;
 }
 
