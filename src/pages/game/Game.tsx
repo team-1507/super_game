@@ -1,4 +1,6 @@
 import React, { createRef, useEffect } from 'react';
+import { notification } from 'antd';
+
 import Character from '../../game/character/Character';
 import ControlsWrapper from '../../game/controls/ControlsWrapper';
 import Map from '../../game/map/Map';
@@ -13,7 +15,12 @@ import withControls from '../../game/controls/withControls';
 
 const music = audio({ src: musicFile, loop: true, volume: 0.3 });
 const playMusic = () => {
-    music.play();
+    music.play().catch((e) => {
+        notification.open({
+            message: 'Error playing music',
+            description: String(e),
+        });
+    });
     document.removeEventListener('click', playMusic);
 };
 

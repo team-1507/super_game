@@ -3,7 +3,7 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 interface Inventory {
     money: number;
-};
+}
 
 const initialState: Inventory = {
     money: 100,

@@ -4,7 +4,7 @@ import { createSlice } from '@reduxjs/toolkit';
 interface UI {
     pauseMenu: boolean;
     mute: boolean;
-};
+}
 
 const initialState: UI = {
     pauseMenu: false,

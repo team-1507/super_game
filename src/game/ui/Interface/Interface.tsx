@@ -8,7 +8,7 @@ const Interface = () => {
     const { money } = useAppSelector((state) => state.inventory);
     const { day } = useAppSelector((state) => state.timer);
     const moneyText = `${money} ₽`;
-    const timeText = `06:00 am`;
+    const timeText = '06:00 am';
 
     return (
         <div className="game-page__interface">
