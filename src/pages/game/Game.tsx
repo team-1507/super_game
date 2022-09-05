@@ -5,7 +5,6 @@ import Character from '../../game/character/Character';
 import ControlsWrapper from '../../game/controls/ControlsWrapper';
 import Map from '../../game/map/Map';
 import Garden from '../../game/plants/Gagden';
-import ActionButtons from '../../game/ui/ActionButtons';
 import PauseMenu from '../../game/ui/PauseMenu';
 import Interface from '../../game/ui/Interface';
 import './Game.scss';
@@ -38,7 +37,6 @@ const Game = () => {
     });
 
     const ControlsWrapperWithControls = withControls(ControlsWrapper, { gardenRef });
-    const ActionButtonsWithControls = withControls(ActionButtons, { gardenRef });
 
     return (
         <main className="game-page">
@@ -50,8 +48,7 @@ const Game = () => {
                     <Garden gardenRef={gardenRef} />
                     <Character container={container} characterRef={characterRef} />
                 </div>
-                <Interface />
-                <ActionButtonsWithControls />
+                <Interface refs={{ gardenRef }} />
                 <PauseMenu wrapperRef={pauseMenu} />
             </ControlsWrapperWithControls>
         </main>
