@@ -55,6 +55,14 @@ export const inventorySlice = createSlice({
                 inventory.money -= SEED_PRICES[selectedSeed];
             }
         },
+        decrementSelectedSeed: (inventory: Inventory) => {
+            const selectedSeed = inventory.isUse;
+            if (
+                inventory.seeds[selectedSeed] > 0
+            ) {
+                inventory.seeds[selectedSeed] -= 1;
+            }
+        },
         selectIt: (inventory: Inventory, { payload }: PayloadAction<keyof Seeds>) => {
             inventory.isUse = payload;
         },
@@ -72,6 +80,7 @@ export const {
     addMoney,
     buySeed,
     buySelectedSeed,
+    decrementSelectedSeed,
     selectIt,
     selectNext,
 } = inventorySlice.actions;

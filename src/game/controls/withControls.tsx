@@ -19,7 +19,7 @@ import {
 } from '../store/characterPositionSlice';
 import { plant } from '../store/gardenStateSlice';
 import {
-    buySelectedSeed, Inventory, Seeds, selectNext,
+    buySelectedSeed, decrementSelectedSeed, Inventory, Seeds, selectNext,
 } from '../store/inventorySlice';
 import { plow, plowedEarthTileType } from '../store/mapStateSlice';
 import { addAction, addMove } from '../store/timerSlice';
@@ -46,6 +46,7 @@ const withControls = <T extends WithControlsProps = WithControlsProps>(
     const currentCharacterPosition = useSelector((state: RootState) => state.characterPosition);
     const inventory: Inventory = useSelector((state: RootState) => state.inventory);
     const map = useSelector((state: RootState) => state.mapState);
+    const garden = useSelector((state: RootState) => state.gardenState);
 
     const dispatch = useDispatch();
 
@@ -53,9 +54,15 @@ const withControls = <T extends WithControlsProps = WithControlsProps>(
         currentCharacterPosition.coords,
     );
 
-    const ifCanPlow = () => map[1][getCurrentCharacterTileNum()] === 0;
+    const ifCanPlowHere = () => map[1][getCurrentCharacterTileNum()] === 0;
 
-    const ifCanPlant = () => map[1][getCurrentCharacterTileNum()] === plowedEarthTileType;
+    const ifTileIsGrass = () => map[1][getCurrentCharacterTileNum()] === plowedEarthTileType;
+
+    const ifNoPlantOnTile = () => garden[getCurrentCharacterTileNum()] === 0;
+
+    const ifCanPlantHere = () => ifTileIsGrass() && ifNoPlantOnTile();
+
+    const ifHasSeedInInventory = () => inventory.seeds[inventory.isUse] > 0;
 
     const gameControls = {
         goUp: () => {
@@ -79,7 +86,7 @@ const withControls = <T extends WithControlsProps = WithControlsProps>(
             dispatch(right());
         },
         doPlow: () => {
-            if (!ifCanPlow()) {
+            if (!ifCanPlowHere()) {
                 return;
             }
             dispatch(addAction());
@@ -88,10 +95,14 @@ const withControls = <T extends WithControlsProps = WithControlsProps>(
             );
         },
         doPlant: () => {
-            if (!ifCanPlant()) {
+            if (!ifCanPlantHere()) {
+                return;
+            }
+            if (!ifHasSeedInInventory()) {
                 return;
             }
             dispatch(addAction());
+            dispatch(decrementSelectedSeed());
             dispatch(
                 plant({
                     plant: plantClasses[inventory.isUse](gardenRef.current),

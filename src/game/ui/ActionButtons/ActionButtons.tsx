@@ -18,7 +18,10 @@ const ActionButtons = (props: WithControlsProps) => {
                 3. WATER
             </SquareButton>
             <SquareButton>
+                <br />
                 4. HARVEST
+                <br />
+                (and sell)
             </SquareButton>
         </div>
     );

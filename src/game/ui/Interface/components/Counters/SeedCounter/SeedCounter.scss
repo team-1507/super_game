@@ -6,12 +6,12 @@
 
     min-width: 130px;
     min-height: 65px;
-    padding: 0 10px;
     margin-top: 10px;
+    padding: 0 10px;
 
     background-color: $black;
-    border-radius: 0 20px 0 0;
     border-bottom: solid 4px transparent;
+    border-radius: 0 20px 0 0;
 
     &--active {
         border-bottom: solid 4px $red;
@@ -43,18 +43,23 @@
                 &-tomato {
                     transform: scale(2) translateY(-7px);
                 }
+
                 &-potato {
                     transform: scale(1.6) translateY(-5px);
                 }
+
                 &-carrot {
                     transform: scale(1.4);
                 }
+
                 &-cabbage {
                     transform: scale(2.2) translateY(-7px);
                 }
+
                 &-pepper {
                     transform: scale(2) translate(5px, -7px);
                 }
+
                 &-squash {
                     transform: scale(1.8) translateY(-5px);
                 }
@@ -78,6 +83,7 @@
                 $font-weight: 300
             );
         }
+
         &__buy-btn {
             cursor: pointer;
 
