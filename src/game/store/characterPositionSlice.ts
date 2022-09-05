@@ -5,8 +5,8 @@ import * as mapConfig from '../map/config';
 import { SpriteSheet } from '../SpriteSheet';
 
 export type Position = {
-    coords: [number, number],
-    direction: number,
+    coords: [number, number];
+    direction: number;
 };
 
 const initialState: Position = {
