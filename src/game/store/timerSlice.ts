@@ -1,18 +1,20 @@
 /* eslint-disable no-param-reassign */
 import { createSlice } from '@reduxjs/toolkit';
 
-type Timer = {
-    moves: number,
-    actions: number,
-    day: number,
-    movesToday: number,
-    actionsToday: number,
+interface Timer {
+    moves: number;
+    actions: number;
+    day: number;
+    time: number;
+    movesToday: number;
+    actionsToday: number;
 };
 
 const initialState: Timer = {
     moves: 0,
     actions: 0,
-    day: 0,
+    day: 1,
+    time: 6 * 60 * 60 * 1000, // 06:00 am
     movesToday: 0,
     actionsToday: 0,
 };

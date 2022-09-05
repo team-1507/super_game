@@ -3,6 +3,11 @@ declare module '*.png' {
     export = value;
 }
 
+declare module '*.ogg' {
+    const value: string;
+    export = value;
+}
+
 declare module '*.scss' {
     const styles: { [className: string]: string };
     export default styles;

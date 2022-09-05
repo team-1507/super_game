@@ -5,14 +5,17 @@ import Map from '../../game/map/Map';
 import Garden from '../../game/plants/Gagden';
 import ActionButtons from '../../game/ui/ActionButtons';
 import PauseMenu from '../../game/ui/PauseMenu';
+import Interface from '../../game/ui/Interface';
 import './Game.scss';
 import audio from '../../audio';
+import musicFile from '../../../static/audio/music/title.ogg';
+import withControls from '../../game/controls/withControls';
 
-const music = audio({ src: require('../../../static/audio/music/title.ogg'), loop: true, volume: 0.3 });
+const music = audio({ src: musicFile, loop: true, volume: 0.3 });
 const playMusic = () => {
     music.play();
     document.removeEventListener('click', playMusic);
-}
+};
 
 document.addEventListener('click', playMusic);
 
@@ -22,32 +25,28 @@ const Game = () => {
     const controlsWrapperRef = createRef<HTMLDivElement>();
     const characterRef = createRef<HTMLCanvasElement>();
     const gardenRef = createRef<HTMLCanvasElement>();
-    const togglePauseMenu = () => {
-        pauseMenu.current?.classList.toggle('active');
-        if (pauseMenu.current?.classList.contains('active')) {
-            controlsWrapperRef.current?.focus();
-        } else {
-            controlsWrapperRef.current?.focus();
-        }
-    };
 
     useEffect(() => {
         controlsWrapperRef.current?.focus();
     });
+
+    const ControlsWrapperWithControls = withControls(ControlsWrapper, { gardenRef });
+    const ActionButtonsWithControls = withControls(ActionButtons, { gardenRef });
+
     return (
         <main className="game-page">
-            <ControlsWrapper
+            <ControlsWrapperWithControls
                 controlsWrapperRef={controlsWrapperRef}
-                gardenRef={gardenRef}
             >
                 <div className="game-page-map-container" ref={container}>
                     <Map />
                     <Garden gardenRef={gardenRef} />
                     <Character container={container} characterRef={characterRef} />
-                    <PauseMenu wrapperRef={pauseMenu} toggleFn={togglePauseMenu} />
                 </div>
-                <ActionButtons />
-            </ControlsWrapper>
+                <Interface />
+                <ActionButtonsWithControls />
+                <PauseMenu wrapperRef={pauseMenu} />
+            </ControlsWrapperWithControls>
         </main>
     );
 };

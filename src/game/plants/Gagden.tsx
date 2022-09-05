@@ -6,8 +6,9 @@ import { SpriteSheet } from '../SpriteSheet';
 import * as config from './config';
 import * as constants from '../constants';
 import * as mapConfig from '../map/config';
-import { plow, PlantOrNone } from '../store/gardenStateSlice';
+import { PlantOrNone } from '../store/gardenStateSlice';
 import { RootState } from '../../store';
+import { plow } from '../store/mapStateSlice';
 
 const mapState = (state: RootState) => {
     return {

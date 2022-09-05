@@ -1,6 +1,17 @@
-import { GetRequestParams, PostRequestParams } from './types';
+import { notification } from 'antd';
+import {
+    ErrorResponse, GetRequestParams, PostRequestParams, PutRequestParams,
+} from './types';
+import { ErrorsList } from './const';
 
 const API_URL = 'https://ya-praktikum.tech/api/v2';
+
+const openNotification = (title: string, text: string) => {
+    notification.open({
+        message: title,
+        description: text,
+    });
+};
 
 function getUrl(
     address: string,
@@ -31,10 +42,11 @@ async function getRequest<R>({
         mode: 'cors',
         credentials: 'include',
     });
-
+    const responseJSON = await response.json() as unknown;
     if (response.status === 200) {
-        return await response.json() as unknown as R;
+        return responseJSON as R;
     }
+    openNotification(ErrorsList.serverError, (responseJSON as ErrorResponse).reason);
     return null;
 }
 
@@ -56,9 +68,11 @@ async function postRequest<B, R>({
         body: body ? JSON.stringify(body) : null,
         credentials: 'include',
     });
+    const responseJSON = await response.json() as unknown;
     if (response.status === 200) {
-        return response.json() as unknown as R;
+        return responseJSON as R;
     }
+    openNotification(ErrorsList.serverError, (await responseJSON as ErrorResponse).reason);
     return null;
 }
 
@@ -66,7 +80,7 @@ async function putRequest<B, R>({
     address,
     body,
     queryParams,
-}: PostRequestParams<B>): Promise<R | null> {
+}: PutRequestParams<B>): Promise<R | null> {
     const url = getUrl(address, queryParams);
 
     const headers = {
@@ -79,10 +93,11 @@ async function putRequest<B, R>({
         body: body ? JSON.stringify(body) : null,
         credentials: 'include',
     });
-
+    const responseJSON = await response.json() as unknown;
     if (response.status === 200) {
-        return await response.json() as unknown as R;
+        return responseJSON as R;
     }
+    openNotification(ErrorsList.serverError, (responseJSON as ErrorResponse).reason);
     return null;
 }
 
@@ -98,10 +113,11 @@ async function putFileRequest<R>({
         body,
         credentials: 'include',
     });
-
+    const responseJSON = await response.json() as unknown;
     if (response.status === 200) {
-        return await response.json() as unknown as R;
+        return responseJSON as R;
     }
+    openNotification(ErrorsList.serverError, (responseJSON as ErrorResponse).reason);
     return null;
 }
 
