@@ -1,10 +1,13 @@
 import React, { createRef, useEffect } from 'react';
+import { useAppSelector, useAppDispatch } from '../../store/hooks';
+import { togglePause } from '../../game/store/uiSlice';
 import Character from '../../game/character/Character';
 import ControlsWrapper from '../../game/controls/ControlsWrapper';
 import Map from '../../game/map/Map';
 import Garden from '../../game/plants/Gagden';
 import ActionButtons from '../../game/ui/ActionButtons';
 import PauseMenu from '../../game/ui/PauseMenu';
+import Interface from '../../game/ui/Interface';
 import './Game.scss';
 import audio from '../../audio';
 
@@ -22,14 +25,10 @@ const Game = () => {
     const controlsWrapperRef = createRef<HTMLDivElement>();
     const characterRef = createRef<HTMLCanvasElement>();
     const gardenRef = createRef<HTMLCanvasElement>();
-    const togglePauseMenu = () => {
-        pauseMenu.current?.classList.toggle('active');
-        if (pauseMenu.current?.classList.contains('active')) {
-            controlsWrapperRef.current?.focus();
-        } else {
-            controlsWrapperRef.current?.focus();
-        }
-    };
+    const { pauseMenu: isPause } = useAppSelector((state) => state.ui);
+    const dispatch = useAppDispatch();
+
+    const togglePauseMenu = () => dispatch(togglePause());
 
     useEffect(() => {
         controlsWrapperRef.current?.focus();
@@ -44,9 +43,10 @@ const Game = () => {
                     <Map />
                     <Garden gardenRef={gardenRef} />
                     <Character container={container} characterRef={characterRef} />
-                    <PauseMenu wrapperRef={pauseMenu} toggleFn={togglePauseMenu} />
                 </div>
+                <Interface />
                 <ActionButtons />
+                <PauseMenu active={isPause} wrapperRef={pauseMenu} toggleFn={togglePauseMenu} />
             </ControlsWrapper>
         </main>
     );

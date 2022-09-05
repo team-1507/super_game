@@ -1,0 +1,13 @@
+.game-page__interface {
+    position: fixed;
+    top: 0;
+
+    width: 100%;
+    height: 100%;
+
+    &__money-counter {
+        position: absolute;
+        top: 10px;
+        left: 10px;
+    }
+}
