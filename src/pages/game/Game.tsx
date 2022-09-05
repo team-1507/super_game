@@ -30,7 +30,6 @@ const Game = () => {
     });
 
     const ControlsWrapperWithControls = withControls(ControlsWrapper, { gardenRef });
-
     return (
         <main className="game-page">
             <ControlsWrapperWithControls
