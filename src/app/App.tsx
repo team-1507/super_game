@@ -1,5 +1,7 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Route, Routes, useNavigate } from 'react-router-dom';
+import { notification } from 'antd';
+import { PayloadAction } from '@reduxjs/toolkit';
 import { hot } from 'react-hot-loader/root';
 import Game from '../pages/game';
 import SignUp from '../pages/sign-up/SignUp';
@@ -11,30 +13,38 @@ import HomePage from '../pages/home-page/HomePage';
 import Forum from '../pages/forum';
 import { useAppSelector, useAppDispatch } from '../store/hooks';
 import { fetchUser } from '../store/reducers/userReducer';
+import { UserDto } from '../api/user/types';
 import './App.scss';
 
 const App = () => {
     const userState = useAppSelector((state) => state.user);
     const { status } = userState;
     const dispatch = useAppDispatch();
+    const navigate = useNavigate();
 
-    const getCurrentUser = async () => {
-        const navigate = useNavigate();
+    useEffect(() => {
+        const getCurrentUser = async () => {
+            try {
+                const { payload } = await dispatch(fetchUser()) as PayloadAction<UserDto>;
+                const { id } = payload;
 
-        try {
-            const { payload: { id } }: any = await dispatch(fetchUser());
-
-            if (!id) {
+                if (!id) {
+                    navigate('/sign-in');
+                }
+            } catch (err) {
                 navigate('/sign-in');
             }
-        } catch (err) {
-            navigate('/sign-in');
-        }
-    }
+        };
 
-    if (status === 'idle') {
-        getCurrentUser();
-    }
+        if (status === 'idle') {
+            getCurrentUser().catch((e) => {
+                notification.open({
+                    message: 'Error getting current user',
+                    description: String(e),
+                });
+            });
+        }
+    });
 
     return (
         <Routes>

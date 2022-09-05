@@ -1,9 +1,10 @@
 import React, { createRef, useEffect } from 'react';
+import { notification } from 'antd';
+
 import Character from '../../game/character/Character';
 import ControlsWrapper from '../../game/controls/ControlsWrapper';
 import Map from '../../game/map/Map';
 import Garden from '../../game/plants/Gagden';
-import ActionButtons from '../../game/ui/ActionButtons';
 import PauseMenu from '../../game/ui/PauseMenu';
 import Interface from '../../game/ui/Interface';
 import './Game.scss';
@@ -13,7 +14,12 @@ import withControls from '../../game/controls/withControls';
 
 const music = audio({ src: musicFile, loop: true, volume: 0.3 });
 const playMusic = () => {
-    music.play();
+    music.play().catch((e) => {
+        notification.open({
+            message: 'Error playing music',
+            description: String(e),
+        });
+    });
     document.removeEventListener('click', playMusic);
 };
 
@@ -31,7 +37,6 @@ const Game = () => {
     });
 
     const ControlsWrapperWithControls = withControls(ControlsWrapper, { gardenRef });
-    const ActionButtonsWithControls = withControls(ActionButtons, { gardenRef });
 
     return (
         <main className="game-page">
@@ -43,8 +48,7 @@ const Game = () => {
                     <Garden gardenRef={gardenRef} />
                     <Character container={container} characterRef={characterRef} />
                 </div>
-                <Interface />
-                <ActionButtonsWithControls />
+                <Interface refs={{ gardenRef }} />
                 <PauseMenu wrapperRef={pauseMenu} />
             </ControlsWrapperWithControls>
         </main>

@@ -1,8 +1,8 @@
 import { Button } from 'antd';
 import React, { RefObject } from 'react';
-import { useAppSelector, useAppDispatch } from '../../../store/hooks';
-import { togglePause, toggleMute } from '../../../game/store/uiSlice';
 import { Link } from 'react-router-dom';
+import { useAppSelector, useAppDispatch } from '../../../store/hooks';
+import { togglePause, toggleMute } from '../../store/uiSlice';
 import { classNames } from '../../../utils';
 import ArrowBack from '../../../components/icons/ArrowBack';
 import ArrowTopRight from '../../../components/icons/ArrowTopRight';

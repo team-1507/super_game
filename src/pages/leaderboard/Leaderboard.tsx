@@ -1,4 +1,5 @@
 import React from 'react';
+import { notification } from 'antd';
 import HeaderBackButton from '../../components/sections/HeaderBackButton';
 import { fetchLeaderboard } from '../../store/reducers/leaderboardReducer';
 import { useAppSelector, useAppDispatch } from '../../store/hooks';
@@ -10,17 +11,22 @@ const Leaderboard = () => {
     const dispatch = useAppDispatch();
 
     const generateCols = data
-        .map(({ data }) => data)
+        .map((lbdata) => lbdata.data)
         .map(({ name, score = 0 }) => (
             <li key={name} title={`score: ${score}`}>{name}</li>
         ));
 
     const getLeaderboard = async () => {
         await dispatch(fetchLeaderboard());
-    }
+    };
 
     if (status === 'idle') {
-        getLeaderboard();
+        getLeaderboard().catch((e) => {
+            notification.open({
+                message: 'Error getting leaderboard',
+                description: String(e),
+            });
+        });
     }
 
     return (

@@ -1,16 +1,22 @@
 import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import './home-page.scss';
-import { Button } from 'antd';
+import { Button, notification } from 'antd';
 import ArrowTopRight from '../../components/icons/ArrowTopRight';
 import UserApi from '../../api/sign-in/sign-in';
 import audio from '../../audio';
+import titleMusic from '../../../static/audio/music/title.ogg';
 
-const music = audio({ src: require('../../../static/audio/music/title.ogg'), loop: true, volume: 0.3 });
+const music = audio({ src: titleMusic, loop: true, volume: 0.3 });
 const playMusic = () => {
-    music.play();
+    music.play().catch((e) => {
+        notification.open({
+            message: 'Error playing music',
+            description: String(e),
+        });
+    });
     document.removeEventListener('click', playMusic);
-}
+};
 
 document.addEventListener('click', playMusic);
 
@@ -22,7 +28,10 @@ const HomePage = () => {
                 navigate('/sign-in');
             }
         }).catch((err) => {
-            console.log(err);
+            notification.open({
+                message: 'Error logging out',
+                description: String(err),
+            });
         });
     };
 
