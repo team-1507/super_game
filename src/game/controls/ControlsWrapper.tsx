@@ -25,6 +25,7 @@ const ControlsWrapper = (
         Tab: gameControls.loopThroughSeeds,
         KeyB: gameControls.buySelectedSeed,
         KeyM: gameControls.toggleMute,
+        KeyF: gameControls.toggleFullScreen,
     };
 
     const keyPressHandler = (e: KeyboardEvent) => {

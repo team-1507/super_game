@@ -122,6 +122,14 @@ const withControls = <T extends WithControlsProps = WithControlsProps>(
         buySelectedSeed: () => {
             dispatch(buySelectedSeed());
         },
+        toggleFullScreen: async () => {
+            const fsElem = document.fullscreenElement;
+            if (fsElem) {
+                await document.exitFullscreen();
+            } else {
+                await document.body.requestFullscreen();
+            }
+        },
     };
 
     return (
