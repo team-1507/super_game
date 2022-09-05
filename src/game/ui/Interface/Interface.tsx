@@ -1,24 +1,39 @@
-import React from 'react';
-import { useAppSelector } from '../../../store/hooks';
-import Counter from './components/Counter';
+import React, { RefObject } from 'react';
+import Counters from './components/Counters';
+import ActionButtons from '../../../game/ui/ActionButtons';
+import withControls from '../../../game/controls/withControls';
 
 import './Interface.scss';
 
-const Interface = () => {
-    const { money } = useAppSelector((state) => state.inventory);
-    const { day } = useAppSelector((state) => state.timer);
-    const moneyText = `${money} ₽`;
-    const timeText = '06:00 am';
+interface props {
+    refs: {
+        gardenRef: RefObject<HTMLCanvasElement>;
+    };
+};
+
+const { MoneyCounter, TimeCounter, SeedCounter } = Counters;
+
+const Interface = (props: props) => {
+    const { refs: { gardenRef } } = props;
+    const ActionButtonsWithControls = withControls(ActionButtons, { gardenRef });
 
     return (
         <div className="game-page__interface">
             <div className="game-page__interface__money-counter">
-                <Counter title="Money" text={moneyText} />
+                <MoneyCounter />
             </div>
             <div className="game-page__interface__time-counter">
-                <Counter title="Day" text={day} />
-                <Counter title="Time" text={timeText} />
+                <TimeCounter />
             </div>
+            <div className="game-page__interface__seed-counter">
+                <SeedCounter type="tomato" />
+                <SeedCounter type="potato" />
+                <SeedCounter type="carrot" />
+                <SeedCounter type="cabbage" />
+                <SeedCounter type="pepper" />
+                <SeedCounter type="squash" />
+            </div>
+            <ActionButtonsWithControls />
         </div>
     );
 };

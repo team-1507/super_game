@@ -1,0 +1,33 @@
+@import "/src/styles/index";
+
+.interface-counter {
+    display: inline-flex;
+    flex-direction: column;
+
+    min-width: 130px;
+    min-height: 65px;
+    padding: 0 10px;
+
+    background-color: $black;
+    border-radius: 0 20px 0 0;
+
+    &__title {
+        @include font-style(
+            $font-size: 14px,
+            $letter-spacing: normal,
+            $color: $white,
+            $font-family: Ubuntu,
+            $font-weight: 300
+        );
+
+        padding-bottom: 5px;
+    }
+
+    &__text {
+        @include font-style(
+            $font-size: 40px,
+            $color: $white,
+            $font-family: VT323
+        );
+    }
+}

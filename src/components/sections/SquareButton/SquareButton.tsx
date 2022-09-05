@@ -9,7 +9,9 @@ const SquareButton = (props: LinkProps & { to?: string }) => {
     } = props;
     return (
         <Link to={to} className={`square-button ${className || ''}`} onClick={onClick}>
-            {children}
+            <span>
+                {children}
+            </span>
         </Link>
     );
 };
