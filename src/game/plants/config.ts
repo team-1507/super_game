@@ -51,12 +51,6 @@ export const ASSET_TILE_TYPES: Record<number, string> = {
     64: 'SQUASH_4',
     65: 'SQUASH_5',
     66: 'SQUASH_6',
-    71: 'CORN_1',
-    72: 'CORN_2',
-    73: 'CORN_3',
-    74: 'CORN_4',
-    75: 'CORN_5',
-    76: 'CORN_6',
 };
 
 /*
@@ -102,12 +96,6 @@ export const ASSET_TILE_COORDS: Record<string, [number, number]> = {
     SQUASH_4: [4, 6],
     SQUASH_5: [5, 6],
     SQUASH_6: [6, 6],
-    CORN_1: [1, 7],
-    CORN_2: [2, 7],
-    CORN_3: [3, 7],
-    CORN_4: [4, 7],
-    CORN_5: [5, 7],
-    CORN_6: [6, 7],
 };
 
 export default {
