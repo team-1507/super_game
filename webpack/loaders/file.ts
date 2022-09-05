@@ -1,4 +1,4 @@
-const fileRegex = /\.(png|jpg|jpeg|gif)$/i;
+const fileRegex = /\.(png|jpg|jpeg|gif|ogg)$/i;
 
 export default {
     client: {
