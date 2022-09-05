@@ -1,19 +1,19 @@
 import React, { RefObject } from 'react';
 import Counters from './components/Counters';
-import ActionButtons from '../../../game/ui/ActionButtons';
-import withControls from '../../../game/controls/withControls';
+import ActionButtons from '../ActionButtons';
+import withControls from '../../controls/withControls';
 
 import './Interface.scss';
 
-interface props {
+interface InterfaceProps {
     refs: {
         gardenRef: RefObject<HTMLCanvasElement>;
     };
-};
+}
 
 const { MoneyCounter, TimeCounter, SeedCounter } = Counters;
 
-const Interface = (props: props) => {
+const Interface = (props: InterfaceProps) => {
     const { refs: { gardenRef } } = props;
     const ActionButtonsWithControls = withControls(ActionButtons, { gardenRef });
 

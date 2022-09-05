@@ -1,8 +1,8 @@
 /* eslint-disable no-param-reassign */
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
+import type { PayloadAction, SerializedError } from '@reduxjs/toolkit';
 import UserApi from '../../api/user/user';
 import { UserDto } from '../../api/user/types';
-import type { PayloadAction, SerializedError } from '@reduxjs/toolkit';
 import type { RootState } from '..';
 import { getAvatar } from '../helpers';
 
@@ -38,7 +38,7 @@ export const initialState: UserState = {
         phone: '',
     },
     status: 'idle',
-    error: null
+    error: null,
 
 };
 
@@ -56,17 +56,17 @@ const userSlice = createSlice({
     },
     extraReducers: (builder) => {
         builder.addCase(fetchUser.pending, (state, action) => {
-          if (state.status === 'idle') {
-            state.status = 'loading';
-          }
-        })
+            if (state.status === 'idle') {
+                state.status = 'loading';
+            }
+        });
         builder.addCase(fetchUser.fulfilled, (state, action) => {
             state.data = { ...state.data, ...action.payload };
-        })
+        });
         builder.addCase(fetchUser.rejected, (state, action) => {
             state.status = 'failed';
             state.error = action.error;
-        })
+        });
     },
 });
 

@@ -26,6 +26,7 @@ const UserinfoForm = (props: UserinfoFormProps) => {
         formInputs, children, submitTitle, callbackFn, valuesToSend, navigateOnSuccess, user,
     } = props;
     const login = user?.login;
+    const isSign = submitTitle.includes('Sign');
     const navigate = useNavigate();
     const dispatch = useAppDispatch();
     const onFinish = (values: CallbackFnData) => {
@@ -55,7 +56,7 @@ const UserinfoForm = (props: UserinfoFormProps) => {
         loginInputRef.current?.focus();
     }, []);
 
-    return formInputs.includes('newPassword') || login ? (
+    return isSign || formInputs.includes('newPassword') || login ? (
         <Form
             name="basic"
             initialValues={{ remember: true }}
@@ -75,7 +76,7 @@ const UserinfoForm = (props: UserinfoFormProps) => {
 UserinfoForm.defaultProps = {
     navigateOnSuccess: undefined,
     callbackFn: undefined,
-    user: initialState,
+    user: initialState.data,
 };
 
 export default UserinfoForm;

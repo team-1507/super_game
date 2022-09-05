@@ -1,46 +1,39 @@
-export function debounce (f: any, ms: number) {
-    let isCooldown = false;
-
-    return function () {
-        if (isCooldown) return;
-
-        f.apply(undefined, arguments);
-        isCooldown = true;
-        setTimeout(() => isCooldown = false, ms);
+export const debounce = (fn: (...args: unknown[]) => unknown, ms = 300) => {
+    let timeoutId: ReturnType<typeof setTimeout>;
+    return function dnced(this: unknown, ...args: unknown[]) {
+        clearTimeout(timeoutId);
+        timeoutId = setTimeout(() => fn.apply(this, args), ms);
     };
 };
 
-export function throttle (f: any, ms: number) {
-
+export function throttle(f: (...args: unknown[]) => unknown, ms: number) {
     let isThrottled = true;
 
-    return (...args: any) => {
-        console.warn(isThrottled)
+    return (...args: unknown[]) => {
         if (!isThrottled) return;
 
         isThrottled = false;
         f(...args);
 
-        setTimeout(function () {
+        setTimeout(() => {
             isThrottled = true;
         }, ms);
-    }
-};
+    };
+}
 
-export function classNames (classesObject: object) {
+export function classNames(classesObject: object) {
     const getClasses = (object: object) => {
         return Object.entries(object)
-            .map(([key, value]) => value ? key : '')
-            .filter(key => key)
+            .map(([key, value]) => (value ? key : ''))
+            .filter((key) => key)
             .join(' ');
     };
 
     if (Array.isArray(classesObject)) {
         return classesObject
-            .map(item => typeof item === 'string' ? item : getClasses(item))
-            .filter(key => key)
+            .map((item) => (typeof item === 'string' ? item : getClasses(item as object)))
+            .filter((key) => key)
             .join(' ');
-    } else {
-        return getClasses(classesObject);
     }
-};
+    return getClasses(classesObject);
+}

@@ -6,20 +6,23 @@ import {
     SetLeaderboardDataDto,
 } from './types';
 
-function setPlayerScoreToLeaderboard({ teamName = TEAM_NAME, ...fields }: SetLeaderboardData): Promise<SetLeaderboardDataDto | null> {
+function setPlayerScoreToLeaderboard(
+    { teamName = TEAM_NAME, ...fields }: SetLeaderboardData,
+): Promise<SetLeaderboardDataDto | null> {
     const body = { teamName, ...fields };
     return ApiService.postRequest<SetLeaderboardData, SetLeaderboardDataDto>({
-        address: `leaderboard`,
+        address: 'leaderboard',
         body,
     });
-};
+}
 
-function getLeaderboard(body: GetLeaderboardData): Promise<SetLeaderboardData[]> {
-    return ApiService.postRequest<GetLeaderboardData, any>({
+function getLeaderboard(body: GetLeaderboardData): Promise<SetLeaderboardData[] | null> {
+    const data = ApiService.postRequest<GetLeaderboardData, SetLeaderboardData[]>({
         address: `leaderboard/${TEAM_NAME}`,
         body,
     });
-};
+    return data;
+}
 
 export default {
     setPlayerScoreToLeaderboard,

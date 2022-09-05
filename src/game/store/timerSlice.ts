@@ -8,7 +8,7 @@ interface Timer {
     time: number;
     movesToday: number;
     actionsToday: number;
-};
+}
 
 const initialState: Timer = {
     moves: 0,

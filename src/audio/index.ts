@@ -1,6 +1,6 @@
 import { AudioParams } from './types';
 
-function audio ({ src, loop = false, volume = 1 }: AudioParams) {
+function audio({ src, loop = false, volume = 1 }: AudioParams) {
     const audioTrack = new Audio();
     audioTrack.src = src;
     audioTrack.autoplay = true;
