@@ -5,6 +5,8 @@
 }
 
 .game-page {
+    user-select: none;
+
     position: relative;
 
     overflow: hidden;
@@ -13,8 +15,6 @@
     height: 100vh;
 
     background-color: $green;
-
-    user-select: none;
 
     .game-page-map-container {
         position: relative;

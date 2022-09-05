@@ -3,15 +3,15 @@
 .interface-counter {
     display: inline-flex;
     flex-direction: column;
-    min-height: 65px;
+
     min-width: 130px;
-    padding: 0 10px 0px 10px;
+    min-height: 65px;
+    padding: 0 10px;
+
     background-color: $black;
     border-radius: 0 20px 0 0;
 
     &__title {
-        padding-bottom: 5px;
-
         @include font-style(
             $font-size: 14px,
             $letter-spacing: normal,
@@ -19,7 +19,10 @@
             $font-family: Ubuntu,
             $font-weight: 300
         );
+
+        padding-bottom: 5px;
     }
+
     &__text {
         @include font-style(
             $font-size: 40px,

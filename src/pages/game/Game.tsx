@@ -8,12 +8,14 @@ import PauseMenu from '../../game/ui/PauseMenu';
 import Interface from '../../game/ui/Interface';
 import './Game.scss';
 import audio from '../../audio';
+import musicFile from '../../../static/audio/music/title.ogg';
+import withControls from '../../game/controls/withControls';
 
-const music = audio({ src: require('../../../static/audio/music/title.ogg'), loop: true, volume: 0.3 });
+const music = audio({ src: musicFile, loop: true, volume: 0.3 });
 const playMusic = () => {
     music.play();
     document.removeEventListener('click', playMusic);
-}
+};
 
 document.addEventListener('click', playMusic);
 
@@ -24,16 +26,17 @@ const Game = () => {
     const characterRef = createRef<HTMLCanvasElement>();
     const gardenRef = createRef<HTMLCanvasElement>();
 
-    const wrapperRef = pauseMenu;
-
     useEffect(() => {
         controlsWrapperRef.current?.focus();
     });
+
+    const ControlsWrapperWithControls = withControls(ControlsWrapper, { gardenRef });
+    const ActionButtonsWithControls = withControls(ActionButtons, { gardenRef });
+
     return (
         <main className="game-page">
-            <ControlsWrapper
+            <ControlsWrapperWithControls
                 controlsWrapperRef={controlsWrapperRef}
-                gardenRef={gardenRef}
             >
                 <div className="game-page-map-container" ref={container}>
                     <Map />
@@ -41,9 +44,9 @@ const Game = () => {
                     <Character container={container} characterRef={characterRef} />
                 </div>
                 <Interface />
-                <ActionButtons />
-                <PauseMenu wrapperRef={wrapperRef} />
-            </ControlsWrapper>
+                <ActionButtonsWithControls />
+                <PauseMenu wrapperRef={pauseMenu} />
+            </ControlsWrapperWithControls>
         </main>
     );
 };

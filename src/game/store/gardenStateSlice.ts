@@ -39,6 +39,6 @@ export const gardenStateSlice = createSlice({
 });
 
 export const {
-    plow, plant,
+    plant,
 } = gardenStateSlice.actions;
 export default gardenStateSlice.reducer;
