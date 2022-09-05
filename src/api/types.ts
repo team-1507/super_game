@@ -19,3 +19,7 @@ export interface PutRequestParams<B> extends BaseRequestParams {
 export interface DeleteRequestParams<B> extends BaseRequestParams {
     body?: B;
 }
+
+export interface ErrorResponse {
+    reason: string;
+}
