@@ -2,7 +2,7 @@ const fileRegex = /\.(png|jpg|jpeg|gif|ogg)$/i;
 
 export default {
     client: {
-        loader: 'url-loader',
+        loader: 'url-loader', // static/assets
         test: fileRegex,
     },
     server: {
