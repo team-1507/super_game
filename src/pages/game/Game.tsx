@@ -1,6 +1,5 @@
 import React, { createRef, useEffect } from 'react';
 import { notification } from 'antd';
-
 import Character from '../../game/character/Character';
 import ControlsWrapper from '../../game/controls/ControlsWrapper';
 import Map from '../../game/map/Map';
