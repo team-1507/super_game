@@ -1,11 +1,13 @@
 /* eslint-disable no-param-reassign */
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { whatDayIsItToday, whatTimeIsItNow } from '../../utils';
+import { SUNRISE_TIMESTAMP, SUNSET_TIMESTAMP } from '../constants';
 
 interface Timer {
     moves: number;
     actions: number;
     day: number;
-    time: number;
+    timestamp: number; // in minutes
     movesToday: number;
     actionsToday: number;
 }
@@ -14,7 +16,7 @@ const initialState: Timer = {
     moves: 0,
     actions: 0,
     day: 1,
-    time: 6 * 60 * 60 * 1000, // 06:00 am
+    timestamp: SUNRISE_TIMESTAMP,
     movesToday: 0,
     actionsToday: 0,
 };
@@ -36,10 +38,21 @@ export const timerSlice = createSlice({
             timer.movesToday = 0;
             timer.actionsToday = 0;
         },
+        incrementTimestamp: (timer: Timer, action: PayloadAction<number>) => {
+            const newTimestamp = timer.timestamp + action.payload;
+            if (whatTimeIsItNow(newTimestamp) >= SUNSET_TIMESTAMP) { // it's a brand new day!
+                timer.day = whatDayIsItToday(timer.timestamp) + 1;
+                timer.timestamp = timer.day * 60 * 24 + SUNRISE_TIMESTAMP;
+                timer.movesToday = 0;
+                timer.actionsToday = 0;
+            } else {
+                timer.timestamp = newTimestamp;
+            }
+        },
     },
 });
 
 export const {
-    addMove, addAction, addDay,
+    addMove, addAction, addDay, incrementTimestamp,
 } = timerSlice.actions;
 export default timerSlice.reducer;
