@@ -9,12 +9,12 @@ import * as mapConfig from '../map/config';
 import { PlantOrNone } from '../store/gardenStateSlice';
 import { RootState } from '../../store';
 import { plow, water } from '../store/mapStateSlice';
+import Plant from './Plant';
 
 const mapState = (state: RootState) => {
     return {
-        user: state.user,
-        characterPosition: state.characterPosition,
         gardenState: state.gardenState,
+        timer: state.timer,
     };
 };
 
@@ -58,9 +58,18 @@ class Garden extends React.PureComponent<PropsFromRedux> {
     componentDidUpdate(prevProps: PropsFromRedux) {
         const { gardenState: gardenStatePrev } = prevProps;
         const { gardenState } = this.props;
+        const { timer } = this.props;
         gardenState.forEach((plant, tileNum) => {
-            if (plant !== gardenStatePrev[tileNum]) {
+            const plantPrev = gardenStatePrev[tileNum];
+            if (plant !== plantPrev) {
                 this.renderTile(tileNum, plant);
+            }
+            if (plant instanceof Plant && plantPrev instanceof Plant) {
+                const prevLifeState = plantPrev.lastKnownLifeState;
+                const newLifeState = plant.getAndSetCurrentLifeState(timer.timestamp);
+                if (prevLifeState !== newLifeState) {
+                    this.renderTile(tileNum, plant);
+                }
             }
         });
     }

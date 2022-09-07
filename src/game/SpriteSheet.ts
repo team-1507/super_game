@@ -70,8 +70,8 @@ export class SpriteSheet implements ISpriteSheet {
                 throw new Error(`"${spriteName}" coordinates are not defined`);
             }
         }
-        const [row, coloumn] = this.ASSET_TILE_COORDS[spriteName] || [0, 0];
-        const sourceX = (coloumn - 1) * (this.SPRITE_SIZE.width + this.SPRITE_SIZE.gap);
+        const [row, column] = this.ASSET_TILE_COORDS[spriteName] || [0, 0];
+        const sourceX = (column - 1) * (this.SPRITE_SIZE.width + this.SPRITE_SIZE.gap);
         const sourceY = (row - 1) * (this.SPRITE_SIZE.height + this.SPRITE_SIZE.gap);
         return {
             sourceX,
