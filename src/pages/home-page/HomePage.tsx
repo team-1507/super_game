@@ -24,7 +24,6 @@ const HomePage = () => {
     const navigate = useNavigate();
     const logOut = () => {
         UserApi.logOut().then((response) => {
-            console.log(response);
             if (response) {
                 navigate('/sign-in');
             }

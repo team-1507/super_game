@@ -7,6 +7,7 @@ import SignInApi from '../../api/sign-in/sign-in';
 import OAuthApi from '../../api/oauth/oauth';
 import './SignIn.scss';
 import YandexIcon from '../../components/icons/YandexIcon';
+import IS_DEV from '../../consts';
 
 const SignIn = () => {
     const callbackFn = SignInApi.signIn;
@@ -14,13 +15,13 @@ const SignIn = () => {
         login: '',
         password: '',
     };
-    const REDIRECT_URI = 'https://ivans-dacha.herokuapp.com';
+
+    const REDIRECT_URI = IS_DEV ? 'http://localhost:3000' : 'https://ivans-dacha.herokuapp.com';
     const getClientId = () => {
         OAuthApi.getServiceId(REDIRECT_URI).then((response) => {
             if (response) {
-                console.log(response.service_id);
                 const urlToAuth = `https://oauth.yandex.ru/authorize?response_type=code&client_id=${response.service_id}&redirect_uri=${REDIRECT_URI}`;
-                window.open(urlToAuth, '_blank');
+                window.open(urlToAuth, '_self');
             }
         })
             .catch((err) => {

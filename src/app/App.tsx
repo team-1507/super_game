@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import './App.scss';
 import {
-    Route, Routes, useNavigate,
+    Route, Routes, useNavigate, useSearchParams,
 } from 'react-router-dom';
 import { notification } from 'antd';
 import { PayloadAction } from '@reduxjs/toolkit';
@@ -16,26 +16,50 @@ import Forum from '../pages/forum';
 import { useAppSelector, useAppDispatch } from '../store/hooks';
 import { fetchUser } from '../store/reducers/userReducer';
 import { UserDto } from '../api/user/types';
+import OAuthApi from '../api/oauth/oauth';
 
 const App = () => {
     const userState = useAppSelector((state) => state.user);
     const { status } = userState;
     const dispatch = useAppDispatch();
     const navigate = useNavigate();
+    const [searchParams] = useSearchParams();
+    const code = searchParams.get('code');
 
     useEffect(() => {
-        const getCurrentUser = async () => {
+        const OauthEnter = async () => {
             try {
-                const { payload } = await dispatch(fetchUser()) as PayloadAction<UserDto>;
-                const { id } = payload;
-                if (!id) {
-                    navigate('/sign-in');
+                const response = await OAuthApi.signInWithYandex({ code: code as string, redirect_uri: '' });
+                if (response) {
+                    navigate('/');
                 }
             } catch (err) {
                 navigate('/sign-in');
             }
         };
-
+        const getCurrentUser = async () => {
+            try {
+                const { payload } = await dispatch(fetchUser()) as PayloadAction<UserDto>;
+                const { id } = payload;
+                const path = (window.location.pathname);
+                if (!id) {
+                    navigate('/sign-in');
+                } else if (path === '/sign-in' || path === '/sign-up') {
+                    navigate('/');
+                }
+            } catch (err) {
+                navigate('/sign-in');
+            }
+        };
+        if (code) {
+            OauthEnter().catch((e) => {
+                notification.open({
+                    message: 'Error getting current user',
+                    description: String(e),
+                });
+            });
+            return;
+        }
         if (status === 'idle') {
             getCurrentUser().catch((e) => {
                 notification.open({

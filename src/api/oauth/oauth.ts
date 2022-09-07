@@ -8,6 +8,16 @@ async function getServiceId(redirect_uri: string): Promise<OAuthType | null> {
     });
 }
 
+async function signInWithYandex(body: { code: string, redirect_uri: string })
+    : Promise<string | null> {
+    return ApiService.postRequest({
+        address: 'oauth/yandex',
+        isJson: false,
+        body,
+    });
+}
+
 export default {
     getServiceId,
+    signInWithYandex,
 };
