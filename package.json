@@ -7,7 +7,7 @@
         "start:server": "nodemon --inspect index.js --watch build/server.js",
         "start:webpack": "webpack --mode=development --watch",
         "start": "cross-env NODE_ENV=development npm-run-all --print-label --parallel start:*",
-        "serve": "node index.js",
+        "serve": "node server.js",
         "build": "webpack --mode production",
         "lint": "stylelint ./src/**/*.scss && eslint \"src/**/*.{ts,tsx}\"",
         "lint-fix": "stylelint --fix ./src/**/*.scss && eslint --fix \"src/**/*.{ts,tsx}\"",
