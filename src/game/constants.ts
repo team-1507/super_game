@@ -1,7 +1,6 @@
 import stepSound from '../../static/audio/sounds/step-one.ogg';
 
-export const MAP_SIZE: [number,
-    number] = [20, 20]; // rows, cols (in tiles)
+export const MAP_SIZE: [number, number] = [20, 20]; // rows, cols (in tiles)
 
 /*
 Этой константой можно менять размер тайла и, соответственно, масштаб на странице
