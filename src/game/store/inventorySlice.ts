@@ -73,9 +73,6 @@ export const inventorySlice = createSlice({
                 ? seedTypes[0] : seedTypes[currentInUseKey + 1];
             inventory.isUse = nextSeedType as keyof Seeds;
         },
-        takeMoney: (inventory: Inventory, { payload }: PayloadAction<number>) => {
-            inventory.money += payload;
-        },
     },
 });
 
@@ -86,7 +83,6 @@ export const {
     decrementSelectedSeed,
     selectIt,
     selectNext,
-    takeMoney,
 } = inventorySlice.actions;
 
 export default inventorySlice.reducer;

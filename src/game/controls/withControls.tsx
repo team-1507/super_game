@@ -19,7 +19,7 @@ import {
 } from '../store/characterPositionSlice';
 import { plant, harvest } from '../store/gardenStateSlice';
 import {
-    buySelectedSeed, decrementSelectedSeed, Inventory, Seeds, selectNext, takeMoney,
+    buySelectedSeed, decrementSelectedSeed, Inventory, Seeds, selectNext, addMoney,
 } from '../store/inventorySlice';
 import { plow, water, plowedEarthTileType, waterEarthTileType } from '../store/mapStateSlice';
 import { addAction, addMove } from '../store/timerSlice';
@@ -127,7 +127,7 @@ const withControls = <T extends WithControlsProps = WithControlsProps>(
             dispatch(
                 harvest({ tileNum: getCurrentCharacterTileNum() }),
             );
-            dispatch(takeMoney(0));
+            dispatch(addMoney(0));
         },
         togglePause: () => {
             dispatch(togglePause());
