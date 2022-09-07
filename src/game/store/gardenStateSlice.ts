@@ -1,6 +1,5 @@
 /* eslint-disable no-param-reassign */
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-// import { ASSET_TILE_TYPES } from '../plants/config';
 import * as constants from '../constants';
 import Plant from '../plants/Plant';
 
@@ -24,17 +23,6 @@ export const gardenStateSlice = createSlice({
     name: 'gardenState',
     initialState,
     reducers: {
-        // plow: (plants: PlantOrNone[], action: PayloadAction<number>) => {
-        //     const tileAlias = Object
-        //         .keys(ASSET_TILE_TYPES)
-        //         .find(
-        //             (key) => ASSET_TILE_TYPES[Number.parseInt(key, 10)] === 'PLOWED_EARTH',
-        //         );
-        //     if (tileAlias === undefined) {
-        //         throw new Error('Tile alias for PLOWED_EARTH not found');
-        //     }
-        //     plants[action.payload] = Number.parseInt(tileAlias, 10);
-        // },
         plant: (plantsState: PlantOrNone[], action: PayloadAction<PlantAction>) => {
             const { plant, tileNum } = action.payload;
             plantsState[tileNum] = plant;
