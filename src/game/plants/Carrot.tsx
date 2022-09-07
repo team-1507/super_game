@@ -1,7 +1,6 @@
 import Plant, { LifeCycle } from './Plant';
 
 class Carrot extends Plant {
-    // eslint-disable-next-line class-methods-use-this
     public get tileTypeList(): Record<LifeCycle, number> {
         return {
             [LifeCycle.sprout]: 31,
@@ -10,6 +9,14 @@ class Carrot extends Plant {
             [LifeCycle.ripe]: 34,
             [LifeCycle.harvested]: 35,
         };
+    }
+
+    public get sellingPrice(): number {
+        return 10;
+    }
+
+    public get plantingTime(): number {
+        return 5;
     }
 }
 

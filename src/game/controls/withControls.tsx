@@ -21,7 +21,9 @@ import { plant, harvest } from '../store/gardenStateSlice';
 import {
     buySelectedSeed, decrementSelectedSeed, Inventory, Seeds, selectNext, addMoney,
 } from '../store/inventorySlice';
-import { plow, water, plowedEarthTileType, waterEarthTileType } from '../store/mapStateSlice';
+import {
+    plow, water, plowedEarthTileType, waterEarthTileType,
+} from '../store/mapStateSlice';
 import { addAction, addMove, incrementTimestamp } from '../store/timerSlice';
 import { toggleMute, togglePause } from '../store/uiSlice';
 import { WithControlsProps } from './types';
@@ -59,7 +61,10 @@ const withControls = <T extends WithControlsProps = WithControlsProps>(
 
     const ifCanWaterHere = () => map[1][getCurrentCharacterTileNum()] === plowedEarthTileType;
 
-    const ifTileIsSoil = () => [plowedEarthTileType, waterEarthTileType].includes(map[1][getCurrentCharacterTileNum()]);
+    const ifTileIsSoil = () => [
+        plowedEarthTileType,
+        waterEarthTileType,
+    ].includes(map[1][getCurrentCharacterTileNum()]);
 
     const ifNoPlantOnTile = () => garden[getCurrentCharacterTileNum()] === 0;
 
@@ -113,27 +118,33 @@ const withControls = <T extends WithControlsProps = WithControlsProps>(
             }
             dispatch(addAction());
             dispatch(decrementSelectedSeed());
+            const plantingPlant = plantClasses[inventory.isUse](gardenRef.current);
+            dispatch(incrementTimestamp(plantingPlant.plantingTime));
             dispatch(
                 plant({
-                    plant: plantClasses[inventory.isUse](gardenRef.current),
+                    plant: plantingPlant,
                     tileNum: getCurrentCharacterTileNum(),
                 }),
             );
         },
         doWater: () => {
-            if (!ifCanWaterHere()) return
+            if (!ifCanWaterHere()) return;
             dispatch(addAction());
             dispatch(
                 water(getCurrentCharacterTileNum()),
             );
         },
         doHarvest: () => {
-            if (!ifCanHarvestHere()) return
+            if (!ifCanHarvestHere()) return;
             dispatch(addAction());
             dispatch(
                 harvest({ tileNum: getCurrentCharacterTileNum() }),
             );
-            dispatch(addMoney(0));
+            const harvestedPlant = garden[getCurrentCharacterTileNum()];
+            if (!(harvestedPlant instanceof Plant)) {
+                throw new Error('Can\'t find a plant here');
+            }
+            dispatch(addMoney(harvestedPlant.sellingPrice));
         },
         togglePause: () => {
             dispatch(togglePause());
