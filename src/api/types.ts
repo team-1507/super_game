@@ -10,6 +10,7 @@ export interface GetRequestParams<B = void> extends BaseRequestParams {
 export interface PostRequestParams<B = void> extends BaseRequestParams {
     body?: B;
     queryParams?: Record<string, unknown>;
+    isJson?: boolean
 }
 
 export interface PutRequestParams<B> extends BaseRequestParams {

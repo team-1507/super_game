@@ -1,9 +1,10 @@
 import React, { useEffect } from 'react';
 import './App.scss';
-import { Route, Routes, useNavigate } from 'react-router-dom';
+import {
+    Route, Routes, useNavigate,
+} from 'react-router-dom';
 import { notification } from 'antd';
 import { PayloadAction } from '@reduxjs/toolkit';
-
 import Game from '../pages/game';
 import SignUp from '../pages/sign-up/SignUp';
 import SignIn from '../pages/sign-in';
@@ -27,7 +28,6 @@ const App = () => {
             try {
                 const { payload } = await dispatch(fetchUser()) as PayloadAction<UserDto>;
                 const { id } = payload;
-
                 if (!id) {
                     navigate('/sign-in');
                 }
