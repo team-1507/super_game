@@ -21,6 +21,8 @@ const ControlsWrapper = (
         ArrowRight: gameControls.goRight,
         Digit1: gameControls.doPlow,
         Digit2: gameControls.doPlant,
+        Digit3: gameControls.doWater,
+        Digit4: gameControls.doHarvest,
         Escape: gameControls.togglePause,
         KeyP: gameControls.togglePause,
         Tab: gameControls.loopThroughSeeds,

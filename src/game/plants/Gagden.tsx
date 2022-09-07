@@ -8,7 +8,7 @@ import * as constants from '../constants';
 import * as mapConfig from '../map/config';
 import { PlantOrNone } from '../store/gardenStateSlice';
 import { RootState } from '../../store';
-import { plow } from '../store/mapStateSlice';
+import { plow, water } from '../store/mapStateSlice';
 import Plant from './Plant';
 
 const mapState = (state: RootState) => {
@@ -20,6 +20,7 @@ const mapState = (state: RootState) => {
 
 const mapDispatch = {
     plow,
+    water
 };
 
 const connector = connect(mapState, mapDispatch);

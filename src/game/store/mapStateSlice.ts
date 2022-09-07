@@ -3,14 +3,19 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { ASSET_TILE_TYPES, MAP } from '../map/config';
 
 const plowedEarthAlias = 'SOIL_1';
-export const plowedEarthTileType = Number.parseInt(
+const waterEarthAlias = 'PLOWED_SOIL_1';
+
+const findTileType = (alias: string) => Number.parseInt(
     String(Object
         .keys(ASSET_TILE_TYPES)
         .find(
-            (key) => ASSET_TILE_TYPES[Number.parseInt(key, 10)] === plowedEarthAlias,
+            (key) => ASSET_TILE_TYPES[Number.parseInt(key, 10)] === alias,
         )),
     10,
 );
+
+export const plowedEarthTileType = findTileType(plowedEarthAlias);
+export const waterEarthTileType = findTileType(waterEarthAlias);
 
 type MapConfig = [
     number[],
@@ -29,10 +34,17 @@ export const mapStateSlice = createSlice({
             }
             currentState[1][action.payload] = plowedEarthTileType;
         },
+        water: (currentState: MapConfig, action: PayloadAction<number>) => {
+            if (Number.isNaN(waterEarthTileType)) {
+                throw new Error(`Tile alias for ${waterEarthAlias} not found`);
+            }
+            currentState[1][action.payload] = waterEarthTileType;
+        },
     },
 });
 
 export const {
     plow,
+    water,
 } = mapStateSlice.actions;
 export default mapStateSlice.reducer;

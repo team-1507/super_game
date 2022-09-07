@@ -17,11 +17,11 @@ import { mapHelper } from '../SpriteSheet';
 import {
     down, left, right, up,
 } from '../store/characterPositionSlice';
-import { plant } from '../store/gardenStateSlice';
+import { plant, harvest } from '../store/gardenStateSlice';
 import {
-    buySelectedSeed, decrementSelectedSeed, Inventory, Seeds, selectNext,
+    buySelectedSeed, decrementSelectedSeed, Inventory, Seeds, selectNext, addMoney,
 } from '../store/inventorySlice';
-import { plow, plowedEarthTileType } from '../store/mapStateSlice';
+import { plow, water, plowedEarthTileType, waterEarthTileType } from '../store/mapStateSlice';
 import { addAction, addMove, incrementTimestamp } from '../store/timerSlice';
 import { toggleMute, togglePause } from '../store/uiSlice';
 import { WithControlsProps } from './types';
@@ -57,11 +57,15 @@ const withControls = <T extends WithControlsProps = WithControlsProps>(
 
     const ifCanPlowHere = () => map[1][getCurrentCharacterTileNum()] === 0;
 
-    const ifTileIsGrass = () => map[1][getCurrentCharacterTileNum()] === plowedEarthTileType;
+    const ifCanWaterHere = () => map[1][getCurrentCharacterTileNum()] === plowedEarthTileType;
+
+    const ifTileIsSoil = () => [plowedEarthTileType, waterEarthTileType].includes(map[1][getCurrentCharacterTileNum()]);
 
     const ifNoPlantOnTile = () => garden[getCurrentCharacterTileNum()] === 0;
 
-    const ifCanPlantHere = () => ifTileIsGrass() && ifNoPlantOnTile();
+    const ifCanPlantHere = () => ifTileIsSoil() && ifNoPlantOnTile();
+
+    const ifCanHarvestHere = () => !ifNoPlantOnTile();
 
     const ifHasSeedInInventory = () => inventory.seeds[inventory.isUse] > 0;
 
@@ -115,6 +119,21 @@ const withControls = <T extends WithControlsProps = WithControlsProps>(
                     tileNum: getCurrentCharacterTileNum(),
                 }),
             );
+        },
+        doWater: () => {
+            if (!ifCanWaterHere()) return
+            dispatch(addAction());
+            dispatch(
+                water(getCurrentCharacterTileNum()),
+            );
+        },
+        doHarvest: () => {
+            if (!ifCanHarvestHere()) return
+            dispatch(addAction());
+            dispatch(
+                harvest({ tileNum: getCurrentCharacterTileNum() }),
+            );
+            dispatch(addMoney(0));
         },
         togglePause: () => {
             dispatch(togglePause());

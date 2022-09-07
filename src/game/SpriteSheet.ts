@@ -62,14 +62,16 @@ export class SpriteSheet implements ISpriteSheet {
 
     private getTileCoordsOnSptiteSheet(tileType: number) {
         const spriteName = this.ASSET_TILE_TYPES[tileType];
-        if (spriteName === undefined) {
-            throw new Error(`Sprite with index ${tileType} does not exist on this sheet`);
+        if (tileType !== 0) {
+            if (spriteName === undefined) {
+                throw new Error(`Sprite with index ${tileType} does not exist on this sheet`);
+            }
+            if (this.ASSET_TILE_COORDS[spriteName] === undefined) {
+                throw new Error(`"${spriteName}" coordinates are not defined`);
+            }
         }
-        if (this.ASSET_TILE_COORDS[spriteName] === undefined) {
-            throw new Error(`"${spriteName}" coordinates are not defined`);
-        }
-        const [row, coloumn] = this.ASSET_TILE_COORDS[spriteName];
-        const sourceX = (coloumn - 1) * (this.SPRITE_SIZE.width + this.SPRITE_SIZE.gap);
+        const [row, column] = this.ASSET_TILE_COORDS[spriteName] || [0, 0];
+        const sourceX = (column - 1) * (this.SPRITE_SIZE.width + this.SPRITE_SIZE.gap);
         const sourceY = (row - 1) * (this.SPRITE_SIZE.height + this.SPRITE_SIZE.gap);
         return {
             sourceX,
@@ -127,14 +129,10 @@ export class SpriteSheet implements ISpriteSheet {
         clearWholeCanvas = false,
         clearTile = false,
     ) {
-        /* TODO
-        * разобраться с 0 индексом
-        */
-        if (tileType === 0) {
+        const ctx = canvas?.getContext('2d');
+        if (!ctx) {
             return canvas;
         }
-        const img = this.sptitesheetImageElement.cloneNode() as HTMLImageElement;
-        const ctx = canvas?.getContext('2d');
         let [row, col] = [1, 1];
         if (typeof position === 'number') {
             [row, col] = this.tileNumToCoords(position);
@@ -155,10 +153,9 @@ export class SpriteSheet implements ISpriteSheet {
             this.SPRITE_SIZE.width * this.spriteScale,
             this.SPRITE_SIZE.height * this.spriteScale,
         ];
+
+        const img = this.sptitesheetImageElement.cloneNode() as HTMLImageElement;
         img.onload = () => {
-            if (!ctx) {
-                return canvas;
-            }
             ctx.imageSmoothingEnabled = false;
             if (clearWholeCanvas) {
                 ctx.clearRect(0, 0, this.canvasWidth, this.canvasHeight);
