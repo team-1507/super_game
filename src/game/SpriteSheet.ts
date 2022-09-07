@@ -52,7 +52,11 @@ export class SpriteSheet implements ISpriteSheet {
         this.MAP_SIZE = config.MAP_SIZE;
         this.TILE_SIZE = config.TILE_SIZE;
         this.BOUNDARIES = config.BOUNDARIES;
-        this.sptitesheetImageElement = new Image();
+        if (typeof window !== 'undefined') {
+            this.sptitesheetImageElement = new Image();
+        }  else {
+            this.sptitesheetImageElement = {} as  HTMLImageElement;
+        }
         this.sptitesheetImageElement.src = this.SPRITE_SHEET;
         this.canvasWidth = this.TILE_SIZE * this.MAP_SIZE[1];
         this.canvasHeight = this.TILE_SIZE * this.MAP_SIZE[0];
@@ -118,8 +122,7 @@ export class SpriteSheet implements ISpriteSheet {
 
     public coordsToTileNum(coords: [number, number]) {
         const [row, col] = coords;
-        const tileNum = (row - 1) * this.MAP_SIZE[1] + col - 1;
-        return tileNum; // from 0;
+        return (row - 1) * this.MAP_SIZE[1] + col - 1; // from 0;
     }
 
     public drawTile(

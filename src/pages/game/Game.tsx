@@ -22,8 +22,9 @@ const playMusic = () => {
     });
     document.removeEventListener('click', playMusic);
 };
-
-document.addEventListener('click', playMusic);
+if (typeof window !== 'undefined') {
+    document.addEventListener('click', playMusic);
+}
 
 const Game = () => {
     const container = createRef<HTMLDivElement>();
