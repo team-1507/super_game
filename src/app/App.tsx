@@ -1,9 +1,8 @@
 import React, { useEffect } from 'react';
-import './App.scss';
 import { Route, Routes, useNavigate } from 'react-router-dom';
 import { notification } from 'antd';
 import { PayloadAction } from '@reduxjs/toolkit';
-
+import { hot } from 'react-hot-loader/root';
 import Game from '../pages/game';
 import SignUp from '../pages/sign-up/SignUp';
 import SignIn from '../pages/sign-in';
@@ -15,6 +14,7 @@ import Forum from '../pages/forum';
 import { useAppSelector, useAppDispatch } from '../store/hooks';
 import { fetchUser } from '../store/reducers/userReducer';
 import { UserDto } from '../api/user/types';
+import './App.scss';
 
 const App = () => {
     const userState = useAppSelector((state) => state.user);
@@ -62,4 +62,4 @@ const App = () => {
     );
 };
 
-export default App;
+export default hot(App);
