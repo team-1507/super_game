@@ -37,3 +37,6 @@ export function classNames(classesObject: object) {
     }
     return getClasses(classesObject);
 }
+
+export const whatTimeIsItNow = (timestamp: number) => (timestamp % (60 * 24));
+export const whatDayIsItToday = (timestamp: number) => Math.ceil(timestamp / (60 * 24));
