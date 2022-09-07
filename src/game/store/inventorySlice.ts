@@ -39,6 +39,9 @@ export const inventorySlice = createSlice({
         addMoney: (inventory: Inventory, { payload }: PayloadAction<number>) => {
             inventory.money += payload;
         },
+        decrementMoney: (inventory: Inventory, { payload }: PayloadAction<number>) => {
+            inventory.money -= payload;
+        },
         buySeed: (inventory: Inventory, { payload }: PayloadAction<keyof Seeds>) => {
             if (inventory.seeds[payload] < 99 && inventory.money >= SEED_PRICES[payload]) {
                 inventory.seeds[payload] += 1;
@@ -78,6 +81,7 @@ export const inventorySlice = createSlice({
 
 export const {
     addMoney,
+    decrementMoney,
     buySeed,
     buySelectedSeed,
     decrementSelectedSeed,

@@ -3,7 +3,7 @@ import React, { RefObject } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import audio from '../../audio';
 import { RootState } from '../../store';
-import constants from '../constants';
+import constants, { MINUTES_PER_PLOW, MINUTES_PER_STEP } from '../constants';
 
 import Cabbage from '../plants/Cabbage';
 import Carrot from '../plants/Carrot';
@@ -17,23 +17,14 @@ import { mapHelper } from '../SpriteSheet';
 import {
     down, left, right, up,
 } from '../store/characterPositionSlice';
-import { plant } from '../store/gardenStateSlice';
+import { plant, harvest } from '../store/gardenStateSlice';
 import {
-    buySelectedSeed, decrementSelectedSeed, Inventory, Seeds, selectNext,
+    buySelectedSeed, decrementSelectedSeed, Inventory, Seeds, selectNext, addMoney,
 } from '../store/inventorySlice';
-import { plow, plowedEarthTileType } from '../store/mapStateSlice';
-import { addAction, addMove } from '../store/timerSlice';
+import { plow, water, plowedEarthTileType, waterEarthTileType } from '../store/mapStateSlice';
+import { addAction, addMove, incrementTimestamp } from '../store/timerSlice';
 import { toggleMute, togglePause } from '../store/uiSlice';
 import { WithControlsProps } from './types';
-
-const plantClasses: Record<keyof Seeds, (canvasElement: HTMLCanvasElement | null) => Plant> = {
-    tomato: (c) => new Tomato(c),
-    potato: (c) => new Potato(c),
-    carrot: (c) => new Carrot(c),
-    cabbage: (c) => new Cabbage(c),
-    pepper: (c) => new Pepper(c),
-    squash: (c) => new Squash(c),
-};
 
 const withControls = <T extends WithControlsProps = WithControlsProps>(
     WrappedComponent: React.ComponentType<T>,
@@ -47,8 +38,18 @@ const withControls = <T extends WithControlsProps = WithControlsProps>(
     const inventory: Inventory = useSelector((state: RootState) => state.inventory);
     const map = useSelector((state: RootState) => state.mapState);
     const garden = useSelector((state: RootState) => state.gardenState);
+    const timer = useSelector((state: RootState) => state.timer);
 
     const dispatch = useDispatch();
+
+    const plantClasses: Record<keyof Seeds, (canvasElement: HTMLCanvasElement | null) => Plant> = {
+        tomato: (c) => new Tomato(c, timer.timestamp),
+        potato: (c) => new Potato(c, timer.timestamp),
+        carrot: (c) => new Carrot(c, timer.timestamp),
+        cabbage: (c) => new Cabbage(c, timer.timestamp),
+        pepper: (c) => new Pepper(c, timer.timestamp),
+        squash: (c) => new Squash(c, timer.timestamp),
+    };
 
     const getCurrentCharacterTileNum = () => mapHelper.coordsToTileNum(
         currentCharacterPosition.coords,
@@ -56,32 +57,40 @@ const withControls = <T extends WithControlsProps = WithControlsProps>(
 
     const ifCanPlowHere = () => map[1][getCurrentCharacterTileNum()] === 0;
 
-    const ifTileIsGrass = () => map[1][getCurrentCharacterTileNum()] === plowedEarthTileType;
+    const ifCanWaterHere = () => map[1][getCurrentCharacterTileNum()] === plowedEarthTileType;
+
+    const ifTileIsSoil = () => [plowedEarthTileType, waterEarthTileType].includes(map[1][getCurrentCharacterTileNum()]);
 
     const ifNoPlantOnTile = () => garden[getCurrentCharacterTileNum()] === 0;
 
-    const ifCanPlantHere = () => ifTileIsGrass() && ifNoPlantOnTile();
+    const ifCanPlantHere = () => ifTileIsSoil() && ifNoPlantOnTile();
+
+    const ifCanHarvestHere = () => !ifNoPlantOnTile();
 
     const ifHasSeedInInventory = () => inventory.seeds[inventory.isUse] > 0;
 
     const gameControls = {
         goUp: () => {
             audio({ src: constants.SOUNDS.steps });
+            dispatch(incrementTimestamp(MINUTES_PER_STEP));
             dispatch(addMove());
             dispatch(up());
         },
         goDown: () => {
             audio({ src: constants.SOUNDS.steps });
+            dispatch(incrementTimestamp(MINUTES_PER_STEP));
             dispatch(addMove());
             dispatch(down());
         },
         goLeft: () => {
             audio({ src: constants.SOUNDS.steps });
+            dispatch(incrementTimestamp(MINUTES_PER_STEP));
             dispatch(addMove());
             dispatch(left());
         },
         goRight: () => {
             audio({ src: constants.SOUNDS.steps });
+            dispatch(incrementTimestamp(MINUTES_PER_STEP));
             dispatch(addMove());
             dispatch(right());
         },
@@ -89,6 +98,7 @@ const withControls = <T extends WithControlsProps = WithControlsProps>(
             if (!ifCanPlowHere()) {
                 return;
             }
+            dispatch(incrementTimestamp(MINUTES_PER_PLOW));
             dispatch(addAction());
             dispatch(
                 plow(getCurrentCharacterTileNum()),
@@ -109,6 +119,21 @@ const withControls = <T extends WithControlsProps = WithControlsProps>(
                     tileNum: getCurrentCharacterTileNum(),
                 }),
             );
+        },
+        doWater: () => {
+            if (!ifCanWaterHere()) return
+            dispatch(addAction());
+            dispatch(
+                water(getCurrentCharacterTileNum()),
+            );
+        },
+        doHarvest: () => {
+            if (!ifCanHarvestHere()) return
+            dispatch(addAction());
+            dispatch(
+                harvest({ tileNum: getCurrentCharacterTileNum() }),
+            );
+            dispatch(addMoney(0));
         },
         togglePause: () => {
             dispatch(togglePause());
