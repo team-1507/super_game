@@ -54,6 +54,7 @@ async function postRequest<B, R>({
     address,
     body,
     queryParams,
+    isJson = true,
 }: PostRequestParams<B>): Promise<R | null> {
     const url = getUrl(address, queryParams);
 
@@ -68,11 +69,17 @@ async function postRequest<B, R>({
         body: body ? JSON.stringify(body) : null,
         credentials: 'include',
     });
-    const responseJSON = await response.json() as unknown;
+
     if (response.status === 200) {
-        return responseJSON as R;
+        if (isJson) {
+            return await response.json() as unknown as R;
+        }
+        return response.ok as unknown as R;
     }
-    openNotification(ErrorsList.serverError, (await responseJSON as ErrorResponse).reason);
+    openNotification(
+        ErrorsList.serverError,
+        (await response.json() as unknown as ErrorResponse).reason,
+    );
     return null;
 }
 

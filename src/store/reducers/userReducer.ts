@@ -4,7 +4,6 @@ import type { PayloadAction, SerializedError } from '@reduxjs/toolkit';
 import UserApi from '../../api/user/user';
 import { UserDto } from '../../api/user/types';
 import type { RootState } from '..';
-import { getAvatar } from '../helpers';
 
 export const fetchUser = createAsyncThunk(
     'user/fetchUser',
@@ -51,7 +50,7 @@ const userSlice = createSlice({
             const { data } = state;
             data.login = login;
             data.email = email;
-            data.avatar = getAvatar(avatar);
+            data.avatar = avatar;
         },
     },
     extraReducers: (builder) => {

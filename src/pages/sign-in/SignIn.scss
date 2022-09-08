@@ -1,6 +1,6 @@
 @import "/src/styles/index";
 
-.sign-up-page {
+.sign-in-page {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -54,6 +54,17 @@
             span {
                 @include font-style($font-size: 33px, $color: $white, $font-family: VT323);
             }
+        }
+    }
+    &__yandex-auth {
+        display: flex;
+        align-items: center;
+        column-gap: 20px;
+        button {
+            @include font-style($font-size: 23px, $font-family: Ubuntu);
+            background: none;
+            border: none;
+            outline: none;
         }
     }
 }

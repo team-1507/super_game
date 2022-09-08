@@ -9,10 +9,12 @@ import { useAppSelector } from '../../store/hooks';
 import './Settings.scss';
 import UserSettingsApi from '../../api/user/user-settings';
 import { UserDataType, UserPasswordType } from '../../api/user/types';
+import { getAvatar } from '../../store/helpers';
 
 const Settings = () => {
     const { activeTab } = useParams();
     const { data: user } = useAppSelector((state) => state.user);
+    const avatar = getAvatar(user.avatar);
     const changeUserFn = UserSettingsApi.changeUser;
     const changePasswordFn = UserSettingsApi.changePassword;
     const valuesToSendUser: UserDataType = {
@@ -35,7 +37,7 @@ const Settings = () => {
                 <Tab header="Profile" url="profile">
                     <section className="avatar-upload-wrapper">
                         <div className="avatar-img-cont">
-                            <img src={user.avatar} alt="avatar" />
+                            <img src={avatar} alt="avatar" />
                         </div>
                         <form className="avatar-buttons-form">
                             <UploadInput label="Upload" name="avatar" />
