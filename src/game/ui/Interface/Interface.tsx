@@ -14,8 +14,8 @@ interface InterfaceProps {
 const { MoneyCounter, TimeCounter, SeedCounter } = Counters;
 
 const Interface = (props: InterfaceProps) => {
-    const { refs: { gardenRef } } = props;
-    const ActionButtonsWithControls = withControls(ActionButtons, { gardenRef });
+    const { refs } = props;
+    const ActionButtonsWithControls = withControls(ActionButtons, refs);
 
     return (
         <div className="game-page__interface">

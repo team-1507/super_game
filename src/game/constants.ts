@@ -16,13 +16,13 @@ export const SOUNDS = {
 };
 
 // one step takes x miutes
-export const MINUTES_PER_STEP = 10;
-export const MINUTES_PER_PLOW = 20;
+export const MINUTES_PER_STEP = 5;
+export const MINUTES_PER_PLOW = 30;
 
 export const DAILY_TAX = 25; // RUB
 
-export const SUNRISE_TIMESTAMP = 60 * 6; // 6:00 am
-export const SUNSET_TIMESTAMP = 60 * 22; // 10:00 pm
+export const SUNRISE_TIMESTAMP = 60 * 10; // 10:00 am
+export const SUNSET_TIMESTAMP = 60 * 18; // 06:00 pm
 
 export default {
     MAP_SIZE,
