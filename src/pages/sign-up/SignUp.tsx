@@ -7,7 +7,7 @@ import SignUpApi from '../../api/sign-up/sign-up';
 import { SignUpData } from '../../api/sign-up/types';
 import YandexIcon from '../../components/icons/YandexIcon';
 import OAuthApi from '../../api/oauth/oauth';
-import IS_DEV from '../../consts';
+import Consts from '../../consts';
 
 const SignUp = () => {
     const callbackFn = SignUpApi.signUp;
@@ -19,11 +19,11 @@ const SignUp = () => {
         email: '',
         password: '',
     };
-    const REDIRECT_URI = IS_DEV ? 'http://localhost:3000' : 'https://ivans-dacha.herokuapp.com';
+
     const getClientId = () => {
-        OAuthApi.getServiceId(REDIRECT_URI).then((response) => {
+        OAuthApi.getServiceId(Consts.REDIRECT_URI).then((response) => {
             if (response) {
-                const urlToAuth = `https://oauth.yandex.ru/authorize?response_type=code&client_id=${response.service_id}&redirect_uri=${REDIRECT_URI}`;
+                const urlToAuth = `https://oauth.yandex.ru/authorize?response_type=code&client_id=${response.service_id}&redirect_uri=${Consts.REDIRECT_URI}`;
                 window.open(urlToAuth, '_self');
             }
         })
