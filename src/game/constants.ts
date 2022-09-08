@@ -18,6 +18,7 @@ export const SOUNDS = {
 // one step takes x miutes
 export const MINUTES_PER_STEP = 5;
 export const MINUTES_PER_PLOW = 30;
+export const MINUTES_PER_WATER = 15;
 
 export const DAILY_TAX = 25; // RUB
 
@@ -31,6 +32,7 @@ export default {
     SIDESPACE,
     MINUTES_PER_STEP,
     MINUTES_PER_PLOW,
+    MINUTES_PER_WATER,
     DAILY_TAX,
     SUNRISE_TIMESTAMP,
     SUNSET_TIMESTAMP,

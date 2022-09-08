@@ -3,7 +3,7 @@ import React, { RefObject } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import audio from '../../audio';
 import { RootState } from '../../store';
-import constants, { MINUTES_PER_PLOW, MINUTES_PER_STEP } from '../constants';
+import constants, { MINUTES_PER_PLOW, MINUTES_PER_STEP, MINUTES_PER_WATER } from '../constants';
 
 import Cabbage from '../plants/Cabbage';
 import Carrot from '../plants/Carrot';
@@ -130,6 +130,7 @@ const withControls = <T extends WithControlsProps = WithControlsProps>(
         doWater: () => {
             if (!ifCanWaterHere()) return;
             dispatch(addAction());
+            dispatch(incrementTimestamp(MINUTES_PER_WATER));
             dispatch(
                 water(getCurrentCharacterTileNum()),
             );
