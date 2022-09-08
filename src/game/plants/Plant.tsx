@@ -28,17 +28,21 @@ abstract class Plant {
 
     public getAndSetCurrentLifeState(currentTimestamp: number): LifeCycle {
         let lifeTime = currentTimestamp - (this.wasPlanted ?? 0);
-        Object.entries(
+        const durations = Object.entries(
             this.liveStateDuration as Record<LifeCycle, number>,
-        ).some(([state, duration]) => {
-            if (lifeTime - duration <= 0) {
-                return true;
-            }
-            this.lifeState = state as unknown as LifeCycle;
+        );
+        let ls = this.lifeState;
+        // eslint-disable-next-line no-restricted-syntax
+        for (const record of durations) {
+            const [state, duration] = record;
             lifeTime -= duration;
-            return false;
-        });
-
+            if (lifeTime >= 0) {
+                ls = state as unknown as LifeCycle;
+            } else {
+                break;
+            }
+        }
+        this.lifeState = ls;
         return this.lifeState ?? LifeCycle.sprout;
     }
 

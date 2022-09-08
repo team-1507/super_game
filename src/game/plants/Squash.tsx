@@ -25,7 +25,7 @@ class Squash extends Plant {
             [LifeCycle.young]: 20,
             [LifeCycle.grown]: 20,
             [LifeCycle.ripe]: 240,
-            [LifeCycle.harvested]: 10,
+            [LifeCycle.harvested]: 240,
         };
     }
 }

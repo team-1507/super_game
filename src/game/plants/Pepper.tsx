@@ -25,7 +25,7 @@ class Pepper extends Plant {
             [LifeCycle.young]: 60,
             [LifeCycle.grown]: 60,
             [LifeCycle.ripe]: 60,
-            [LifeCycle.harvested]: 10,
+            [LifeCycle.harvested]: 60,
         };
     }
 }

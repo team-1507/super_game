@@ -25,7 +25,7 @@ class Cabbage extends Plant {
             [LifeCycle.young]: 20,
             [LifeCycle.grown]: 70,
             [LifeCycle.ripe]: 120,
-            [LifeCycle.harvested]: 10,
+            [LifeCycle.harvested]: 120,
         };
     }
 }

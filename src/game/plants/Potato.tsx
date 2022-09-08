@@ -25,7 +25,7 @@ class Potato extends Plant {
             [LifeCycle.young]: 20,
             [LifeCycle.grown]: 20,
             [LifeCycle.ripe]: 180,
-            [LifeCycle.harvested]: 10,
+            [LifeCycle.harvested]: 180,
         };
     }
 }

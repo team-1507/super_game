@@ -25,7 +25,7 @@ class Carrot extends Plant {
             [LifeCycle.young]: 30,
             [LifeCycle.grown]: 40,
             [LifeCycle.ripe]: 120,
-            [LifeCycle.harvested]: 10,
+            [LifeCycle.harvested]: 120,
         };
     }
 }
