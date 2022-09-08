@@ -12,11 +12,21 @@ class Potato extends Plant {
     }
 
     public get sellingPrice(): number {
-        return 10;
+        return 18;
     }
 
     public get plantingTime(): number {
-        return 5;
+        return 60;
+    }
+
+    public get liveStateDuration(): Record<LifeCycle, number> {
+        return {
+            [LifeCycle.sprout]: 20,
+            [LifeCycle.young]: 20,
+            [LifeCycle.grown]: 20,
+            [LifeCycle.ripe]: 180,
+            [LifeCycle.harvested]: 10,
+        };
     }
 }
 

@@ -18,16 +18,16 @@ export interface Seeds {
 }
 
 const initialSeeds: Seeds = {
-    tomato: 0,
-    potato: 0,
-    carrot: 0,
-    cabbage: 0,
-    pepper: 0,
-    squash: 0,
+    tomato: 1,
+    potato: 1,
+    carrot: 1,
+    cabbage: 1,
+    pepper: 1,
+    squash: 1,
 };
 
 const initialState: Inventory = {
-    money: 100,
+    money: 50,
     seeds: initialSeeds,
     isUse: 'tomato',
 };

@@ -12,11 +12,21 @@ class Squash extends Plant {
     }
 
     public get sellingPrice(): number {
-        return 10;
+        return 35;
     }
 
     public get plantingTime(): number {
         return 5;
+    }
+
+    public get liveStateDuration(): Record<LifeCycle, number> {
+        return {
+            [LifeCycle.sprout]: 60,
+            [LifeCycle.young]: 20,
+            [LifeCycle.grown]: 20,
+            [LifeCycle.ripe]: 240,
+            [LifeCycle.harvested]: 10,
+        };
     }
 }
 

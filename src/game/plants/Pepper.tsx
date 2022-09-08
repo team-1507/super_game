@@ -12,11 +12,21 @@ class Pepper extends Plant {
     }
 
     public get sellingPrice(): number {
-        return 10;
+        return 45;
     }
 
     public get plantingTime(): number {
-        return 5;
+        return 45;
+    }
+
+    public get liveStateDuration(): Record<LifeCycle, number> {
+        return {
+            [LifeCycle.sprout]: 60,
+            [LifeCycle.young]: 60,
+            [LifeCycle.grown]: 60,
+            [LifeCycle.ripe]: 60,
+            [LifeCycle.harvested]: 10,
+        };
     }
 }
 

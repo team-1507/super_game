@@ -1,12 +1,12 @@
 export const SEED_PRICES = {
-    tomato: 5,
-    potato: 7,
-    carrot: 2,
-    cabbage: 5,
-    pepper: 7,
-    squash: 2,
+    tomato: 25,
+    potato: 15,
+    carrot: 17,
+    cabbage: 30,
+    pepper: 20,
+    squash: 27,
 };
 
 export default {
-    SEED_PRICES
+    SEED_PRICES,
 };
