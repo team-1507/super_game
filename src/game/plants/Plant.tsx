@@ -19,7 +19,6 @@ abstract class Plant {
         this.wasPlanted = plantingTimestamp;
     }
 
-    // eslint-disable-next-line class-methods-use-this
     public get tileType(): number {
         if (!this.lifeState) {
             this.lifeState = LifeCycle.sprout;
@@ -47,7 +46,6 @@ abstract class Plant {
         return this.lifeState;
     }
 
-    // eslint-disable-next-line class-methods-use-this
     public get liveStateDuration(): Record<LifeCycle, number> {
         return {
             [LifeCycle.sprout]: 10,
@@ -58,7 +56,6 @@ abstract class Plant {
         };
     }
 
-    // eslint-disable-next-line class-methods-use-this
     public get tileTypeList(): Record<LifeCycle, number> {
         throw new Error('Getter "tileTypeList" is not implemented');
         return {
@@ -68,6 +65,14 @@ abstract class Plant {
             [LifeCycle.ripe]: 0,
             [LifeCycle.harvested]: 0,
         };
+    }
+
+    public get sellingPrice(): number {
+        return 10;
+    }
+
+    public get plantingTime(): number {
+        return 10;
     }
 }
 
