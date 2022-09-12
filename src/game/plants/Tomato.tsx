@@ -12,11 +12,21 @@ class Tomato extends Plant {
     }
 
     public get sellingPrice(): number {
-        return 10;
+        return 30;
     }
 
     public get plantingTime(): number {
-        return 5;
+        return 30;
+    }
+
+    public get liveStateDuration(): Record<LifeCycle, number> {
+        return {
+            [LifeCycle.sprout]: 30,
+            [LifeCycle.young]: 30,
+            [LifeCycle.grown]: 40,
+            [LifeCycle.ripe]: 120,
+            [LifeCycle.harvested]: 120,
+        };
     }
 }
 
