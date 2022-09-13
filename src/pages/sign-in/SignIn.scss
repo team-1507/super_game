@@ -56,12 +56,15 @@
             }
         }
     }
+
     &__yandex-auth {
         display: flex;
-        align-items: center;
         column-gap: 20px;
+        align-items: center;
+
         button {
             @include font-style($font-size: 23px, $font-family: Ubuntu);
+
             background: none;
             border: none;
             outline: none;

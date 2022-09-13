@@ -33,8 +33,8 @@ const SeedCounter = (props: props) => {
 
     const getClass = (text?: string, extra?: string) => {
         return (
-            ('interface__seed-counter' + (text ? `__${text}` : '')) +
-            (extra ? ` ${extra}`: '')
+            `interface__seed-counter${text ? `__${text}` : ''
+            }${extra ? ` ${extra}` : ''}`
         );
     };
     const buySeedFn = (e: any) => {
@@ -52,7 +52,11 @@ const SeedCounter = (props: props) => {
                 <span className={getClass('content__buy-btn')} onClick={buySeedFn}>
                     <FastBuy />
                 </span>
-                <span className={getClass('content__price')}>{priceSeed} ₽</span>
+                <span className={getClass('content__price')}>
+                    {priceSeed}
+                    {' '}
+                    ₽
+                </span>
             </div>
         </div>
     );

@@ -54,8 +54,8 @@ export class SpriteSheet implements ISpriteSheet {
         this.BOUNDARIES = config.BOUNDARIES;
         if (typeof window !== 'undefined') {
             this.sptitesheetImageElement = new Image();
-        }  else {
-            this.sptitesheetImageElement = {} as  HTMLImageElement;
+        } else {
+            this.sptitesheetImageElement = {} as HTMLImageElement;
         }
         this.sptitesheetImageElement.src = this.SPRITE_SHEET;
         this.canvasWidth = this.TILE_SIZE * this.MAP_SIZE[1];

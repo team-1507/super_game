@@ -20,7 +20,7 @@ const mapState = (state: RootState) => {
 
 const mapDispatch = {
     plow,
-    water
+    water,
 };
 
 const connector = connect(mapState, mapDispatch);
