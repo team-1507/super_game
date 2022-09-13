@@ -11,7 +11,7 @@ export const getTopics = (start = 0, limit = 20): ForumPostData[] => {
 export const getPosts = (topicId: number): ForumPostData[] => {
     return posts
         .filter((post) => post.replyto === topicId)
-        .sort((a, b) => parseInt(b.timestamp, 10) - parseInt(a.timestamp, 10));
+        .sort((a, b) => parseInt(a.timestamp, 10) - parseInt(b.timestamp, 10));
 };
 
 export default { getPosts, getTopics };
