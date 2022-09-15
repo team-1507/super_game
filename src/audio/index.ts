@@ -2,7 +2,7 @@ import { AudioParams } from './types';
 
 function audio({ src, loop = false, volume = 1 }: AudioParams) {
     if (typeof window !== 'undefined') {
-        const audioTrack = new Audio();;
+        const audioTrack = new Audio();
         audioTrack.src = src;
         audioTrack.autoplay = true;
         audioTrack.loop = loop;
