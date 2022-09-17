@@ -240,6 +240,14 @@
                         outline: none;
                     }
                 }
+
+                .ant-form-item-explain-error {
+                    position: absolute;
+                    right: 50px;
+                    bottom: 15px;
+
+                    opacity: 0.5;
+                }
             }
 
             &.expanded {

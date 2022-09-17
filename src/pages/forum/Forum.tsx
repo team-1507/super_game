@@ -30,6 +30,7 @@ const Forum = () => {
                         topicData={topic}
                         posts={getPosts(topic.id)}
                         expanded={topic.id === activeTopicId}
+                        key={topic.id}
                     />
                 ))}
             </section>

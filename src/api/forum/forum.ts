@@ -1,5 +1,5 @@
 import posts from './posts_mock';
-import { ForumPostData } from './types';
+import { ForumPostData, SendForumPostData } from './types';
 
 export const getTopics = (start = 0, limit = 20): ForumPostData[] => {
     const topics = posts.filter((post) => post.replyto === null);
@@ -14,4 +14,12 @@ export const getPosts = (topicId: number): ForumPostData[] => {
         .sort((a, b) => parseInt(a.timestamp, 10) - parseInt(b.timestamp, 10));
 };
 
-export default { getPosts, getTopics };
+export const sendPost = (data: SendForumPostData) => {
+    const newId = posts[posts.length - 1].id + 1;
+    posts.push(
+        { ...data, id: newId, timestamp: Date.now().toString() },
+    );
+    return newId;
+};
+
+export default { getPosts, getTopics, sendPost };

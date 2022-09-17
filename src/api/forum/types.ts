@@ -8,3 +8,5 @@ export type ForumPostData = {
     replyto: number | null,
     text: string,
 };
+
+export type SendForumPostData = Omit<ForumPostData, 'id'>;
