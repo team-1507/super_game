@@ -207,6 +207,7 @@
                 }
 
                 textarea.ant-input {
+                    width: 100%;
                     margin-bottom: -60px;
                     padding: 40px 45px 8px 8px;
 
@@ -225,6 +226,7 @@
                         margin-bottom: 0;
 
                         background-color: $white !important;
+                        outline: none;
                         box-shadow: none;
                     }
                 }
@@ -234,7 +236,17 @@
                 &:focus {
                     textarea.ant-input {
                         margin-bottom: 0;
+
+                        outline: none;
                     }
+                }
+
+                .ant-form-item-explain-error {
+                    position: absolute;
+                    right: 50px;
+                    bottom: 15px;
+
+                    opacity: 0.5;
                 }
             }
 
