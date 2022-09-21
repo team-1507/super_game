@@ -9,7 +9,7 @@ function audio({ src, loop = false, volume = 1 }: AudioParams) {
         audioTrack.volume = volume;
         return audioTrack as HTMLMediaElement;
     }
-   return {} as HTMLAudioElement
+    return {} as HTMLAudioElement;
 }
 
 export default audio;
