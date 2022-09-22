@@ -4,8 +4,9 @@ import 'babel-polyfill';
 import webpack from 'webpack';
 import devMiddleware from 'webpack-dev-middleware';
 import hotMiddleware from 'webpack-hot-middleware';
-import serverRenderMiddleware from './middleware/render';
 import config from '../../webpack/client.config';
+import serverRenderMiddleware from './middleware/render';
+import { csp } from './middleware/csp';
 
 // Эта функция возвращает middleware для локального девсервера и HMR
 // Она должна работать только для режима разработки
@@ -27,7 +28,8 @@ const app = express();
 
 // Отдаём статику приложения
 app
-    .use(express.static(path.resolve(__dirname, '../build')));
+    .use(express.static(path.resolve(__dirname, '../build')))
+    .use(csp);
 
 // На все get запросы запускаем сначала middleware dev server, а потом middleware рендеринга приложения
 app.get('/*', [...getWebpackMiddlewares(config)], serverRenderMiddleware);
