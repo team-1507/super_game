@@ -8,6 +8,8 @@ import config from '../../webpack/client.config';
 import serverRenderMiddleware from './middleware/render';
 import { csp } from './middleware/csp';
 
+require('../database');
+
 // Эта функция возвращает middleware для локального девсервера и HMR
 // Она должна работать только для режима разработки
 function getWebpackMiddlewares(config: webpack.Configuration): RequestHandler[] {
@@ -25,6 +27,11 @@ function getWebpackMiddlewares(config: webpack.Configuration): RequestHandler[] 
 }
 
 const app = express();
+
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
+app.use('/api/posts', require('../database/routes/postRoutes'));
 
 // Отдаём статику приложения
 app
