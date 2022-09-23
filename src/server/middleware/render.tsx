@@ -3,10 +3,10 @@ import { renderToString } from 'react-dom/server';
 import { StaticRouter } from 'react-router-dom/server';
 import { Request, Response } from 'express';
 import { Provider as ReduxProvider } from 'react-redux';
-import { StaticRouterContext } from 'react-router/ts4.0';
-import App from '../../app/App';
-import getPageHtml from './bundle';
+import App from "../../app/App";
+import getPageHtml from "./bundle";
 import store from '../../store';
+import { StaticRouterContext } from "react-router/ts4.0";
 
 export default (req: Request, res: Response) => {
     const location = req.url;
@@ -20,7 +20,7 @@ export default (req: Request, res: Response) => {
     );
 
     if (context.url) {
-        return { redirectUrl: context.url };
+        return {redirectUrl: context.url};
     }
 
     const reactHtml = renderToString(jsx);
