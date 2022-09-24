@@ -8,14 +8,14 @@
     min-height: 65px;
     padding: 0 10px;
 
-    background-color: $black;
+    background-color: rgb($black);
     border-radius: 0 20px 0 0;
 
     &__title {
         @include font-style(
             $font-size: 14px,
             $letter-spacing: normal,
-            $color: $white,
+            $color: rgb($white),
             $font-family: Ubuntu,
             $font-weight: 300
         );
@@ -26,7 +26,7 @@
     &__text {
         @include font-style(
             $font-size: 40px,
-            $color: $white,
+            $color: rgb($white),
             $font-family: VT323
         );
     }

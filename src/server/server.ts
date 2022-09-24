@@ -10,14 +10,16 @@ import { csp } from './middleware/csp';
 
 // Эта функция возвращает middleware для локального девсервера и HMR
 // Она должна работать только для режима разработки
-function getWebpackMiddlewares(config: webpack.Configuration): RequestHandler[] {
-    const compiler = webpack({ ...config, mode: 'development' });
+function getWebpackMiddlewares(mwConfig: webpack.Configuration): RequestHandler[] {
+    const compiler = webpack({ ...mwConfig, mode: 'development' });
 
     return [
-        // Middleware для Webpack-билда проекта в реальном времени. Низкоуровневый аналог webpack-dev-server
+        // Middleware для Webpack-билда проекта в реальном времени.
+        // Низкоуровневый аналог webpack-dev-server
         devMiddleware(compiler, {
             // logLevel: 'error',
-            publicPath: config.output!.publicPath!,
+            // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+            publicPath: mwConfig.output!.publicPath!,
         }),
         // Middleware для HMR
         hotMiddleware(compiler, { path: '/__webpack_hmr' }),
@@ -31,7 +33,10 @@ app
     .use(express.static(path.resolve(__dirname, '../build')))
     .use(csp);
 
-// На все get запросы запускаем сначала middleware dev server, а потом middleware рендеринга приложения
+// На все get запросы запускаем сначала middleware dev server,
+// а потом middleware рендеринга приложения
 app.get('/*', [...getWebpackMiddlewares(config)], serverRenderMiddleware);
 
 export { app };
+
+export default app;

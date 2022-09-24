@@ -9,7 +9,7 @@
     min-height: 100vh;
     padding: 40px 100px;
 
-    background-color: $red;
+    background-color: rgb($red);
 
     h3 {
         @include font-style($font-size: $xxxl, $line-height: 1em, $font-family: VT323);
@@ -22,7 +22,7 @@
     }
 
     &__score h3 {
-        color: $white;
+        color: rgb($white);
     }
 
     .game-over__buttons-group {

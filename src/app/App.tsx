@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { createContext, useEffect } from 'react';
 import {
     Route, Routes, useNavigate, useSearchParams,
 } from 'react-router-dom';
@@ -17,6 +17,8 @@ import { useAppSelector, useAppDispatch } from '../store/hooks';
 import { fetchUser } from '../store/reducers/userReducer';
 import { UserDto } from '../api/user/types';
 import OAuthApi from '../api/oauth/oauth';
+
+export const ThemeContext = createContext('default');
 
 const App = () => {
     const userState = useAppSelector((state) => state.user);
@@ -70,19 +72,33 @@ const App = () => {
         }
     });
 
+    let theme = 'default';
+    theme = localStorage.getItem('theme') ?? 'default';
+    // window.addEventListener('storage', () => {
+    //     theme = localStorage.getItem('theme') ?? 'default';
+    //     alert(theme);
+    //     document.body.setAttribute('class', `theme-${theme}`);
+    // });
+
+    // useEffect(() => {
+    //     document.body.setAttribute('class', `theme-${theme}`);
+    // }, [theme]);
+
     return (
-        <Routes>
-            <Route path="/game" element={<Game />} />
-            <Route path="/sign-up" element={<SignUp />} />
-            <Route path="/sign-in" element={<SignIn />} />
-            <Route path="/settings/:activeTab" element={<Settings />} />
-            <Route path="/settings" element={<Settings />} />
-            <Route path="/game-over" element={<GameOver />} />
-            <Route path="/leaderboard" element={<Leaderboard />} />
-            <Route path="/forum/:topicId" element={<Forum />} />
-            <Route path="/forum" element={<Forum />} />
-            <Route path="/" element={<HomePage />} />
-        </Routes>
+        <ThemeContext.Provider value={theme}>
+            <Routes>
+                <Route path="/game" element={<Game />} />
+                <Route path="/sign-up" element={<SignUp />} />
+                <Route path="/sign-in" element={<SignIn />} />
+                <Route path="/settings/:activeTab" element={<Settings />} />
+                <Route path="/settings" element={<Settings />} />
+                <Route path="/game-over" element={<GameOver />} />
+                <Route path="/leaderboard" element={<Leaderboard />} />
+                <Route path="/forum/:topicId" element={<Forum />} />
+                <Route path="/forum" element={<Forum />} />
+                <Route path="/" element={<HomePage />} />
+            </Routes>
+        </ThemeContext.Provider>
     );
 };
 
