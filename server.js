@@ -1,9 +1,13 @@
 const express = require('express');
 const { DATA, EVAL, expressCspHeader, INLINE, SELF, NONCE }  = require('express-csp-header');
 require('./src/database');
-
+const selfSigned = require('openssl-self-signed-certificate');
+const https = require('https');
 const app = express();
-const port = process.env.PORT || 3000;
+
+const { PORT = 3000, NODE_ENV = 'development' } = process.env;
+const { key, cert } = selfSigned;
+
 app.use(express.static(`${__dirname}/build`));
 app.use(expressCspHeader({
     directives: {
@@ -25,6 +29,13 @@ app.get('/*', (_req, res) => {
     res.sendFile(`${__dirname}/build/index.html`);
 });
 
-app.listen(port, () => {
-    console.log(`Server listening on port: ${port}`);
-});
+if (NODE_ENV === 'development') {
+    https.createServer({ key, cert }, app)
+    .listen(PORT, '0.0.0.0', () => {
+        console.info(`https://localhost:${PORT}`);
+    });
+} else {
+    app.listen(PORT, () => {
+        console.log(`Server listening on http://localhost:${PORT}`);
+    });
+}
