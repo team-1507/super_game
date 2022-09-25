@@ -13,7 +13,9 @@
         "lint-fix": "stylelint --fix ./src/**/*.scss && eslint --fix \"src/**/*.{ts,tsx}\"",
         "stylelint": "npx stylelint ./**/*.scss",
         "stylelint-fix": "npx stylelint ./**/*.scss --fix",
-        "test": "npx jest"
+        "test": "npx jest",
+        "docker-psql:build": "docker build -f ./Dockerfile-db -t ivans-psql-db ./",
+        "docker-psql:run": "docker run -d --name ivans-psql-db-container -p 5432:5432 -e POSTGRES_PASSWORD=newPassword ivans-psql-db"
     },
     "repository": {
         "type": "git",

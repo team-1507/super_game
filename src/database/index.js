@@ -2,7 +2,7 @@ const { Sequelize, DataTypes } = require('sequelize');
 require('dotenv').config();
 
 const sequelizeOptions = {
-    host: 'database',
+    host: process.env.DATABASE_URL,
     port: 5432,
     username: process.env.DATABASE_USERNAME,
     password: process.env.DATABASE_PASSWORD,
