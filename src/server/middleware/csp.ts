@@ -1,8 +1,8 @@
 import {
-    DATA, EVAL, expressCspHeader, INLINE, NONCE, SELF
+    DATA, EVAL, expressCspHeader, INLINE, NONCE, SELF,
 } from 'express-csp-header';
 
-export const csp = () => expressCspHeader({
+export default () => expressCspHeader({
     directives: {
         'default-src': [SELF, 'https://ya-praktikum.tech'],
         'script-src': [SELF, INLINE, EVAL, NONCE],
