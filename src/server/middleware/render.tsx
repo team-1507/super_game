@@ -27,4 +27,5 @@ export default (req: Request, res: Response) => {
     const reduxState = store.getState();
 
     res.send(getPageHtml(reactHtml, reduxState));
+    return null;
 };

@@ -4,24 +4,23 @@ import 'babel-polyfill';
 import webpack from 'webpack';
 import devMiddleware from 'webpack-dev-middleware';
 import hotMiddleware from 'webpack-hot-middleware';
-import config from '../../webpack/client.config';
+import clientConfig from '../../webpack/client.config';
 import serverRenderMiddleware from './middleware/render';
-import { csp } from './middleware/csp';
+import csp from './middleware/csp';
 
 require('../database');
 
 // Эта функция возвращает middleware для локального девсервера и HMR
 // Она должна работать только для режима разработки
-function getWebpackMiddlewares(mwConfig: webpack.Configuration): RequestHandler[] {
-    const compiler = webpack({ ...mwConfig, mode: 'development' });
+function getWebpackMiddlewares(config: webpack.Configuration): RequestHandler[] {
+    const compiler = webpack({ ...config, mode: 'development' });
 
     return [
         // Middleware для Webpack-билда проекта в реальном времени.
         // Низкоуровневый аналог webpack-dev-server
         devMiddleware(compiler, {
             // logLevel: 'error',
-            // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-            publicPath: mwConfig.output!.publicPath!,
+            publicPath: config.output!.publicPath!,
         }),
         // Middleware для HMR
         hotMiddleware(compiler, { path: '/__webpack_hmr' }),
@@ -42,8 +41,6 @@ app
 
 // На все get запросы запускаем сначала middleware dev server,
 // а потом middleware рендеринга приложения
-app.get('/*', [...getWebpackMiddlewares(config)], serverRenderMiddleware);
+app.get('/*', [...getWebpackMiddlewares(clientConfig)], serverRenderMiddleware);
 
-export { app };
-
-export default app;
+export default { app };
