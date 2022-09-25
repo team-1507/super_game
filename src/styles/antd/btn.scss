@@ -1,14 +1,14 @@
 .ant-btn-primary {
     height: 90px;
 
-    background: rgb($black);
+    background: $black;
     border: none;
-    box-shadow: inset 0 0 0 rgb($brown);
+    box-shadow: inset 0 0 0 $brown;
 
     transition: background-color 0.3s, box-shadow 0.3s;
 
     span {
-        @include font-style($font-size: 60px, $color: rgb($white), $font-family: VT323);
+        @include font-style($font-size: 60px, $color: $white, $font-family: VT323);
 
         letter-spacing: normal !important;
     }
@@ -20,12 +20,12 @@
     &:active,
     &:focus,
     &:hover {
-        background-color: rgb($black-hilighted);
-        box-shadow: inset 0 -5px 0 0 rgb($brown);
+        background-color: $black-hilighted;
+        box-shadow: inset 0 -5px 0 0 $brown;
     }
 
     svg {
-        fill: rgb($white);
+        fill: $white;
     }
 
     &:not(.ant-btn-icon-only) {

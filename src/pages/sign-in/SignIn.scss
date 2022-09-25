@@ -9,11 +9,11 @@
     min-height: 100vh;
     padding: 0 100px;
 
-    background-color: rgb($red);
+    background-color: $red;
 
     a {
         font-size: inherit;
-        color: rgb($black);
+        color: $black;
         text-decoration: underline;
     }
 
@@ -41,7 +41,7 @@
             @include font-style(
                 $font-size: 16px,
                 $letter-spacing: normal,
-                $color: rgb($white),
+                $color: $white,
                 $font-family: Ubuntu,
                 $font-weight: 300
             );
@@ -52,7 +52,7 @@
             height: 46px;
 
             span {
-                @include font-style($font-size: 33px, $color: rgb($white), $font-family: VT323);
+                @include font-style($font-size: 33px, $color: $white, $font-family: VT323);
             }
         }
     }

@@ -4,12 +4,12 @@
     min-height: 100vh;
     padding: 40px 100px;
 
-    background-color: rgb($white);
+    background-color: $white;
     background-image: url("/static/images/background.png");
     background-repeat: no-repeat;
 
     &__subtitle p {
-        @include font-style($color: rgb($red), $font-size: 36px, $font-weight: 700, $line-height: 41px);
+        @include font-style($color: $red, $font-size: 36px, $font-weight: 700, $line-height: 41px);
 
         width: 260px;
         margin-top: 0;
@@ -34,7 +34,7 @@
         }
 
         &__about p {
-            @include font-style($color: rgb($red));
+            @include font-style($color: $red);
 
             text-align: justify;
 

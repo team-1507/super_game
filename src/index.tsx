@@ -16,12 +16,12 @@ const Root = () => (
 );
 ReactDOM.hydrate(<Root />, document.getElementById('root'));
 
-// if ('serviceWorker' in navigator) {
-//     window.addEventListener('load', () => {
-//         navigator.serviceWorker.register('/sw.js').then(() => {
-//             console.log('success sw');
-//         }).catch((error) => {
-//             console.log('error sw:', error);
-//         });
-//     });
-// }
+if ('serviceWorker' in navigator) {
+    window.addEventListener('load', () => {
+        navigator.serviceWorker.register('/sw.js').then(() => {
+            console.log('success sw');
+        }).catch((error) => {
+            console.log('error sw:', error);
+        });
+    });
+}

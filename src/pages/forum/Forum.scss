@@ -5,10 +5,10 @@
     min-height: 100vh;
     padding: 40px 120px;
 
-    background-color: rgb($white);
+    background-color: $white;
 
     .header-back-button h1 {
-        color: rgb($black);
+        color: $black;
     }
 
     .pencil-icon {
@@ -29,13 +29,13 @@
             margin: 0 0 20px;
             padding: 15px;
 
-            background-color: rgb($black);
+            background-color: $black;
 
             transition: max-height 0.3s, height 0.3s;
 
             * {
                 font-size: $m;
-                color: rgb($white);
+                color: $white;
             }
 
             .close-button {
@@ -56,7 +56,7 @@
                 transition: box-shadow 0.5s;
 
                 &:hover {
-                    box-shadow: 0 0 5px 0 rgb($red), inset 0 3px 5px 0 rgb($red);
+                    box-shadow: 0 0 5px 0 $red, inset 0 3px 5px 0 $red;
                 }
             }
 
@@ -156,7 +156,7 @@
                     @include Ubuntu;
 
                     font-size: $m;
-                    color: rgb($black);
+                    color: $black;
                     letter-spacing: normal;
                 }
 
@@ -179,8 +179,8 @@
                         line-height: 1em;
 
                         opacity: 1;
-                        background-color: rgba($white, 0.5);
-                        box-shadow: 0 -2px 5px 5px rgba($white, 0.5);
+                        background-color: adjust-color($white, $alpha: -0.5);
+                        box-shadow: 0 -2px 5px 5px adjust-color($white, $alpha: -0.5);
                     }
                 }
 
@@ -202,7 +202,7 @@
                     }
 
                     svg {
-                        fill: rgb($red);
+                        fill: $red;
                     }
                 }
 
@@ -213,7 +213,7 @@
 
                     line-height: normal;
 
-                    background-color: rgb($white) !important;
+                    background-color: $white !important;
                     box-shadow: none;
 
                     transition: margin-bottom 0.3s;
@@ -225,7 +225,7 @@
                     &:not(:empty) {
                         margin-bottom: 0;
 
-                        background-color: rgb($white) !important;
+                        background-color: $white !important;
                         outline: none;
                         box-shadow: none;
                     }
@@ -277,7 +277,7 @@
                     width: 100%;
                     height: 0;
 
-                    box-shadow: 0 0 20px 10px rgb($black);
+                    box-shadow: 0 0 20px 10px $black;
                 }
 
                 .close-button {

@@ -8,15 +8,15 @@
     margin-right: 25px;
 
     line-height: 7rem;
-    color: rgb($white);
+    color: $white;
     text-align: center;
     vertical-align: middle;
 
-    background-color: rgb($black);
+    background-color: $black;
     border: 0;
     border-radius: 20px;
     outline: 0;
-    box-shadow: 5px 5px 10px 0 rgba($black-hilighted, 0.5);
+    box-shadow: 5px 5px 10px 0 adjust-color($black-hilighted, $alpha: -0.5);
 
     transition: background-color 0.3s, transform 0.3s, box-shadow 0.3s;
 
@@ -29,13 +29,13 @@
     }
 
     &:hover {
-        background-color: rgb($black-hilighted);
+        background-color: $black-hilighted;
     }
 
     &:active {
         transform: translate(5px, 5px);
 
-        box-shadow: 0 0 10px 0 rgba($black-hilighted, 0.5);
+        box-shadow: 0 0 10px 0 adjust-color($black-hilighted, $alpha: -0.5);
     }
 
     &:focus,
@@ -44,6 +44,6 @@
     }
 
     .arrow-back-icon {
-        fill: rgb($white);
+        fill: $white;
     }
 }
