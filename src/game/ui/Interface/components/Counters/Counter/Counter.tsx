@@ -2,12 +2,12 @@ import React from 'react';
 
 import './Counter.scss';
 
-type props = {
+type Props = {
     title: string;
     text: string | number;
 };
 
-const Counter = (props: props) => {
+const Counter = (props: Props) => {
     const { title, text } = props;
 
     return (

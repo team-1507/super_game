@@ -7,13 +7,13 @@ import { SEED_PRICES } from '../../../../../plants/constants';
 
 import './SeedCounter.scss';
 
-type props = {
+type Props = {
     type: string;
 };
 
 const HARVESTED = 6;
 
-const SeedCounter = (props: props) => {
+const SeedCounter = (props: Props) => {
     const type = props.type as keyof Seeds;
     const { seeds, isUse } = useAppSelector((state) => state.inventory);
     const dispatch = useAppDispatch();
