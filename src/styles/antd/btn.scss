@@ -13,8 +13,8 @@
         letter-spacing: normal !important;
     }
 
-    *:only-child {
-        flex-grow: 1;
+    svg {
+        fill: rgb($white);
     }
 
     &:active,
@@ -22,10 +22,6 @@
     &:hover {
         background-color: rgb($black-hilighted);
         box-shadow: inset 0 -5px 0 0 rgb($brown);
-    }
-
-    svg {
-        fill: rgb($white);
     }
 
     &:not(.ant-btn-icon-only) {
@@ -42,5 +38,10 @@
         width: 90px;
 
         border-radius: 20px;
+    }
+
+    /* stylelint-disable-next-line no-descending-specificity */
+    *:only-child {
+        flex-grow: 1;
     }
 }

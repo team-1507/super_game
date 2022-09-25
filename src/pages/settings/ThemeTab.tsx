@@ -1,11 +1,15 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import { Form, Radio } from 'antd';
+import { useDispatch } from 'react-redux';
+import { setTheme } from 'src/store/reducers/themeReducer';
+import { useAppSelector } from 'src/store/hooks';
 
 const ThemeTab = () => {
+    const dispatch = useDispatch();
     const changeHandler = ({ theme } : { theme: string }) => {
-        window.localStorage.setItem('theme', theme);
+        dispatch(setTheme({ theme }));
     };
-    const theme = useContext(ThemeContext);
+    const { theme } = useAppSelector((state) => state.theme);
     return (
         <Form
             initialValues={{ remember: true }}
@@ -14,8 +18,11 @@ const ThemeTab = () => {
             layout="vertical"
             onValuesChange={changeHandler}
         >
-            <Form.Item label="Select theme" name="theme">
-                <Radio.Group>
+            <Form.Item name="theme">
+                <Radio.Group
+                    defaultValue={theme}
+                    buttonStyle="solid"
+                >
                     <Radio.Button value="default">Default</Radio.Button>
                     <Radio.Button value="alternative">Alternative</Radio.Button>
                 </Radio.Group>
