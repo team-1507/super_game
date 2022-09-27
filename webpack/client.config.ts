@@ -1,8 +1,8 @@
 import path from 'path';
-import { Configuration, Entry } from 'webpack';
+import webpack, { Configuration, Entry } from 'webpack';
 import { TsconfigPathsPlugin } from 'tsconfig-paths-webpack-plugin';
 import MiniCssExtractPlugin from 'mini-css-extract-plugin';
-
+import ReactRefreshWebpackPlugin from '@pmmmwh/react-refresh-webpack-plugin';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
 import { IS_DEV, DIST_DIR, SRC_DIR } from './env';
 
@@ -45,8 +45,8 @@ const config: Configuration = {
         new MiniCssExtractPlugin({ filename: '[name].css' }),
         new HtmlWebpackPlugin(htmlPluginConfig),
         // Plugin для HMR
-        // new webpack.HotModuleReplacementPlugin(),
-
+        new webpack.HotModuleReplacementPlugin(),
+        new ReactRefreshWebpackPlugin(),
     ].filter(Boolean),
 
     devtool: 'source-map',
