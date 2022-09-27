@@ -1,0 +1,2 @@
+CREATE DATABASE ivansdb;
+GRANT ALL PRIVILEGES ON DATABASE ivansdb TO postgres;

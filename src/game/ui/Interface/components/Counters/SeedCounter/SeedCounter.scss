@@ -9,19 +9,19 @@
     margin-top: 10px;
     padding: 0 10px;
 
-    background-color: $black;
+    background-color: rgb($black);
     border-bottom: solid 4px transparent;
     border-radius: 0 20px 0 0;
 
     &--active {
-        border-bottom: solid 4px $red;
+        border-bottom: solid 4px rgb($red);
     }
 
     &__title {
         @include font-style(
             $font-size: 14px,
             $letter-spacing: normal,
-            $color: $white,
+            $color: rgb($white),
             $font-family: Ubuntu,
             $font-weight: 300
         );
@@ -69,7 +69,7 @@
         &__text {
             @include font-style(
                 $font-size: 40px,
-                $color: $white,
+                $color: rgb($white),
                 $font-family: VT323
             );
         }
@@ -78,7 +78,7 @@
             @include font-style(
                 $font-size: 20px,
                 $letter-spacing: normal,
-                $color: $white,
+                $color: rgb($white),
                 $font-family: Ubuntu,
                 $font-weight: 300
             );
@@ -88,7 +88,7 @@
             cursor: pointer;
 
             svg {
-                fill: $white;
+                fill: rgb($white);
             }
         }
     }
