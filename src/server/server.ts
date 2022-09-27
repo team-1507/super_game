@@ -3,7 +3,7 @@ import express, { RequestHandler } from 'express';
 import 'babel-polyfill';
 import webpack from 'webpack';
 import devMiddleware from 'webpack-dev-middleware';
-import hotMiddleware from 'webpack-hot-middleware';
+// import hotMiddleware from 'webpack-hot-middleware';
 import clientConfig from '../../webpack/client.config';
 import serverRenderMiddleware from './middleware/render';
 import csp from './middleware/csp';
@@ -23,7 +23,7 @@ function getWebpackMiddlewares(config: webpack.Configuration): RequestHandler[] 
             publicPath: config.output!.publicPath!,
         }),
         // Middleware для HMR
-        hotMiddleware(compiler, { path: '/__webpack_hmr' }),
+        // hotMiddleware(compiler, { path: '/__webpack_hmr' }),
     ];
 }
 
