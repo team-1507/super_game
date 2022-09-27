@@ -14,14 +14,14 @@
         padding: 15px 25px;
 
         font-size: $xxl;
-        color: $red;
+        color: rgb($red);
         text-decoration: none;
 
-        background-color: $white;
-        border: 1px solid adjust-color($black-hilighted, $alpha: 0);
-        border-bottom: 10px solid $brown;
+        background-color: rgb($white);
+        border: 1px solid rgb($black-hilighted);
+        border-bottom: 10px solid rgb($brown);
         border-radius: 2px 20px 2px 2px;
-        box-shadow: 0 -5px 5px 0 adjust-color($black-hilighted, $alpha: -0.5);
+        box-shadow: 0 -5px 5px 0 rgba($black-hilighted, 0.5);
 
         transition: background-color 0.3s, transform 0.3s, box-shadow 0.3s;
 
@@ -34,7 +34,7 @@
         &[data-active="true"] {
             z-index: 20;
 
-            background-color: $brown;
+            background-color: rgb($brown);
         }
 
         &:active,
@@ -45,7 +45,7 @@
         &:active {
             transform: translate(0, -5px);
 
-            box-shadow: 0 -2px 5px 0 adjust-color($black-hilighted, $alpha: -0.5);
+            box-shadow: 0 -2px 5px 0 rgba($black-hilighted, 0.5);
         }
     }
 

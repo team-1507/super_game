@@ -1,31 +1,27 @@
 .ant-btn-primary {
     height: 90px;
 
-    background: $black;
+    background: rgb($black);
     border: none;
-    box-shadow: inset 0 0 0 $brown;
+    box-shadow: inset 0 0 0 rgb($brown);
 
     transition: background-color 0.3s, box-shadow 0.3s;
 
     span {
-        @include font-style($font-size: 60px, $color: $white, $font-family: VT323);
+        @include font-style($font-size: 60px, $color: rgb($white), $font-family: VT323);
 
         letter-spacing: normal !important;
     }
 
-    *:only-child {
-        flex-grow: 1;
+    svg {
+        fill: rgb($white);
     }
 
     &:active,
     &:focus,
     &:hover {
-        background-color: $black-hilighted;
-        box-shadow: inset 0 -5px 0 0 $brown;
-    }
-
-    svg {
-        fill: $white;
+        background-color: rgb($black-hilighted);
+        box-shadow: inset 0 -5px 0 0 rgb($brown);
     }
 
     &:not(.ant-btn-icon-only) {
@@ -42,5 +38,10 @@
         width: 90px;
 
         border-radius: 20px;
+    }
+
+    /* stylelint-disable-next-line no-descending-specificity */
+    *:only-child {
+        flex-grow: 1;
     }
 }

@@ -1,5 +1,5 @@
 import { configureStore } from '@reduxjs/toolkit';
-import { userReducer, leaderboardReducer } from './reducers';
+import { userReducer, leaderboardReducer, themeReducer } from './reducers';
 import characterPositionReducer from '../game/store/characterPositionSlice';
 import gardenStateReducer from '../game/store/gardenStateSlice';
 import mapStateReducer from '../game/store/mapStateSlice';
@@ -17,6 +17,7 @@ const store = configureStore({
         timer: timerReducer,
         ui: uiReducer,
         inventory: inventoryReducer,
+        theme: themeReducer,
     },
     devTools: true,
     middleware: (getDefaultMiddleware) => getDefaultMiddleware({

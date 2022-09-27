@@ -4,14 +4,14 @@
     min-height: 100vh;
     padding: 40px 100px;
 
-    background-color: $red;
+    background-color: rgb($red);
 
     &__grid {
         padding-top: 40px;
 
         .ant-row {
             .ant-col {
-                @include font-style($font-size: 48px, $line-height: 42px, $color: $white, $font-family: VT323);
+                @include font-style($font-size: 48px, $line-height: 42px, $color: rgb($white), $font-family: VT323);
 
                 display: flex;
 
@@ -39,7 +39,7 @@
     }
 
     .header-back-button h1 {
-        color: $black;
+        color: rgb($black);
     }
 
     ol.leaders-list {
@@ -61,7 +61,7 @@
 
             font-size: 3.7rem;
             line-height: 3.7rem;
-            color: $white;
+            color: rgb($white);
             text-overflow: ellipsis;
             white-space: nowrap;
             list-style-position: inside;
