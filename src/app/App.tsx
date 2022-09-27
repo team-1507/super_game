@@ -4,7 +4,7 @@ import {
 } from 'react-router-dom';
 import { notification } from 'antd';
 import { PayloadAction } from '@reduxjs/toolkit';
-import { hot } from 'react-hot-loader/root';
+// import { hot } from 'react-hot-loader/root';
 import Game from '../pages/game';
 import SignUp from '../pages/sign-up/SignUp';
 import SignIn from '../pages/sign-in';
@@ -87,4 +87,4 @@ const App = () => {
 };
 
 // eslint-disable-next-line @typescript-eslint/no-unsafe-call
-export default hot(App);
+export default App;
