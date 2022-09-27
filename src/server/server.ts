@@ -43,4 +43,6 @@ app
 // а потом middleware рендеринга приложения
 app.get('/*', [...getWebpackMiddlewares(clientConfig)], serverRenderMiddleware);
 
-export default { app };
+export { app };
+
+export default app;
