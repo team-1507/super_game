@@ -20,6 +20,7 @@ const container = document.getElementById('root');
 if (!container) {
     throw new Error('container was not found');
 }
+
 hydrateRoot(container, <Root />);
 
 // if ('serviceWorker' in navigator) {

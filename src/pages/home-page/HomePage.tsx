@@ -70,7 +70,7 @@ const HomePage = () => {
                 </div>
             </div>
             <div className="home-page__subtitle">
-                <p>Welcome to Ivan’s dacha</p>
+                <p>Welcome to Ivan&#x27;s dacha</p>
             </div>
             <div className="home-page__buttons-group">
                 <div className="home-page__buttons-group__one-button">

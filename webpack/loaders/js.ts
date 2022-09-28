@@ -1,5 +1,5 @@
-import ReactRefreshTypeScript from 'react-refresh-typescript';
-import { IS_DEV } from '../env';
+// import ReactRefreshTypeScript from 'react-refresh-typescript';
+// import { IS_DEV } from '../env';
 
 export default {
     client: {
@@ -7,13 +7,13 @@ export default {
         exclude: /node_modules/,
         use: [
             {
-                loader: require.resolve('ts-loader'),
-                options: {
-                    getCustomTransformers: () => ({
-                        before: [IS_DEV && ReactRefreshTypeScript()].filter(Boolean),
-                    }),
-                    transpileOnly: IS_DEV,
-                },
+                loader: 'ts-loader',
+                // options: {
+                //     getCustomTransformers: () => ({
+                //         before: [IS_DEV && ReactRefreshTypeScript()].filter(Boolean),
+                //     }),
+                //     transpileOnly: IS_DEV,
+                // },
             },
         ],
     },
@@ -22,7 +22,7 @@ export default {
         exclude: /node_modules/,
         use: [
             {
-                loader: require.resolve('ts-loader'),
+                loader: 'ts-loader',
             },
         ],
     },
