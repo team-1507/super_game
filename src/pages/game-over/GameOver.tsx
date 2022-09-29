@@ -8,19 +8,24 @@ import { resetInventory } from 'src/game/store/inventorySlice';
 import { resetGarden } from 'src/game/store/gardenStateSlice';
 import { resetMap } from 'src/game/store/mapStateSlice';
 import { resetPosition } from 'src/game/store/characterPositionSlice';
+import LeaderboardAPI from '../../api/leaderboard/leaderboard';
 import './game-over.scss';
 
 const GameOver = () => {
     const { score } = useAppSelector((state) => state.inventory);
+    const { data: { login: name } } = useAppSelector((state) => state.user);
+    const { timestamp: time } = useAppSelector((state) => state.timer);
     const navigate = useNavigate();
     const dispatch = useDispatch();
 
     const restartStore = () => {
+        const data = { name, time, score };
         dispatch(resetTimer());
         dispatch(resetInventory());
         dispatch(resetGarden());
         dispatch(resetMap());
         dispatch(resetPosition());
+        return LeaderboardAPI.setPlayerScoreToLeaderboard({ data });
     };
     const startAgain = () => {
         restartStore();
