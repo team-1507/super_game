@@ -40,11 +40,15 @@ export const mapStateSlice = createSlice({
             }
             currentState[1][action.payload] = waterEarthTileType;
         },
+        resetMap: (currentState: MapConfig) => {
+            currentState = initialState;
+        },
     },
 });
 
 export const {
     plow,
     water,
+    resetMap,
 } = mapStateSlice.actions;
 export default mapStateSlice.reducer;
