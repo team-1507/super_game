@@ -12,7 +12,7 @@ import jsLoader from './loaders/js';
 
 const htmlPluginConfig = {
     filename: 'index.html',
-    title: "IVAN\'S DACHA",
+    title: 'IVAN&#39;S DACHA',
     template: 'src/template.html',
     path: path.resolve(__dirname, 'build'),
     favicon: 'static/images/favicon.ico',
@@ -20,11 +20,12 @@ const htmlPluginConfig = {
 
 const config: Configuration = {
     target: 'web',
+    node: false,
     entry: ([
         // IS_DEV && 'react-hot-loader/patch',
         // Entry для работы HMR
         // IS_DEV && 'webpack-hot-middleware/client',
-        // IS_DEV && 'css-hot-loader/hotModuleReplacement',
+        IS_DEV && 'css-hot-loader/hotModuleReplacement',
         path.join(SRC_DIR, 'index'),
     ].filter(Boolean) as unknown) as Entry,
     module: {

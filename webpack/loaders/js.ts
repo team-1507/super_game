@@ -7,13 +7,10 @@ export default {
         exclude: /node_modules/,
         use: [
             {
-                loader: 'ts-loader',
-                // options: {
-                //     getCustomTransformers: () => ({
-                //         before: [IS_DEV && ReactRefreshTypeScript()].filter(Boolean),
-                //     }),
-                //     transpileOnly: IS_DEV,
-                // },
+                loader: 'babel-loader',
+                options: {
+                    plugins: ['react-refresh/babel'].filter(Boolean),
+                },
             },
         ],
     },
@@ -22,7 +19,7 @@ export default {
         exclude: /node_modules/,
         use: [
             {
-                loader: 'ts-loader',
+                loader: 'babel-loader',
             },
         ],
     },

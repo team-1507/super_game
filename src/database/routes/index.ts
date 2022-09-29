@@ -1,3 +1,3 @@
-const postRoutes = require('./postRoutes');
+import * as postRoutes from './postRoutes';
 
 export default postRoutes;

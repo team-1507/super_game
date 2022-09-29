@@ -1,9 +1,12 @@
 import React, { HTMLProps } from 'react';
 
-type HtmlElemProps = HTMLProps<HTMLElement>;
+type HtmlElemProps = HTMLProps<HTMLElement> & {
+    reduxState?: Record<string, unknown>;
+};
 
 const Html = (props: HtmlElemProps) => {
-    const { children } = props;
+    const { children, reduxState } = props;
+    const reduxStateString = reduxState ? `window.__INITIAL_STATE__ = ${JSON.stringify(reduxState)}` : '';
     return (
         <html lang="en">
             <head>
@@ -20,7 +23,7 @@ const Html = (props: HtmlElemProps) => {
                     {children}
                 </div>
                 <script>
-                    {/* {JSON.stringify(reduxState)} */}
+                    {reduxStateString}
                 </script>
                 <script src="/main.js" />
             </body>

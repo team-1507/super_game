@@ -1,6 +1,8 @@
-const express = require('express');
+import express from 'express';
+import postRoutes from '../database/routes';
+
 const { DATA, EVAL, expressCspHeader, INLINE, SELF, NONCE }  = require('express-csp-header');
-require('./src/database');
+// require('./src/database');
 
 const app = express();
 const port = process.env.PORT || 3000;
@@ -19,12 +21,31 @@ app.use(expressCspHeader({
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-app.use('/api/posts', require('./src/database/routes/postRoutes'));
+app.use('/api/posts', postRoutes);
 
 app.get('/*', (_req, res) => {
     res.sendFile(`${__dirname}/build/index.html`);
 });
 
-app.listen(port, () => {
-    console.log(`Server listening on port: ${port}`);
-});
+app.listen(PORT, () => {
+    console.log(`Listening at ${PORT}...`);
+})
+    .on('error', function (error) {
+        if (error.syscall !== 'listen') {
+            throw error;
+        }
+        const isPipe = portOrPipe => Number.isNaN(portOrPipe);
+        const bind = isPipe(PORT) ? 'Pipe ' + PORT : 'Port ' + PORT;
+        switch (error.code) {
+            case 'EACCES':
+                console.error(bind + ' requires elevated privileges');
+                process.exit(1);
+                break;
+            case 'EADDRINUSE':
+                console.error(bind + ' is already in use');
+                process.exit(1);
+                break;
+            default:
+                throw error;
+        }
+    });
