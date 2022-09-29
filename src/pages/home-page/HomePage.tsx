@@ -42,7 +42,7 @@ const HomePage = () => {
             <div className="home-page__info">
                 <div className="home-page__info__header">
                     <h1>
-                        1Ivan&#x27;s
+                        Ivan&#x27;s
                         <br />
                         Dacha
                     </h1>
