@@ -13,16 +13,24 @@ import WorkboxPlugin from "workbox-webpack-plugin";
 
 const htmlPluginConfig = {
     filename: 'index.html',
-    title: "IVAN\'S DACHA",
+    title: 'IVAN&#39;S DACHA',
     template: 'src/template.html',
     path: path.resolve(__dirname, 'build'),
     favicon: 'static/images/favicon.ico',
 };
 
+console.log("path.resolve(__dirname, 'src')");
+console.log(path.resolve(__dirname, '../'));
+
 const config = {
     name: 'server',
     target: 'node',
-    node: { __dirname: false },
+    context: path.resolve(__dirname, '../'),
+    node: {
+        global: false,
+        __dirname: false,
+        __filename: false,
+    },
     entry: path.join(SRC_DIR, 'server/server'),
     module: {
         rules: [fileLoader.server, cssLoader.server, jsLoader.server],
@@ -35,17 +43,17 @@ const config = {
     },
     resolve: {
         modules: ['src', 'node_modules'],
-        extensions: ['*', '.js', '.jsx', '.json', '.ts', '.tsx'],
+        extensions: ['.js', '.jsx', '.json', '.ts', '.tsx'],
         plugins: [new TsconfigPathsPlugin({ configFile: './tsconfig.json' })],
     },
     plugins: [
         new HtmlWebpackPlugin(htmlPluginConfig),
         new MiniCssExtractPlugin(),
-        new WorkboxPlugin.InjectManifest({
-            swSrc: path.resolve(__dirname, '../sw.js'),
-            maximumFileSizeToCacheInBytes: 50000000,
-            mode: 'production',
-        })
+        // new WorkboxPlugin.InjectManifest({
+        //     swSrc: path.resolve(__dirname, '../sw.js'),
+        //     maximumFileSizeToCacheInBytes: 50000000,
+        //     mode: 'production',
+        // })
     ],
     devtool: 'source-map',
 
@@ -55,7 +63,7 @@ const config = {
         maxAssetSize: 512000
     },
 
-    externals: [nodeExternals({ allowlist: [/\.(?!(?:tsx?|json)$).{1,5}$/i] })],
+    externals: [nodeExternals()],
 
     optimization: {
         minimize: true,

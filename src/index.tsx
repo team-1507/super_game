@@ -1,5 +1,6 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
+// import ReactDOM from 'react-dom';
+import { hydrateRoot } from 'react-dom/client';
 import { BrowserRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import store from './store';
@@ -14,7 +15,13 @@ const Root = () => (
         </Provider>
     </React.StrictMode>
 );
-ReactDOM.hydrate(<Root />, document.getElementById('root'));
+
+const container = document.getElementById('root');
+if (!container) {
+    throw new Error('container was not found');
+}
+
+hydrateRoot(container, <Root />);
 
 // if ('serviceWorker' in navigator) {
 //     window.addEventListener('load', () => {
