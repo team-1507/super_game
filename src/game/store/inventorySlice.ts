@@ -4,6 +4,7 @@ import { SEED_PRICES } from '../plants/constants';
 
 export interface Inventory {
     money: number;
+    score: number;
     seeds: Seeds;
     isUse: keyof Seeds;
 }
@@ -28,6 +29,7 @@ const initialSeeds: Seeds = {
 
 const initialState: Inventory = {
     money: 50,
+    score: 0,
     seeds: initialSeeds,
     isUse: 'tomato',
 };
@@ -38,9 +40,13 @@ export const inventorySlice = createSlice({
     reducers: {
         addMoney: (inventory: Inventory, { payload }: PayloadAction<number>) => {
             inventory.money += payload;
+            inventory.score += payload;
         },
         decrementMoney: (inventory: Inventory, { payload }: PayloadAction<number>) => {
             inventory.money -= payload;
+        },
+        incrementScore: (inventory: Inventory, { payload }: PayloadAction<number>) => {
+            inventory.score += payload;
         },
         buySeed: (inventory: Inventory, { payload }: PayloadAction<keyof Seeds>) => {
             if (inventory.seeds[payload] < 99 && inventory.money >= SEED_PRICES[payload]) {
@@ -76,17 +82,27 @@ export const inventorySlice = createSlice({
                 ? seedTypes[0] : seedTypes[currentInUseKey + 1];
             inventory.isUse = nextSeedType as keyof Seeds;
         },
+        resetInventory: (inventory: Inventory) => {
+            const { money, score, seeds, isUse } = initialState;
+
+            inventory.money = money;
+            inventory.score = score;
+            inventory.seeds = seeds;
+            inventory.isUse = isUse;
+        },
     },
 });
 
 export const {
     addMoney,
     decrementMoney,
+    incrementScore,
     buySeed,
     buySelectedSeed,
     decrementSelectedSeed,
     selectIt,
     selectNext,
+    resetInventory,
 } = inventorySlice.actions;
 
 export default inventorySlice.reducer;

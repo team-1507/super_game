@@ -12,22 +12,23 @@ const sequelizeOptions = {
 
 const sequelize = new Sequelize(sequelizeOptions);
 
-sequelize.authenticate()
-    .then(() => {
-        console.log('DATABASE: Connection has been established successfully');
-    })
-    .catch((err) => {
-        console.error('DATABASE: Unable to connect to the database - ' + err);
-    });
-
 const db = { Sequelize, sequelize };
 
 db.posts = require('./models/postModel')(sequelize, DataTypes);
 db.users = require('./models/userModel')(sequelize, DataTypes);
 
-db.sequelize.sync({ force: false })
+
+sequelize.authenticate()
     .then(() => {
-        console.log('sync database is completed')
+        console.log('DATABASE: Connection has been established successfully');
+
+        db.sequelize.sync({ force: false })
+            .then(() => {
+                console.log('sync database is completed')
+            });
+    })
+    .catch((err) => {
+        console.error('DATABASE: Unable to connect to the database - ' + err);
     });
 
 module.exports = db;

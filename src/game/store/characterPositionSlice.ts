@@ -96,10 +96,16 @@ export const characterPositionSlice = createSlice({
             position.direction = newPosition.direction;
             [position.coords[0], position.coords[1]] = newPosition.coords;
         },
+        resetPosition: (position) => {
+            const { coords, direction } = initialState;
+
+            position.coords = coords;
+            position.direction = direction;
+        },
     },
 });
 
 export const {
-    setPosition, up, down, left, right,
+    setPosition, up, down, left, right, resetPosition,
 } = characterPositionSlice.actions;
 export default characterPositionSlice.reducer;

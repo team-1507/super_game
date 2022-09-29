@@ -49,10 +49,20 @@ export const timerSlice = createSlice({
                 timer.timestamp = newTimestamp;
             }
         },
+        resetTimer: (timer: Timer) => {
+            const { moves, actions, day, movesToday, actionsToday, timestamp } = initialState;
+
+            timer.moves = moves;
+            timer.actions = actions;
+            timer.day = day;
+            timer.movesToday = movesToday;
+            timer.actionsToday = actionsToday;
+            timer.timestamp = timestamp;
+        },
     },
 });
 
 export const {
-    addMove, addAction, addDay, incrementTimestamp,
+    addMove, addAction, addDay, incrementTimestamp, resetTimer,
 } = timerSlice.actions;
 export default timerSlice.reducer;
