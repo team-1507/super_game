@@ -31,11 +31,15 @@ export const gardenStateSlice = createSlice({
             const { tileNum } = action.payload;
             plantsState[tileNum] = 0;
         },
+        resetGarden: (plantsState: PlantOrNone[]) => {
+            plantsState = initialState;
+        },
     },
 });
 
 export const {
     plant,
     harvest,
+    resetGarden,
 } = gardenStateSlice.actions;
 export default gardenStateSlice.reducer;

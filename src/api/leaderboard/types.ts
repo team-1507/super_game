@@ -1,7 +1,7 @@
 export interface SetLeaderboardData {
     data: GetLeaderboardDataDto;
-    ratingFieldName: string;
-    teamName: string;
+    ratingFieldName?: string;
+    teamName?: string;
 }
 
 export interface GetLeaderboardData {
