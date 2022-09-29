@@ -1,11 +1,11 @@
 import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import './home-page.scss';
 import { Button, notification } from 'antd';
 import ArrowTopRight from '../../components/icons/ArrowTopRight';
 import UserApi from '../../api/sign-in/sign-in';
 import audio from '../../audio';
 import titleMusic from '../../../static/audio/music/title.ogg';
+import './home-page.scss';
 
 const music = audio({ src: titleMusic, loop: true, volume: 0.3 });
 const playMusic = () => {
@@ -49,23 +49,30 @@ const HomePage = () => {
                 </div>
                 <div className="home-page__info__about">
                     <p>
-                        Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium
-                        doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore
-                        veritatis et quasi architecto beatae vitae dicta sunt explicabo.
+                        Controls:
                     </p>
                     <p>
-                        Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit,
-                        sed quia consequuntur magni dolores eos qui ratione voluptatem sequi
-                        nesciunt.
-                    </p>
-                </div>
-                <div className="home-page__info__about">
-                    <p>
-                        Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet,
-                        consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt
-                        ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima
-                        veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam,
-                        nisi ut aliquid ex ea commodi consequatur?
+                        <strong>W, A, S, D </strong>
+                        – move the character
+                        <br />
+                        <strong>1, 2, 3, 4 </strong>
+                        – Plow, plant selected crop,
+                        water the earth, harvest and sell the gather
+                        <br />
+                        <strong>TAB </strong>
+                        – cycle through the seeds
+                        <br />
+                        <strong>B </strong>
+                        – buy more of selected seeds
+                        <br />
+                        <strong>F </strong>
+                        – enter fullscreen
+                        <br />
+                        <strong>M </strong>
+                        – mute
+                        <br />
+                        <strong>ESC </strong>
+                        – pause menu
                     </p>
                 </div>
             </div>
