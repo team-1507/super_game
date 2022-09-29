@@ -4,7 +4,6 @@ import {
 } from 'react-router-dom';
 import { notification } from 'antd';
 import { PayloadAction } from '@reduxjs/toolkit';
-// import { hot } from 'react-hot-loader/root';
 import Game from '../pages/game';
 import SignUp from '../pages/sign-up/SignUp';
 import SignIn from '../pages/sign-in';

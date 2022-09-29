@@ -1,5 +1,4 @@
 const { app } = require('./build/server.js');
-// import * as app from './build/server.js';
 
 const PORT = process.env.PORT || 3000;
 
